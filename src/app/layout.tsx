@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains' })
 
 export const metadata: Metadata = {
-  title: 'Polymorphic Portfolio | Full Stack AI Engineer',
+  title: 'VM | Full Stack AI Engineer',
   description: 'Building Intelligent Systems. Merging Full Stack Engineering with AI Research.',
 }
 

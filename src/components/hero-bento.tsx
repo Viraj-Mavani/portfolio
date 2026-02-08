@@ -28,9 +28,9 @@ export function HeroBento() {
               id="hero-heading"
               className="text-balance text-4xl font-medium leading-tight tracking-tight text-foreground lg:text-5xl"
             >
-              Building Intelligent
+              Hello, I am
               <br />
-              Systems.
+              VM
             </h1>
             <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground lg:text-lg">
               Merging Full Stack Engineering with AI Research to create production-grade solutions.
