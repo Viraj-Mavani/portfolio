@@ -24,18 +24,18 @@ export function TechTicker() {
         </span>
       </div>
       <div className="relative flex flex-1 items-center overflow-hidden">
-        <div className="animate-ticker flex gap-3 whitespace-nowrap px-4">
+        <div className="flex animate-ticker gap-3 whitespace-nowrap px-4 hover:[animation-play-state:paused]">
           {[...techStack, ...techStack].map((tech, i) => (
             <span
               key={`${tech}-${i}`}
-              className="inline-flex items-center rounded-sm border border-border px-2.5 py-1 font-mono text-[11px] text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
+              className="inline-flex items-center rounded-sm border border-border px-2.5 py-1 font-mono text-[10px] text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
             >
               {tech}
             </span>
           ))}
         </div>
       </div>
-
+{/* 
       <style jsx>{`
         @keyframes ticker {
           0% {
@@ -51,7 +51,7 @@ export function TechTicker() {
         .animate-ticker:hover {
           animation-play-state: paused;
         }
-      `}</style>
+      `}</style> */}
     </div>
   )
 }

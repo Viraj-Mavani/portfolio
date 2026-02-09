@@ -13,8 +13,8 @@ export function ContextSwitcherNav() {
   const [activeMode, setActiveMode] = useState("generalist")
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
-      <div className="mx-auto max-w-7xl px-4 py-4">
+    <div className="fixed top-16 left-0 right-0 z-40">
+      <div className="mx-auto max-w-7xl px-4 py-2">
         <nav
           className="mx-auto flex w-fit items-center gap-6 rounded-md border border-border bg-card/80 px-2 py-1.5 backdrop-blur-xl"
           role="navigation"
@@ -53,6 +53,6 @@ export function ContextSwitcherNav() {
           </a>
         </nav>
       </div>
-    </header>
+    </div>
   )
 }

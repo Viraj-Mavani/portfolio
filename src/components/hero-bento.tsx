@@ -4,7 +4,7 @@ import { TechTicker } from "./tech-ticker"
 
 export function HeroBento() {
   return (
-    <section className="mx-auto max-w-7xl px-4 pt-28 pb-16 lg:pt-32 lg:pb-24" aria-labelledby="hero-heading">
+    <section id="home" className="mx-auto max-w-7xl px-4 pt-36 pb-16 lg:pt-40 lg:pb-24" aria-labelledby="hero-heading">
       {/* Section label */}
       <div className="mb-8 flex items-center gap-4">
         <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
@@ -38,10 +38,10 @@ export function HeroBento() {
           </div>
           <div className="mt-8">
             <a
-              href="#work"
+              href="#about"
               className="group inline-flex items-center gap-3 rounded-sm bg-primary px-6 py-3 font-mono text-sm font-medium text-primary-foreground transition-all hover:gap-4"
             >
-              View Work
+              About Me
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
             </a>
           </div>
