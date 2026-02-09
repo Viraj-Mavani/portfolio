@@ -3,6 +3,7 @@ import { HeroBento } from "@/components/hero-bento"
 import { AboutSection } from "@/components/about-section"
 import { SkillsSection } from "@/components/skills-section"
 import { ExperienceSection } from "@/components/experience-section"
+import { ProjectsSection } from "@/components/projects-section"
 import { ServicesStrip } from "@/components/services-strip"
 import { Footer } from "@/components/footer"
 
@@ -15,6 +16,7 @@ export default function Page() {
         <AboutSection />
         <SkillsSection />
         <ExperienceSection />
+        <ProjectsSection />
         <ServicesStrip />
       </main>
       <Footer />
