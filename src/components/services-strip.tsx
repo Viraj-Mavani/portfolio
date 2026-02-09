@@ -23,7 +23,7 @@ const services = [
 
 export function ServicesStrip() {
   return (
-    <section className="border-t border-border" aria-labelledby="services-heading">
+    <section id="services" className="border-t border-border" aria-labelledby="services-heading">
       <div className="mx-auto max-w-7xl px-4 py-16 lg:py-24">
         <div className="mb-12 flex items-center gap-4">
           <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
@@ -31,7 +31,7 @@ export function ServicesStrip() {
           </span>
           <div className="h-px flex-1 bg-border" aria-hidden="true" />
           <span className="font-mono text-[10px] tracking-widest text-muted-foreground">
-            03
+            07
           </span>
         </div>
 
