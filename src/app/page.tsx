@@ -1,6 +1,7 @@
 import { TopNav } from "@/components/top-nav"
 import { HeroBento } from "@/components/hero-bento"
 import { AboutSection } from "@/components/about-section"
+import { SkillsSection } from "@/components/skills-section"
 import { ServicesStrip } from "@/components/services-strip"
 import { Footer } from "@/components/footer"
 
@@ -11,6 +12,7 @@ export default function Page() {
       <main>
         <HeroBento />
         <AboutSection />
+        <SkillsSection />
         <ServicesStrip />
       </main>
       <Footer />
