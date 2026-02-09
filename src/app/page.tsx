@@ -4,6 +4,7 @@ import { AboutSection } from "@/components/about-section"
 import { SkillsSection } from "@/components/skills-section"
 import { ExperienceSection } from "@/components/experience-section"
 import { ProjectsSection } from "@/components/projects-section"
+import { CertificatesSection } from "@/components/certificates-section"
 import { ServicesStrip } from "@/components/services-strip"
 import { Footer } from "@/components/footer"
 
@@ -17,6 +18,7 @@ export default function Page() {
         <SkillsSection />
         <ExperienceSection />
         <ProjectsSection />
+        <CertificatesSection />
         <ServicesStrip />
       </main>
       <Footer />
