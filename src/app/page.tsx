@@ -2,6 +2,7 @@ import { TopNav } from "@/components/top-nav"
 import { HeroBento } from "@/components/hero-bento"
 import { AboutSection } from "@/components/about-section"
 import { SkillsSection } from "@/components/skills-section"
+import { ExperienceSection } from "@/components/experience-section"
 import { ServicesStrip } from "@/components/services-strip"
 import { Footer } from "@/components/footer"
 
@@ -13,6 +14,7 @@ export default function Page() {
         <HeroBento />
         <AboutSection />
         <SkillsSection />
+        <ExperienceSection />
         <ServicesStrip />
       </main>
       <Footer />
