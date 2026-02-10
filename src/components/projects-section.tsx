@@ -1,39 +1,6 @@
 import { Github, ExternalLink, ArrowRight } from "lucide-react"
-
-const projects = [
-  {
-    title: "Aerospace Part Tracking System",
-    description:
-      "Developed secure system features focusing on scalability and performance, implementing JWT-based authentication for stakeholder security. Engineered real-time data synchronization APIs and middleware using Azure ServiceBus to connect disparate stakeholders. Collaborated on backend architectural design, ensuring high availability and seamless integration of blockchain components for data immutability.",
-    tags: [ ".NET Core", "AngularJS", "PostgreSQL", "Azure DevOps", "Azure ServiceBus", "Blockchain"],
-    live: "https://www.skythread.aero/solution/overview",
-    mode: ["fullstack"],
-  },
-  {
-    title: "Distributed Web Scraper (MPI)",
-    description:
-      "Engineered a distributed scraper using MPI for parallelism to efficiently handle large-scale data extraction. Integrated modular scheduling and checkpointing to ensure high reliability and deduplication across multi-process runs.",
-    tags: ["Python", "Message Passing Interface", "mpi4py", "CloudScraper", "Distributed Computing", "Parallel Programming"],
-    github: "https://github.com/Viraj-Mavani/DistributedWebScraper",
-    mode: ["data", "webscraping"],
-  },
-  {
-    title: "ML-Powered Taxi Fare Prediction",
-    description:
-      "Implemented an ML-based prediction system using LightGBM, achieving an R^2 score of 83.9%. Developed a Docker-based pipeline to automate data extraction from map images, streamlining the ingestion of travel features.",
-    tags: ["Python", "LightGBM", "Docker", "XGBoost", "Scikit-learn"],
-    github: "https://github.com/Viraj-Mavani/ML-Powered-Taxi-Fare-Prediction-using-Docker",
-    mode: ["ai-ml", "data"],
-  },
-  {
-    title: "Web Scraping Automation for Business Registries",
-    description:
-      "Developed 15+ Python-based web scraping systems targeting dynamic business registry websites across various regions. Each extracting millions of data points for international client, handling JavaScript rendering, pagination, and utilized reverse engineering techniques to bypass anti-scraping with 99.9% uptime. Post-processed large datasets for deduplication, formatting, and export to CSV/JSON.",
-    tags: ["Python", "Selenium", "Scrapy", "BeautifulSoup", "Docker"],
-    live: "https://www.upwork.com/freelancers/~0100fa5d569b04d18d?p=1927504018187304960",
-    mode: ["data", "webscraping"],
-  },
-]
+import { projects } from "@/lib/data"
+import Link from "next/link"
 
 export function ProjectsSection() {
   return (
@@ -53,7 +20,7 @@ export function ProjectsSection() {
         <h2 id="projects-heading" className="sr-only">Projects</h2>
 
         <div className="grid gap-4 md:grid-cols-2">
-          {projects.map((project, index) => (
+          {projects.slice(0, 4).map((project, index) => (
             <div
               key={project.title}
               className="group relative flex flex-col gap-5 rounded-md border border-border bg-card p-8 transition-colors hover:border-primary/30"
@@ -62,7 +29,7 @@ export function ProjectsSection() {
               <div className="flex items-start justify-between">
                 <div className="flex flex-col gap-1">
                   <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
-                    project_{String(index + 1).padStart(2, "0")}
+                    project_{String(index + 1).padStart(2, "0")} / brief description
                   </span>
                   <h3 className="text-lg font-medium text-foreground">
                     {project.title}
@@ -94,9 +61,9 @@ export function ProjectsSection() {
                 </div>
               </div>
 
-              {/* Description */}
+              {/* Brief Description */}
               <p className="text-sm leading-relaxed text-muted-foreground">
-                {project.description}
+                {project.brief}
               </p>
 
               {/* Tags */}
