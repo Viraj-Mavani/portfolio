@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowLeft, Github, ExternalLink, Image as ImageIcon, Video } from "lucide-react"
 import { projects } from "@/lib/data"
 import { TopNav } from "@/components/top-nav"
@@ -126,7 +127,13 @@ export function ProjectsPageContent() {
                         key={`${project.title}-img-${i}`}
                         className="flex h-40 w-64 items-center justify-center rounded-sm border border-border bg-secondary"
                       >
-                        <ImageIcon className="h-6 w-6 text-muted-foreground" strokeWidth={1} />
+                        <Image
+                          src={img}
+                          alt={`${project.title} screenshot ${i + 1}`}
+                          width={256}
+                          height={160}
+                          className="h-full w-full object-cover"
+                        />
                       </div>
                     ))}
                     {project.video && (

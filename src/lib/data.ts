@@ -65,6 +65,7 @@ export const projects: Project[] = [
     description:
       "Developed 15+ Python-based web scraping systems targeting dynamic business registry websites across various regions. Each extracting millions of data points for international client, handling JavaScript rendering, pagination, and utilized reverse engineering techniques to bypass anti-scraping with 99.9% uptime. Post-processed large datasets for deduplication, formatting, and export to CSV/JSON.",
     tags: ["Python", "Selenium", "Scrapy", "BeautifulSoup", "Docker"],
+    images: ["/projects/webscraping_1.png"],
     live: "https://www.upwork.com/freelancers/~0100fa5d569b04d18d?p=1927504018187304960",
     mode: ["data", "webscraping"],
   },
