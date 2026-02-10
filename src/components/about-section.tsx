@@ -6,14 +6,13 @@ const education = [
     school: "WESTERN UNIVERSITY",
     location: "ON, Canada",
     period: "2024 - 2025",
-    focus: "Specialization in Artificial Intelligence & Machine Learning",
+    focus: "Specialization in Artificial Intelligence",
   },
   {
     degree: "Bachelor of Technology in Computer Engineering",
     school: "ATMIYA UNIVERSITY",
     location: "Gujarat, India",
     period: "2019 - 2023",
-    focus: "Focus on Software Engineering & Data Structures",
   },
 ]
 
