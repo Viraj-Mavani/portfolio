@@ -1,6 +1,11 @@
 import { skillCategories } from "@/lib/data"
 
-export function SkillsSection() {
+interface SkillsSectionProps {
+  index: number
+}
+
+export function SkillsSection({ index }: SkillsSectionProps) {
+
   return (
     <section id="skills" className="border-t border-border" aria-labelledby="skills-heading">
       <div className="mx-auto max-w-7xl px-4 py-16 lg:py-24">
@@ -11,7 +16,7 @@ export function SkillsSection() {
           </span>
           <div className="h-px flex-1 bg-border" aria-hidden="true" />
           <span className="font-mono text-[10px] tracking-widest text-muted-foreground">
-            03
+            {String(index).padStart(2, "0")}
           </span>
         </div>
 

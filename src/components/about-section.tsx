@@ -1,7 +1,12 @@
 import { GraduationCap, MapPin, Calendar } from "lucide-react"
 import { education } from "@/lib/data"
 
-export function AboutSection() {
+interface AboutSectionProps {
+  index: number
+}
+
+export function AboutSection({ index }: AboutSectionProps) {
+
   return (
     <section id="about" className="border-t border-border" aria-labelledby="about-heading">
       <div className="mx-auto max-w-7xl px-4 py-16 lg:py-24">
@@ -12,7 +17,7 @@ export function AboutSection() {
           </span>
           <div className="h-px flex-1 bg-border" aria-hidden="true" />
           <span className="font-mono text-[10px] tracking-widest text-muted-foreground">
-            02
+            {String(index).padStart(2, "0")}
           </span>
         </div>
 

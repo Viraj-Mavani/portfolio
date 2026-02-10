@@ -2,7 +2,12 @@ import { Github, ExternalLink, ArrowRight } from "lucide-react"
 import { projects } from "@/lib/data"
 import Link from "next/link"
 
-export function ProjectsSection() {
+interface ProjectsSectionProps {
+  index: number
+}
+
+export function ProjectsSection({ index }: ProjectsSectionProps) {
+
   return (
     <section id="projects" className="border-t border-border" aria-labelledby="projects-heading">
       <div className="mx-auto max-w-7xl px-4 py-16 lg:py-24">
@@ -13,7 +18,7 @@ export function ProjectsSection() {
           </span>
           <div className="h-px flex-1 bg-border" aria-hidden="true" />
           <span className="font-mono text-[10px] tracking-widest text-muted-foreground">
-            05
+            {String(index).padStart(2, "0")}
           </span>
         </div>
 

@@ -3,7 +3,12 @@ import { ArrowRight } from "lucide-react"
 import { TerminalCard } from "./terminal-card"
 import { TechTicker } from "./tech-ticker"
 
-export function HeroBento() {
+interface HeroBentoProps {
+  index: number
+}
+
+export function HeroBento({ index }: HeroBentoProps) {
+
   return (
     <section id="home" className="mx-auto max-w-7xl px-4 pt-36 pb-16 lg:pt-40 lg:pb-24" aria-labelledby="hero-heading">
       {/* Section label */}
@@ -12,9 +17,9 @@ export function HeroBento() {
           index
         </span>
         <div className="h-px flex-1 bg-border" aria-hidden="true" />
-        <span className="font-mono text-[10px] tracking-widest text-muted-foreground">
-          01
-        </span>
+          <span className="font-mono text-[10px] tracking-widest text-muted-foreground">
+            {String(index).padStart(2, "0")}
+          </span>
       </div>
 
       {/* Bento Grid */}

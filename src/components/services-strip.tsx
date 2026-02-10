@@ -1,5 +1,9 @@
 import { Globe, Brain, BarChart3 } from "lucide-react"
 
+interface ServicesStripProps {
+  index: number
+}
+
 const services = [
   {
     icon: Globe,
@@ -21,7 +25,8 @@ const services = [
   },
 ]
 
-export function ServicesStrip() {
+export function ServicesStrip({ index }: ServicesStripProps) {
+
   return (
     <section id="services" className="border-t border-border" aria-labelledby="services-heading">
       <div className="mx-auto max-w-7xl px-4 py-16 lg:py-24">
@@ -31,7 +36,7 @@ export function ServicesStrip() {
           </span>
           <div className="h-px flex-1 bg-border" aria-hidden="true" />
           <span className="font-mono text-[10px] tracking-widest text-muted-foreground">
-            07
+            {String(index).padStart(2, "0")}
           </span>
         </div>
 

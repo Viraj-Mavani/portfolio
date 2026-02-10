@@ -6,7 +6,12 @@ import { certificates } from "@/lib/data"
 
 const INITIAL_COUNT = 3
 
-export function CertificatesSection() {
+interface CertificatesSectionProps {
+  index: number
+}
+
+export function CertificatesSection({ index }: CertificatesSectionProps) {
+
   const [expanded, setExpanded] = useState(false)
   const visible = expanded ? certificates : certificates.slice(0, INITIAL_COUNT)
   const hasMore = certificates.length > INITIAL_COUNT
@@ -21,7 +26,7 @@ export function CertificatesSection() {
           </span>
           <div className="h-px flex-1 bg-border" aria-hidden="true" />
           <span className="font-mono text-[10px] tracking-widest text-muted-foreground">
-            06
+            {String(index).padStart(2, "0")}
           </span>
         </div>
 

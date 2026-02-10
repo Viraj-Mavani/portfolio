@@ -13,13 +13,14 @@ export default function Page() {
     <div className="min-h-screen bg-background">
       <TopNav />
       <main>
-        <HeroBento />
-        <AboutSection />
-        <SkillsSection />
-        <ExperienceSection />
-        <ProjectsSection />
-        <CertificatesSection />
-        <ServicesStrip />
+        <HeroBento index={1} />
+        <AboutSection index={2} />
+        <SkillsSection index={3} />
+        <ExperienceSection index={4} />
+        <ProjectsSection index={5} />
+        <CertificatesSection index={6} />
+        <ServicesStrip index={7} />
+
       </main>
       <Footer />
     </div>

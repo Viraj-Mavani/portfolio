@@ -1,7 +1,12 @@
 import { Briefcase, Calendar, MapPin } from "lucide-react"
 import { experiences } from "@/lib/data"
 
-export function ExperienceSection() {
+interface ExperienceSectionProps {
+  index: number
+}
+
+export function ExperienceSection({ index }: ExperienceSectionProps) {
+
   return (
     <section id="experience" className="border-t border-border" aria-labelledby="experience-heading">
       <div className="mx-auto max-w-7xl px-4 py-16 lg:py-24">
@@ -12,7 +17,7 @@ export function ExperienceSection() {
           </span>
           <div className="h-px flex-1 bg-border" aria-hidden="true" />
           <span className="font-mono text-[10px] tracking-widest text-muted-foreground">
-            04
+            {String(index).padStart(2, "0")}
           </span>
         </div>
 
