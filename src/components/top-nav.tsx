@@ -1,6 +1,8 @@
 "use client"
 
 import { useState } from "react"
+import { usePathname } from "next/navigation"
+import Link from "next/link"
 import { useTheme } from "next-themes"
 import { Sun, Moon, Menu, Mail, Github, Linkedin, MessageSquare } from "lucide-react"
 import {
@@ -12,14 +14,15 @@ import {
 } from "@/components/ui/sheet"
 
 const exploreLinks = [
-  { label: "Home", href: "#home" },
-  { label: "About & Education", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Work Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
-  { label: "Certificates", href: "#certificates" },
-  { label: "Services", href: "#services" },
-  { label: "Get in Touch", href: "#contact" },
+  { label: "Home", href: "/#home" },
+  { label: "About Me", href: "/about" },
+  { label: "Education", href: "/#about" },
+  { label: "Skills", href: "/#skills" },
+  { label: "Work Experience", href: "/#experience" },
+  { label: "Projects", href: "/projects" },
+  { label: "Certificates", href: "/#certificates" },
+  { label: "Services", href: "/#services" },
+  { label: "Get in Touch", href: "/#contact" },
 ]
 
 const modes = [
@@ -40,6 +43,8 @@ export function TopNav() {
   const { theme, setTheme } = useTheme()
   const [open, setOpen] = useState(false)
   const [activeMode, setActiveMode] = useState("generalist")
+  const pathname = usePathname()
+  const isHome = pathname === "/"
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -47,14 +52,14 @@ export function TopNav() {
         <div className="flex items-center gap-4">
           {/* Left box - Logo / Name */}
           <div className="flex items-center rounded-md border border-border bg-card/80 px-4 py-2 backdrop-blur-xl">
-            <a href="#home" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2">
               <span className="flex h-7 w-7 items-center justify-center rounded-sm bg-primary font-mono text-xs font-bold text-primary-foreground">
                 VM
               </span>
               <span className="hidden font-mono text-xs tracking-wider text-foreground sm:block">
                 viraj.dev
               </span>
-            </a>
+            </Link>
           </div>
 
           {/* Middle - Context Switcher */}
@@ -142,17 +147,21 @@ export function TopNav() {
                     Explore
                   </span>
                   <nav className="flex flex-col gap-1" role="navigation" aria-label="Page sections">
-                    {exploreLinks.map((link) => (
-                      <a
-                        key={link.label}
-                        href={link.href}
-                        onClick={() => setOpen(false)}
-                        className="flex items-center gap-3 rounded-sm px-3 py-2.5 font-mono text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-                      >
-                        <span className="text-[10px] text-primary">{">"}</span>
-                        {link.label}
-                      </a>
-                    ))}
+                    {exploreLinks.map((link) => {
+                      const isPageLink = link.href.startsWith("/") && !link.href.startsWith("/#")
+                      const Component = isPageLink ? Link : "a"
+                      return (
+                        <Component
+                          key={link.label}
+                          href={link.href}
+                          onClick={() => setOpen(false)}
+                          className="flex items-center gap-3 rounded-sm px-3 py-2.5 font-mono text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                        >
+                          <span className="text-[10px] text-primary">{">"}</span>
+                          {link.label}
+                        </Component>
+                      )
+                    })}
                   </nav>
                 </div>
 

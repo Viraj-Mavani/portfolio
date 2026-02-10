@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { TerminalCard } from "./terminal-card"
 import { TechTicker } from "./tech-ticker"
@@ -37,13 +38,13 @@ export function HeroBento() {
             </p>
           </div>
           <div className="mt-8">
-            <a
-              href="#about"
+            <Link
+              href="/about"
               className="group inline-flex items-center gap-3 rounded-sm bg-primary px-6 py-3 font-mono text-sm font-medium text-primary-foreground transition-all hover:gap-4"
             >
               About Me
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-            </a>
+            </Link>
           </div>
         </div>
 
