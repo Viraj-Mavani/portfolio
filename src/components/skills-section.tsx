@@ -1,29 +1,4 @@
-const skillCategories = [
-  {
-    label: "Languages",
-    skills: ["Python", "TypeScript", "JavaScript", "Java", "SQL", "R", "C++"],
-  },
-  {
-    label: "Frameworks / Web",
-    skills: ["React", "Next.js", "Node.js", "FastAPI", "Flask", "Django", "Tailwind CSS"],
-  },
-  {
-    label: "Databases",
-    skills: ["PostgreSQL", "MongoDB", "Redis", "MySQL", "Supabase", "Firebase"],
-  },
-  {
-    label: "Data Science & AI",
-    skills: ["PyTorch", "TensorFlow", "Scikit-learn", "Pandas", "NumPy", "LangChain", "OpenAI", "Hugging Face"],
-  },
-  {
-    label: "Data Engineering",
-    skills: ["Apache Spark", "Airflow", "Kafka", "dbt", "ETL Pipelines", "Data Modeling"],
-  },
-  {
-    label: "Cloud & Tools",
-    skills: ["AWS", "GCP", "Docker", "Kubernetes", "Git", "CI/CD", "Vercel", "Terraform"],
-  },
-]
+import { skillCategories } from "@/lib/data"
 
 export function SkillsSection() {
   return (

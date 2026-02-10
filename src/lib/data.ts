@@ -1,3 +1,26 @@
+export interface Education {
+  degree: string
+  school: string
+  location: string
+  period: string
+  focus?: string
+  highlights?: string[]
+}
+
+export interface SkillCategory {
+  label: string
+  skills: string[]
+}
+
+export interface Experience {
+  role: string
+  company: string
+  location: string
+  period: string
+  description: string
+  tags: string[]
+}
+
 export interface Project {
   title: string
   brief: string
@@ -18,14 +41,99 @@ export interface Certificate {
   modes: string[]
 }
 
-export interface Education {
-  degree: string
-  school: string
-  location: string
-  period: string
-  focus?: string
-  highlights?: string[]
-}
+export const education: Education[] = [
+  {
+    degree: "Master of Science in Computer Science",
+    school: "WESTERN UNIVERSITY",
+    location: "ON, Canada",
+    period: "2024 - 2025",
+    focus: "Specialization in Artificial Intelligence",
+    highlights: [
+      "Published paper on efficient fine-tuning methods for domain-specific LLMs",
+      "Teaching Assistant for Advanced Machine Learning course",
+      "Directed Studies Research in ", // TODO: Project title and description
+      "GPA: 3.58/4.0",
+    ],
+  },
+  {
+    degree: "Bachelor of Technology in Computer Engineering",
+    school: "ATMIYA UNIVERSITY",
+    location: "Gujarat, India",
+    period: "2019 - 2023",
+    highlights: [
+      "Dean's List all semesters",
+      "Led the university's Competitive Programming Club",
+      "Senior capstone: ", // TODO: Project title and description
+      "GPA: 3.62/4.0",
+    ],
+  },
+]
+
+export const skillCategories : SkillCategory[] = [
+  {
+    label: "Languages",
+    skills: ["Python", "TypeScript", "JavaScript", "Java", "SQL", "R", "C++"],
+  },
+  {
+    label: "Frameworks / Web",
+    skills: ["React", "Next.js", "Node.js", "FastAPI", "Flask", "Django", "Tailwind CSS"],
+  },
+  {
+    label: "Databases",
+    skills: ["PostgreSQL", "MongoDB", "Redis", "MySQL", "Supabase", "Firebase"],
+  },
+  {
+    label: "Data Science & AI",
+    skills: ["PyTorch", "TensorFlow", "Scikit-learn", "Pandas", "NumPy", "LangChain", "OpenAI", "Hugging Face"],
+  },
+  {
+    label: "Data Engineering",
+    skills: ["Apache Spark", "Airflow", "Kafka", "dbt", "ETL Pipelines", "Data Modeling"],
+  },
+  {
+    label: "Cloud & Tools",
+    skills: ["AWS", "GCP", "Docker", "Kubernetes", "Git", "CI/CD", "Vercel", "Terraform"],
+  },
+]
+
+export const experiences : Experience[] = [
+  {
+    role: "Graduate Teaching Assistant",
+    company: "Western University",
+    location: "London, ON",
+    period: "Jan 2024 - Apr 2025",
+    description:
+      "Supported 200+ students in CS2034b–Data Analytics: Principles through labs, tutorials, and office hours. Facilitated student learning by clarifying complex concepts in data analytics, Python, and machine learning. Contributed to academic success and improved average course satisfaction scores.",
+    tags: ["Python", "VBA", "Regex", "Pandas", "NumPy", "Matplotlib", "Microsoft Excel", "SQL", "Jupyter Notebooks"],
+  },
+  {
+    role: "Full Stack Developer",
+    company: "Dexoc Solutions",
+    location: "Ahmedabad, India",
+    period: "Sep 2023 - Jul 2024",
+    description:
+      "Worked as Full Stack Developer with expertise in Python, C#, JavaScript, and AngularJS, integrating front-end and back-end systems to streamline workflows and improving client system performance by 20%. Led 15+ web scraping projects, processing millions of data, with foreign clients, delivering accurate datasets with 99%+ data integrity. Implemented AWS Lambda functions to streamline data processing and storage, ensuring seamless integration within the AWS cloud infrastructure. Mentored junior developers and conducted code reviews to improve team delivery standards.",
+    tags: ["Python", "C#", ".NET Core", "ASP.NET Web API", "JavaScript (ES6+)", "AngularJS", "SQL", "PostgreSQL", "JWT Token", "Azure DevOps", "Azure ServiceBus", "AWS Lambda", "Git/GitHub", "CI/CD Pipelines", "Docker", "Web Scraping", "Selenium", "Scrapy", "Jira", "HTML5", "CSS3", "xUnit", "Agile/Scrum", "Requirement Analysis"],
+  },
+  {
+    role: "Software Engineer",
+    company: "FSP MEDIA",
+    location: "Ahmedabad, India",
+    period: "Mar 2023 - Aug 2023",
+    description:
+      "Designed and developed .NET-based backend applications for diverse industries, ensuring modular architecture and timely project delivery. Partnered with stakeholders to translate business requirements into technical specifications and functional solutions. Enhanced system reliability & code quality by implementing comprehensive unit testing and rigorous debugging protocols.",
+    tags: ["C#", ".NET Core", "ASP.NET Web API", "JavaScript (ES6+)", "AngularJS", "SQL", "PostgreSQL", "Entity Framework", "Dapper", "Microsoft SQL Server", "Git" ,"Version Control"],
+  },
+  {
+    role: ".Net Developer Intern",
+    company: "TatvaSoft",
+    location: "Ahmedabad, India",
+    period: "Dec 2022 - Feb 2023",
+    description:
+      "Contributed to production-level .NET projects, transitioning classroom concepts into enterprise-grade software solutions. Optimized application performance through hands-on development, code reviews, proactive debugging within the .NET ecosystem, and utilized version control (Git) and collaborative tools to manage codebases.",
+    tags: ["C#", ".NET Core", "ASP.NET MVC", "ASP.NET Web API", "LINQ", "SQL", "Entity Framework", "Git" ,"Version Control", "Jira" , "Unit Testing"],
+  },
+]
 
 export const projects: Project[] = [
   {
@@ -120,33 +228,5 @@ export const certificates: Certificate[] = [
     date: "2020",
     credentialUrl: "https://coursera.org/share/ba053d3229601521dd958d7c66b4c974",
     modes: ["fullstack"],
-  },
-]
-
-export const education: Education[] = [
-  {
-    degree: "Master of Science in Computer Science",
-    school: "WESTERN UNIVERSITY",
-    location: "ON, Canada",
-    period: "2024 - 2025",
-    focus: "Specialization in Artificial Intelligence",
-    highlights: [
-      "Published paper on efficient fine-tuning methods for domain-specific LLMs",
-      "Teaching Assistant for Advanced Machine Learning course",
-      "Directed Studies Research in ", // TODO: Project title and description
-      "GPA: 3.58/4.0",
-    ],
-  },
-  {
-    degree: "Bachelor of Technology in Computer Engineering",
-    school: "ATMIYA UNIVERSITY",
-    location: "Gujarat, India",
-    period: "2019 - 2023",
-    highlights: [
-      "Dean's List all semesters",
-      "Led the university's Competitive Programming Club",
-      "Senior capstone: ", // TODO: Project title and description
-      "GPA: 3.62/4.0",
-    ],
   },
 ]

@@ -1,43 +1,5 @@
 import { Briefcase, Calendar, MapPin } from "lucide-react"
-
-const experiences = [
-  {
-    role: "Graduate Teaching Assistant",
-    company: "Western University",
-    location: "London, ON",
-    period: "Jan 2024 - Apr 2025",
-    description:
-      "Supported 200+ students in CS2034b–Data Analytics: Principles through labs, tutorials, and office hours. Facilitated student learning by clarifying complex concepts in data analytics, Python, and machine learning. Contributed to academic success and improved average course satisfaction scores.",
-    tags: ["Python", "VBA", "Regex", "Pandas", "NumPy", "Matplotlib", "Microsoft Excel", "SQL", "Jupyter Notebooks"],
-  },
-  {
-    role: "Full Stack Developer",
-    company: "Dexoc Solutions",
-    location: "Ahmedabad, India",
-    period: "Sep 2023 - Jul 2024",
-    description:
-      "Worked as Full Stack Developer with expertise in Python, C#, JavaScript, and AngularJS, integrating front-end and back-end systems to streamline workflows and improving client system performance by 20%. Led 15+ web scraping projects, processing millions of data, with foreign clients, delivering accurate datasets with 99%+ data integrity. Implemented AWS Lambda functions to streamline data processing and storage, ensuring seamless integration within the AWS cloud infrastructure. Mentored junior developers and conducted code reviews to improve team delivery standards.",
-    tags: ["Python", "C#", ".NET Core", "ASP.NET Web API", "JavaScript (ES6+)", "AngularJS", "SQL", "PostgreSQL", "JWT Token", "Azure DevOps", "Azure ServiceBus", "AWS Lambda", "Git/GitHub", "CI/CD Pipelines", "Docker", "Web Scraping", "Selenium", "Scrapy", "Jira", "HTML5", "CSS3", "xUnit", "Agile/Scrum", "Requirement Analysis"],
-  },
-  {
-    role: "Software Engineer",
-    company: "FSP MEDIA",
-    location: "Ahmedabad, India",
-    period: "Mar 2023 - Aug 2023",
-    description:
-      "Designed and developed .NET-based backend applications for diverse industries, ensuring modular architecture and timely project delivery. Partnered with stakeholders to translate business requirements into technical specifications and functional solutions. Enhanced system reliability & code quality by implementing comprehensive unit testing and rigorous debugging protocols.",
-    tags: ["C#", ".NET Core", "ASP.NET Web API", "JavaScript (ES6+)", "AngularJS", "SQL", "PostgreSQL", "Entity Framework", "Dapper", "Microsoft SQL Server", "Git" ,"Version Control"],
-  },
-  {
-    role: ".Net Developer Intern",
-    company: "TatvaSoft",
-    location: "Ahmedabad, India",
-    period: "Dec 2022 - Feb 2023",
-    description:
-      "Contributed to production-level .NET projects, transitioning classroom concepts into enterprise-grade software solutions. Optimized application performance through hands-on development, code reviews, proactive debugging within the .NET ecosystem, and utilized version control (Git) and collaborative tools to manage codebases.",
-    tags: ["C#", ".NET Core", "ASP.NET MVC", "ASP.NET Web API", "LINQ", "SQL", "Entity Framework", "Git" ,"Version Control", "Jira" , "Unit Testing"],
-  },
-]
+import { experiences } from "@/lib/data"
 
 export function ExperienceSection() {
   return (
