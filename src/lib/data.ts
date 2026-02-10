@@ -18,6 +18,15 @@ export interface Certificate {
   modes: string[]
 }
 
+export interface Education {
+  degree: string
+  school: string
+  location: string
+  period: string
+  focus?: string
+  highlights?: string[]
+}
+
 export const projects: Project[] = [
   {
     title: "Aerospace Part Tracking System",
@@ -110,5 +119,33 @@ export const certificates: Certificate[] = [
     date: "2020",
     credentialUrl: "https://coursera.org/share/ba053d3229601521dd958d7c66b4c974",
     modes: ["fullstack"],
+  },
+]
+
+export const education: Education[] = [
+  {
+    degree: "Master of Science in Computer Science",
+    school: "WESTERN UNIVERSITY",
+    location: "ON, Canada",
+    period: "2024 - 2025",
+    focus: "Specialization in Artificial Intelligence",
+    highlights: [
+      "Published paper on efficient fine-tuning methods for domain-specific LLMs",
+      "Teaching Assistant for Advanced Machine Learning course",
+      "Directed Studies Research in ", // TODO: Project title and description
+      "GPA: 3.58/4.0",
+    ],
+  },
+  {
+    degree: "Bachelor of Technology in Computer Engineering",
+    school: "ATMIYA UNIVERSITY",
+    location: "Gujarat, India",
+    period: "2019 - 2023",
+    highlights: [
+      "Dean's List all semesters",
+      "Led the university's Competitive Programming Club",
+      "Senior capstone: ", // TODO: Project title and description
+      "GPA: 3.62/4.0",
+    ],
   },
 ]

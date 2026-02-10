@@ -1,20 +1,5 @@
 import { GraduationCap, MapPin, Calendar } from "lucide-react"
-
-const education = [
-  {
-    degree: "Master of Science in Computer Science",
-    school: "WESTERN UNIVERSITY",
-    location: "ON, Canada",
-    period: "2024 - 2025",
-    focus: "Specialization in Artificial Intelligence",
-  },
-  {
-    degree: "Bachelor of Technology in Computer Engineering",
-    school: "ATMIYA UNIVERSITY",
-    location: "Gujarat, India",
-    period: "2019 - 2023",
-  },
-]
+import { education } from "@/lib/data"
 
 export function AboutSection() {
   return (

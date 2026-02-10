@@ -14,39 +14,12 @@ import {
 } from "lucide-react"
 import { TopNav } from "@/components/top-nav"
 import { Footer } from "@/components/footer"
+import { education } from "@/lib/data"
 
 export const metadata: Metadata = {
   title: "About | VM Portfolio",
   description: "Detailed background, education, philosophy, and journey of VM.",
 }
-
-const education = [
-  {
-    degree: "Master of Science in Computer Science",
-    school: "WESTERN UNIVERSITY",
-    location: "ON, Canada",
-    period: "2024 - 2025",
-    focus: "Specialization in Artificial Intelligence",
-    highlights: [
-        "Published paper on efficient fine-tuning methods for domain-specific LLMs",
-        "Teaching Assistant for Advanced Machine Learning course",
-        "Directed Studies Research in ",  //TODO: Project title and description
-        "GPA: 3.58/4.0",
-    ],
-  },
-  {
-    degree: "Bachelor of Technology in Computer Engineering",
-    school: "ATMIYA UNIVERSITY",
-    location: "Gujarat, India",
-    period: "2019 - 2023",
-    highlights: [
-      "Dean's List all semesters",
-      "Led the university's Competitive Programming Club",
-      "Senior capstone: ", //TODO: Project title and description
-      "GPA: 3.62/4.0",
-    ],
-  },
-]
 
 const journey = [
   {
