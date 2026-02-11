@@ -4,7 +4,7 @@ import { useState } from "react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { useTheme } from "next-themes"
-import { Sun, Moon, Menu, Mail, Github, Linkedin, MessageSquare } from "lucide-react"
+import { Sun, Moon, Menu, Mail, Github, Linkedin, MessageSquare, ChevronDown } from "lucide-react"
 import {
   Sheet,
   SheetContent,
@@ -12,8 +12,13 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
-// 1. ADD THESE IMPORTS
 import { useMode } from "@/hooks/use-mode"
 import { SITE_CONFIG } from "@/config/site-config"
 
@@ -43,11 +48,16 @@ const socialLinks = [
   { label: "Discord", href: "#", icon: MessageSquare },
 ]
 
+const RESUMES = [
+  { id: "fullstack", label: "Full Stack Resume", href: "/resumes/Viraj_Mavani_Resume_FullStack.pdf" },
+  // { id: "fullstack", label: "Full Stack Resume", href: "https://uwoca-my.sharepoint.com/:b:/g/personal/vmavani2_uwo_ca/IQDtOwLXU5P2R4ujwpNLHlqiAcM00LiuTindE7b4bi-x3Uk?e=Nvd39I" },
+  { id: "data", label: "AI / ML Resume", href: "/resumes/Viraj_Mavani_Resume_Data.pdf" },
+]
+
 export function TopNav() {
   const { theme, setTheme } = useTheme()
   const [open, setOpen] = useState(false)
   
-  // 2. CHANGE THIS: Use the global hook instead of local state
   // const [activeMode, setActiveMode] = useState("generalist") 
   const { mode: activeMode, setMode: setActiveMode } = useMode() 
 
@@ -89,7 +99,7 @@ export function TopNav() {
                       key={mode.id}
                       role="tab"
                       aria-selected={activeMode === mode.id}
-                      // Note: Typescript might complain here if mode.id string doesn't perfectly match
+                      // if mode.id string doesn't perfectly match
                       // We can cast it: setActiveMode(mode.id as any) if needed
                       onClick={() => setActiveMode(mode.id as any)}
                       className={`relative flex items-center gap-2 rounded-sm px-3 py-1.5 font-mono text-xs tracking-tight transition-all duration-200 ${
@@ -124,6 +134,45 @@ export function TopNav() {
 
           {/* Right box - Theme Toggle + Drawer Button */}
           <div className="flex items-center gap-1 rounded-md border border-border bg-card/80 px-2 py-1.5 backdrop-blur-xl">
+          
+            {/* Dynamic Resume Button */}
+            {activeMode === "generalist" ? (
+              // If Generalist: Show Dropdown Menu
+              <DropdownMenu>
+                <DropdownMenuTrigger className="hidden rounded-sm border border-border px-3 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:border-primary hover:text-foreground sm:flex sm:items-center sm:gap-1 outline-none">
+                  Resume <ChevronDown className="h-3 w-3 opacity-70" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="min-w-[160px] font-mono text-xs">
+                  {RESUMES.map((resume) => (
+                    <DropdownMenuItem key={resume.id} asChild className="cursor-pointer">
+                      <a href={resume.href} target="_blank" rel="noopener noreferrer">
+                        {resume.label}
+                      </a>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              // If Specific Mode: Show Direct Link
+              (() => {
+                const resumeId = activeMode === "ai-ml" ? "data" : activeMode //TODO: set diiferent resume for data
+                const resume = RESUMES.find((r) => r.id === resumeId)
+                if (!resume) return null
+                return (
+                  <a
+                    href={resume.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hidden rounded-sm border border-border px-3 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:border-primary hover:text-foreground sm:block"
+                  >
+                    Resume
+                  </a>
+                )
+              })()
+            )}
+
+            <div className="hidden sm:block mx-1 h-4 w-px bg-border" aria-hidden="true" />
+
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="flex h-8 w-8 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
