@@ -1,7 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+images: {
+    // This allows you to use the high-performance Next.js Image component
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.linkedin.com',
+      },
+      // Add other domains if you plan to host images externally
+    ],
+  },
   reactCompiler: true,
 };
 
