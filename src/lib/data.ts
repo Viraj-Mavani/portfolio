@@ -157,6 +157,16 @@ export const projects: Project[] = [
     mode: ["data", "webscraping"],
   },
   {
+    title: "Tomato Leaf Disease Detection",
+    brief:
+      "Developed a custom CNN achieving 96.3% test accuracy for tomato diseases; optimized for resource-constrained devices. Applied transfer learning via ResNet50 and data augmentation to improve model generalization and reduce overfitting.",
+    description:
+      "Developed a custom CNN achieving 96.3% test accuracy for tomato diseases; optimized for resource-constrained devices. Applied transfer learning via ResNet50 and data augmentation to improve model generalization and reduce overfitting.",
+    tags: ["Python", "TensorFlow", "ResNet50", "CNN", "Keras"],
+    github: "https://github.com/Viraj-Mavani/smart_agriculture_system",
+    mode: ["ai-ml", "data"],
+  },
+  {
     title: "ML-Powered Taxi Fare Prediction",
     brief:
       "Implemented an ML-based prediction system using LightGBM, achieving an R^2 score of 83.9%. Developed a Docker-based pipeline to automate data extraction from map images, streamlining the ingestion of travel features.",

@@ -1,12 +1,20 @@
+"use client"
+
 import { Github, ExternalLink, ArrowRight } from "lucide-react"
 import { projects } from "@/lib/data"
 import Link from "next/link"
+import { useMode } from "@/hooks/use-mode"
 
 interface ProjectsSectionProps {
   index: number
 }
 
 export function ProjectsSection({ index }: ProjectsSectionProps) {
+  const { mode } = useMode()
+
+  const filteredProjects = projects.filter((project) => 
+    mode === "generalist" || project.mode.includes(mode)
+  )
 
   return (
     <section id="projects" className="border-t border-border" aria-labelledby="projects-heading">
@@ -25,7 +33,7 @@ export function ProjectsSection({ index }: ProjectsSectionProps) {
         <h2 id="projects-heading" className="sr-only">Projects</h2>
 
         <div className="grid gap-4 md:grid-cols-2">
-          {projects.slice(0, 4).map((project, index) => (
+          {filteredProjects.slice(0, 4).map((project, index) => (
             <div
               key={project.title}
               className="group relative flex flex-col gap-5 rounded-md border border-border bg-card p-8 transition-colors hover:border-primary/30"
@@ -87,15 +95,17 @@ export function ProjectsSection({ index }: ProjectsSectionProps) {
         </div>
 
         {/* More Projects button */}
-        <div className="mt-8 flex justify-center">
-          <Link
-            href="/projects"
-            className="group inline-flex items-center gap-3 rounded-sm border border-border px-6 py-3 font-mono text-sm text-muted-foreground transition-all hover:border-primary hover:text-foreground hover:gap-4"
-          >
-            View All Projects
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-          </Link>
-        </div>
+        {filteredProjects.length > 4 && (
+          <div className="mt-8 flex justify-center">
+            <Link
+              href="/projects"
+              className="group inline-flex items-center gap-3 rounded-sm border border-border px-6 py-3 font-mono text-sm text-muted-foreground transition-all hover:border-primary hover:text-foreground hover:gap-4"
+            >
+              View All {mode === "generalist" ? "" : mode} Projects
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   )

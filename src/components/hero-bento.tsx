@@ -1,13 +1,38 @@
+"use client"
+
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { TerminalCard } from "./terminal-card"
 import { TechTicker } from "./tech-ticker"
+import { useMode } from "@/hooks/use-mode"
 
 interface HeroBentoProps {
   index: number
 }
 
+// Map the different modes to specific tailored copy
+const HERO_CONTENT = {
+  generalist: {
+    title: "Full Stack AI Engineer",
+    description: "Merging Full Stack Engineering with AI Research to create production-grade solutions."
+  },
+  fullstack: {
+    title: "Full Stack Developer",
+    description: "Building scalable, secure, and robust web applications and APIs from frontend to database."
+  },
+  "ai-ml": {
+    title: "Machine Learning Engineer",
+    description: "Designing intelligent systems, predictive models, and custom AI data pipelines."
+  },
+  data: {
+    title: "Data Engineer",
+    description: "Architecting distributed web scrapers, data pipelines, and processing millions of records."
+  }
+}
+
 export function HeroBento({ index }: HeroBentoProps) {
+  const { mode } = useMode()
+  const content = HERO_CONTENT[mode as keyof typeof HERO_CONTENT] || HERO_CONTENT.generalist
 
   return (
     <section id="home" className="mx-auto max-w-7xl px-4 pt-36 pb-16 lg:pt-40 lg:pb-24" aria-labelledby="hero-heading">
@@ -24,11 +49,11 @@ export function HeroBento({ index }: HeroBentoProps) {
 
       {/* Bento Grid */}
       <div className="grid gap-3 md:grid-cols-3 md:grid-rows-[1fr_auto]">
-        {/* Card 1 - Intro (Large, Top Left, spans 2 cols) */}
+        {/* Card 1 - Intro */}
         <div className="flex flex-col justify-between rounded-md border border-border bg-card p-8 md:col-span-2 md:row-span-1 lg:p-10">
           <div>
             <span className="mb-4 inline-block font-mono text-[10px] tracking-widest text-primary uppercase">
-              Full Stack AI Engineer
+              {content.title}
             </span>
             <h1
               id="hero-heading"
@@ -39,7 +64,7 @@ export function HeroBento({ index }: HeroBentoProps) {
               VM
             </h1>
             <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground lg:text-lg">
-              Merging Full Stack Engineering with AI Research to create production-grade solutions.
+              {content.description}
             </p>
           </div>
           <div className="mt-8">

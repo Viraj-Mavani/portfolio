@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Award, ExternalLink, ChevronDown, ChevronUp } from "lucide-react"
 import { certificates } from "@/lib/data"
+import { useMode } from "@/hooks/use-mode"
 
 const INITIAL_COUNT = 3
 
@@ -11,15 +12,20 @@ interface CertificatesSectionProps {
 }
 
 export function CertificatesSection({ index }: CertificatesSectionProps) {
-
+  const { mode } = useMode()
   const [expanded, setExpanded] = useState(false)
-  const visible = expanded ? certificates : certificates.slice(0, INITIAL_COUNT)
-  const hasMore = certificates.length > INITIAL_COUNT
+
+  // Filter logic
+  const filteredCertificates = certificates.filter((cert) => 
+    mode === "generalist" || cert.modes.includes(mode)
+  )
+
+  const visible = expanded ? filteredCertificates : filteredCertificates.slice(0, INITIAL_COUNT)
+  const hasMore = filteredCertificates.length > INITIAL_COUNT
 
   return (
     <section id="certificates" className="border-t border-border" aria-labelledby="certificates-heading">
       <div className="mx-auto max-w-7xl px-4 py-16 lg:py-24">
-        {/* Section label */}
         <div className="mb-12 flex items-center gap-4">
           <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
             certificates
@@ -79,7 +85,7 @@ export function CertificatesSection({ index }: CertificatesSectionProps) {
                   ))}
                 </div>
               </div>
-            </div>
+             </div>
           ))}
         </div>
 
@@ -92,7 +98,7 @@ export function CertificatesSection({ index }: CertificatesSectionProps) {
               aria-expanded={expanded}
               aria-controls="certificates-grid"
             >
-              {expanded ? "Show Less" : `Show All (${certificates.length})`}
+              {expanded ? "Show Less" : `Show All (${filteredCertificates.length})`}
               {expanded ? (
                 <ChevronUp className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5" />
               ) : (
