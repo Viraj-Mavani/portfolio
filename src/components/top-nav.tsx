@@ -21,6 +21,7 @@ import {
 
 import { useMode } from "@/hooks/use-mode"
 import { SITE_CONFIG } from "@/config/site-config"
+import { socialLinks } from "@/components/footer"
 
 const exploreLinks = [
   { label: "Home", href: "/#home" },
@@ -39,13 +40,6 @@ const modes = [
   { id: "fullstack", label: "Full Stack" },
   { id: "ai-ml", label: "AI / ML" },
   { id: "data", label: "Data" },
-]
-
-const socialLinks = [
-  { label: "Email", href: "mailto:vm@example.com", icon: Mail },
-  { label: "LinkedIn", href: "#", icon: Linkedin },
-  { label: "GitHub", href: "#", icon: Github },
-  { label: "Discord", href: "#", icon: MessageSquare },
 ]
 
 const RESUMES = [
@@ -81,7 +75,7 @@ export function TopNav() {
           </div>
 
           {/* Middle - Context Switcher */}
-          {/* 3. ADD THIS CHECK: Only show if enabled in Config */}
+          {/* THIS CHECK: Only show if enabled in Config */}
           {SITE_CONFIG.enableContextSwitcher ? (
             <div className="flex min-w-0 flex-1 justify-center">
               <nav
@@ -195,7 +189,7 @@ export function TopNav() {
               </SheetTrigger>
               <SheetContent
                 side="right"
-                className="border-border bg-card w-80 overflow-y-auto"
+                className="border-border bg-card w-96 overflow-y-auto"
               >
                 <SheetHeader className="border-b border-border pb-4">
                   <SheetTitle className="flex items-center gap-2 font-mono text-sm tracking-wider text-foreground">
