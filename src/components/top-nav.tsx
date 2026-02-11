@@ -13,6 +13,10 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 
+// 1. ADD THESE IMPORTS
+import { useMode } from "@/hooks/use-mode"
+import { SITE_CONFIG } from "@/config/site-config"
+
 const exploreLinks = [
   { label: "Home", href: "/#home" },
   { label: "About Me", href: "/about" },
@@ -42,7 +46,11 @@ const socialLinks = [
 export function TopNav() {
   const { theme, setTheme } = useTheme()
   const [open, setOpen] = useState(false)
-  const [activeMode, setActiveMode] = useState("generalist")
+  
+  // 2. CHANGE THIS: Use the global hook instead of local state
+  // const [activeMode, setActiveMode] = useState("generalist") 
+  const { mode: activeMode, setMode: setActiveMode } = useMode() 
+
   const pathname = usePathname()
   const isHome = pathname === "/"
 
@@ -63,48 +71,56 @@ export function TopNav() {
           </div>
 
           {/* Middle - Context Switcher */}
-          <div className="flex min-w-0 flex-1 justify-center">
-            <nav
-              className="flex w-fit items-center gap-6 rounded-md border border-border bg-card/80 px-2 py-1.5 backdrop-blur-xl"
-              role="navigation"
-              aria-label="Mode switcher"
-            >
-              <span className="hidden pl-3 font-mono text-xs tracking-widest text-muted-foreground uppercase sm:block">
-                mode
-              </span>
-
-              <div className="flex items-center gap-0.5 rounded-sm bg-secondary p-0.5" role="tablist">
-                {modes.map((mode) => (
-                  <button
-                    key={mode.id}
-                    role="tab"
-                    aria-selected={activeMode === mode.id}
-                    onClick={() => setActiveMode(mode.id)}
-                    className={`relative flex items-center gap-2 rounded-sm px-3 py-1.5 font-mono text-xs tracking-tight transition-all duration-200 ${
-                      activeMode === mode.id
-                        ? "bg-primary text-primary-foreground shadow-sm"
-                        : "text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    {activeMode === mode.id && (
-                      <span
-                        className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400"
-                        aria-hidden="true"
-                      />
-                    )}
-                    {mode.label}
-                  </button>
-                ))}
-              </div>
-
-              <a
-                href="#contact"
-                className="hidden rounded-sm border border-border px-3 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:border-primary hover:text-foreground sm:block"
+          {/* 3. ADD THIS CHECK: Only show if enabled in Config */}
+          {SITE_CONFIG.enableContextSwitcher ? (
+            <div className="flex min-w-0 flex-1 justify-center">
+              <nav
+                className="flex w-fit items-center gap-6 rounded-md border border-border bg-card/80 px-2 py-1.5 backdrop-blur-xl"
+                role="navigation"
+                aria-label="Mode switcher"
               >
-                Contact
-              </a>
-            </nav>
-          </div>
+                <span className="hidden pl-3 font-mono text-xs tracking-widest text-muted-foreground uppercase sm:block">
+                  mode
+                </span>
+
+                <div className="flex items-center gap-0.5 rounded-sm bg-secondary p-0.5" role="tablist">
+                  {modes.map((mode) => (
+                    <button
+                      key={mode.id}
+                      role="tab"
+                      aria-selected={activeMode === mode.id}
+                      // Note: Typescript might complain here if mode.id string doesn't perfectly match
+                      // We can cast it: setActiveMode(mode.id as any) if needed
+                      onClick={() => setActiveMode(mode.id as any)}
+                      className={`relative flex items-center gap-2 rounded-sm px-3 py-1.5 font-mono text-xs tracking-tight transition-all duration-200 ${
+                        activeMode === mode.id
+                          ? "bg-primary text-primary-foreground shadow-sm"
+                          : "text-muted-foreground hover:text-foreground"
+                      }`}
+                    >
+                      {activeMode === mode.id && (
+                        <span
+                          className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400"
+                          aria-hidden="true"
+                        />
+                      )}
+                      {mode.label}
+                    </button>
+                  ))}
+                </div>
+
+                <a
+                  href="#contact"
+                  className="hidden rounded-sm border border-border px-3 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:border-primary hover:text-foreground sm:block"
+                >
+                  Contact
+                </a>
+              </nav>
+            </div>
+          ) : (
+            // If hidden, keep the layout balanced (optional spacer)
+            <div className="flex-1" />
+          )}
 
           {/* Right box - Theme Toggle + Drawer Button */}
           <div className="flex items-center gap-1 rounded-md border border-border bg-card/80 px-2 py-1.5 backdrop-blur-xl">

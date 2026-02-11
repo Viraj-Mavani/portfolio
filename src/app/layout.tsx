@@ -2,6 +2,7 @@ import React from "react"
 import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import { ThemeProvider } from "@/components/theme-provider"
+import { ModeProvider } from "@/hooks/use-mode"
 
 import './globals.css'
 
@@ -31,7 +32,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <ModeProvider>
+            {children}
+          </ModeProvider>
         </ThemeProvider>
       </body>
     </html>
