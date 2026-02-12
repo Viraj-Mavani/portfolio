@@ -31,7 +31,7 @@ export function HeroBento({ index }: HeroBentoProps) {
       {/* Bento Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:grid-rows-[1fr_auto]">
         {/* Card 1 - Intro */}
-        <div className="sm:col-span-2 md:col-span-2 flex flex-col justify-between rounded-md border border-border bg-card p-8 lg:p-10">
+        <div className="sm:col-span-2 md:col-span-2 flex flex-col justify-between rounded-md border border-border bg-card p-6 md:p-8 lg:p-10">
           <div>
             <span className="mb-4 inline-block font-mono text-[10px] tracking-widest text-primary uppercase">
               {content.title}
@@ -60,7 +60,7 @@ export function HeroBento({ index }: HeroBentoProps) {
         </div>
 
         {/* Card 2 - Terminal (Tall, Right, spans 2 rows) */}
-        <div className="sm:col-span-2 md:col-span-1 min-h-[440px] md:row-span-2">
+        <div className="sm:col-span-2 md:col-span-1 min-h-[425px] lg:min-h-[440px] md:row-span-2">
           <TerminalCard />
         </div>
 

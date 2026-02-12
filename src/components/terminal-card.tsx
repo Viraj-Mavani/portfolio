@@ -64,7 +64,7 @@ export function TerminalCard() {
         </span>
       </div>
       <div className="flex-1 overflow-hidden p-4" aria-label="Terminal animation showing a Python data pipeline script">
-        <pre className="font-mono text-xs leading-relaxed">
+        <pre className="font-mono text-[11.5px] lg:text-xs leading-relaxed">
           {terminalLines.slice(0, visibleLines).map((line, i) => (
             <div key={`${line.text}-${i}`} className={`${getLineColor(line.type)} transition-opacity duration-200`}>
               {line.text || "\u00A0"}
