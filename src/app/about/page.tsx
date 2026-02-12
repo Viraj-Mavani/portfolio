@@ -151,11 +151,11 @@ export default function AboutPage() {
             <div className="h-px flex-1 bg-border" aria-hidden="true" />
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="flex flex-wrap justify-center gap-4">
             {journey.map((item) => (
               <div
                 key={item.title}
-                className="group flex flex-col gap-4 rounded-md border border-border bg-card p-6 transition-colors hover:border-primary/30"
+                className="group flex w-full flex-col gap-4 rounded-md border border-border bg-card p-6 transition-colors hover:border-primary/30 md:w-[calc(50%-0.5rem)] lg:w-[calc(33.33%-0.67rem)]"
               >
                 <div className="flex h-9 w-9 items-center justify-center rounded-sm border border-border bg-secondary text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                   <item.icon className="h-4 w-4" strokeWidth={1.5} />

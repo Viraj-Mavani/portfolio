@@ -5,7 +5,7 @@ import { Award, ExternalLink, ChevronDown, ChevronUp } from "lucide-react"
 import { certificates } from "@/lib/data"
 import { useMode } from "@/hooks/use-mode"
 
-const INITIAL_COUNT = 3
+const INITIAL_COUNT = 4
 
 interface CertificatesSectionProps {
   index: number
@@ -21,7 +21,11 @@ export function CertificatesSection({ index }: CertificatesSectionProps) {
   )
 
   const visible = expanded ? filteredCertificates : filteredCertificates.slice(0, INITIAL_COUNT)
-  const hasMore = filteredCertificates.length > INITIAL_COUNT
+  const hasMore = filteredCertificates.length > (INITIAL_COUNT-1)
+
+  // Calculate empty slots to fill the grid
+  const remainder = visible.length % 3
+  const emptySlots = remainder === 0 ? 0 : 3 - remainder
 
   return (
     <section id="certificates" className="border-t border-border" aria-labelledby="certificates-heading">
@@ -39,10 +43,10 @@ export function CertificatesSection({ index }: CertificatesSectionProps) {
         <h2 id="certificates-heading" className="sr-only">Certificates</h2>
 
         <div className="grid gap-px border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
-          {visible.map((cert) => (
+          {visible.map((cert, index) => (
             <div
               key={cert.title}
-              className="group flex flex-col gap-3 bg-background p-6 transition-colors hover:bg-card"
+              className={`group flex flex-col gap-3 bg-background p-6 transition-colors hover:bg-card ${!expanded && index === 3 ? "lg:hidden" : ""}`}
             >
               <div className="flex items-start justify-between">
                 <div className="flex h-8 w-8 items-center justify-center rounded-sm border border-border bg-secondary text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
@@ -87,11 +91,21 @@ export function CertificatesSection({ index }: CertificatesSectionProps) {
               </div>
              </div>
           ))}
+          {Array.from({ length: emptySlots }).map((_, i) => {
+            const showOnMd = visible.length % 2 !== 0 && i === 0
+            return (
+              <div
+                key={`empty-${i}`}
+                className={`hidden bg-background ${showOnMd ? "md:block" : "lg:block"} ${!expanded && visible.length === 4 ? "lg:hidden" : ""}`}
+                aria-hidden="true"
+              />
+            )
+          })}
         </div>
 
         {/* Expand/Collapse button */}
         {hasMore && (
-          <div className="mt-6 flex justify-center">
+          <div className={`mt-6 flex justify-center ${!expanded && filteredCertificates.length === 4 ? "md:hidden lg:flex" : ""}`}>
             <button
               onClick={() => setExpanded((prev) => !prev)}
               className="group inline-flex items-center gap-2 rounded-sm border border-border px-5 py-2.5 font-mono text-xs text-muted-foreground transition-all hover:border-primary hover:text-foreground"
