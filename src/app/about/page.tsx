@@ -5,12 +5,13 @@ import {
   GraduationCap,
   MapPin,
   Calendar,
-  Code2,
   Brain,
-  Database,
-  Globe,
   Terminal,
-  Users,
+  Gamepad2,
+  Briefcase,
+  Plane,
+  School,
+  Lightbulb
 } from "lucide-react"
 import { TopNav } from "@/components/top-nav"
 import { Footer } from "@/components/footer"
@@ -32,24 +33,39 @@ const intro = {
 
 const journey = [
   {
-    icon: Terminal,
-    title: "The Automation Roots",
-    text: "My technical journey began with a focus on efficiency. I started by writing Python scripts to automate manual tasks and building my first web scrapers, discovering the power of code to transform unstructured web data into actionable information.",
+    icon: Gamepad2,
+    title: "The Spark",
+    text: "My fascination with technology ignited in high school, fueled by gaming and building custom computers. I realized I didn't just want to use software; I wanted to understand the machine behind the magic. This curiosity drove me to choose Computer Engineering.",
   },
   {
-    icon: Globe,
-    title: "Full Stack Engineering",
-    text: "In my professional roles at Dexoc Solutions and FSP Media, I mastered the art of building enterprise-grade applications. I specialized in the .NET ecosystem, React, and AWS, delivering high-performance APIs and scalable architectures for international clients.",
+    icon: GraduationCap,
+    title: "Engineering Foundation",
+    text: "During my Bachelor's at Atmiya University, I built my technical bedrock. The highlight was my final term internship, where I first experienced the gap between academic theory and production-grade software, solidifying my desire to build for the real world.",
+  },
+  {
+    icon: Plane,
+    title: "The Canadian Goal",
+    text: "I set my sights on a Master's degree in Canada. I knew that to work on the cutting edge of AI and Tech, I needed a global education and exposure to advanced research environments that only a top-tier institution could provide.",
+  },
+  {
+    icon: Briefcase,
+    title: "The Industry Gap",
+    text: "While preparing for my Master's, I worked as a Full Stack Developer & Web Scraper at Dexoc Solutions. I mastered the .NET ecosystem and data extraction at scale, working until I received acceptance letters from the University of Regina, Wilfrid Laurier, and Western University.",
+  },
+  {
+    icon: School,
+    title: "The Western Choice",
+    text: "I chose Western University (Ranked Top 1% Globally) for its research excellence. Stepping onto campus in London, Ontario was a defining moment—it was the start of my transition from a software engineer to an AI researcher.",
   },
   {
     icon: Brain,
-    title: "The AI Specialization",
-    text: "My pivot into Artificial Intelligence at Western University allowed me to dive deep into Deep Learning and NLP. My research moved into production-ready AI, focusing on fine-tuning LLMs and developing high-accuracy computer vision models for specialized domains.",
+    title: "AI Specialization",
+    text: "Graduating with an MS in CS & AI Specialization was a transformation. Working on projects like Taxi Fare Prediction and Tomato Disease Detection, I merged my 'Full Stack' background with 'AI' to officially begin my journey as an AI Engineer.",
   },
   {
-    icon: Database,
-    title: "Large-Scale Systems",
-    text: "Handling data at scale became a core expertise through my work with distributed systems. By leveraging MPI for parallel computing and serverless architectures, I have engineered pipelines capable of processing millions of records with near-perfect integrity.",
+    icon: Lightbulb,
+    title: "My Philosophy",
+    text: "I believe in the 'Student for Life' mindset. Best practices aren't static; they evolve. My philosophy is to continuously learn, strictly follow coding standards, and synthesize every piece of knowledge—from full stack to deep learning—to build systems that last.",
   },
 ]
 
@@ -75,22 +91,53 @@ export default function AboutPage() {
           </span>
           <div className="h-px flex-1 bg-border" aria-hidden="true" />
         </div>
-
+        
         {/* Intro section */}
-        <section className="mb-16">
-          <div className="rounded-md border border-border bg-card p-8 lg:p-10">
+        {/* Mobile/Tablet: 1 column (vertical stack). Desktop: 4 columns (3:1 ratio) */}
+        <section className="mb-16 grid gap-4 grid-cols-1 lg:grid-cols-4">
+          
+          {/* Left Block: Intro Content */}
+          {/* Desktop: Spans 3 of 4 columns (75%). Tablet/Mobile: Default auto (100%) */}
+          <div className="rounded-md border border-border bg-card p-8 lg:col-span-3 lg:p-10">
             <span className="mb-4 inline-block font-mono text-[10px] tracking-widest text-primary uppercase">
               who I am
             </span>
             <h1 className="mb-6 text-balance text-3xl font-medium leading-tight tracking-tight text-foreground lg:text-4xl">
               {intro.title}
             </h1>
-            <div className="flex max-w-full flex-col gap-4">
+            <div className="flex max-w-full flex-col gap-4 text-justify">
               {intro.paragraphs.map((paragraph, index) => (
                 <p key={index} className="text-base leading-relaxed text-muted-foreground">
                   {paragraph}
                 </p>
               ))}
+            </div>
+          </div>
+          
+          {/* Right Block: Status & Location Cards */}
+          {/* Mobile: 1 col (Vertical). Tablet: 2 cols (Side-by-Side). Desktop: Flex Col (Vertical Stack) */}
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:flex lg:flex-col">
+            
+            {/* Card 2: Status */}
+            <div className="flex flex-col justify-center gap-4 rounded-md border border-border bg-card p-6">
+              <div className="flex items-center gap-3">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                </span>
+                <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
+                  Status
+                </span>
+              </div>
+              <p className="text-sm font-medium">Available for Freelance & Full-time opportunities</p>
+            </div>
+
+            {/* Card 3: Location */}
+            <div className="flex flex-col justify-center gap-4 rounded-md border border-border bg-card p-6">
+              <div className="space-y-1">
+                <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">Location</span>
+                <p className="text-sm">London, ON, Canada</p>
+              </div>
             </div>
           </div>
         </section>
@@ -113,12 +160,8 @@ export default function AboutPage() {
                 <div className="flex h-9 w-9 items-center justify-center rounded-sm border border-border bg-secondary text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                   <item.icon className="h-4 w-4" strokeWidth={1.5} />
                 </div>
-                <h3 className="font-mono text-sm font-medium text-foreground">
-                  {item.title}
-                </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  {item.text}
-                </p>
+                <h3 className="font-mono text-sm font-medium text-foreground">{item.title}</h3>
+                <p className="text-xs leading-relaxed text-muted-foreground text-justify">{item.text}</p>
               </div>
             ))}
           </div>
@@ -171,7 +214,7 @@ export default function AboutPage() {
 
                 <ul className="flex flex-col gap-2">
                   {edu.highlights?.map((h) => (
-                    <li key={h} className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <li key={h} className="flex items-start gap-2 text-sm text-muted-foreground text-justify">
                       <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary" aria-hidden="true" />
                       {h}
                     </li>
