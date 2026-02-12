@@ -1,7 +1,7 @@
 "use client"
 
 import { Github, ExternalLink, ArrowRight } from "lucide-react"
-import { projects } from "@/lib/data"
+import { projects } from "@/lib/bio-data"
 import Link from "next/link"
 import { useMode } from "@/hooks/use-mode"
 

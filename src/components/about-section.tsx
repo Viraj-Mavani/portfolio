@@ -1,7 +1,7 @@
 "use client"
 
 import { GraduationCap, MapPin, Calendar } from "lucide-react"
-import { aboutContent, education } from "@/lib/data"
+import { aboutContent, education } from "@/lib/bio-data"
 import { useMode } from "@/hooks/use-mode"
 
 interface AboutSectionProps {

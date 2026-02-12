@@ -1,4 +1,4 @@
-import { skillCategories } from "@/lib/data"
+import { skillCategories } from "@/lib/bio-data"
 
 interface SkillsSectionProps {
   index: number

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Award, ExternalLink, ChevronDown, ChevronUp } from "lucide-react"
-import { certificates } from "@/lib/data"
+import { certificates } from "@/lib/bio-data"
 import { useMode } from "@/hooks/use-mode"
 
 const INITIAL_COUNT = 4

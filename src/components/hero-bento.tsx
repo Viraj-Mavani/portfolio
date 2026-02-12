@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react"
 import { TerminalCard } from "./terminal-card"
 import { TechTicker } from "./tech-ticker"
 import { useMode } from "@/hooks/use-mode"
-import { HeroContent } from "@/lib/data"
+import { HeroContent } from "@/lib/bio-data"
 
 interface HeroBentoProps {
   index: number

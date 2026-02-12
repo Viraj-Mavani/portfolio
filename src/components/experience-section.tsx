@@ -1,5 +1,5 @@
 import { Briefcase, Calendar, MapPin } from "lucide-react"
-import { experiences } from "@/lib/data"
+import { experiences } from "@/lib/bio-data"
 
 interface ExperienceSectionProps {
   index: number

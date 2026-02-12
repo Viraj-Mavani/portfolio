@@ -15,7 +15,7 @@ import {
 } from "lucide-react"
 import { TopNav } from "@/components/top-nav"
 import { Footer } from "@/components/footer"
-import { education } from "@/lib/data"
+import { education } from "@/lib/bio-data"
 
 export const metadata: Metadata = {
   title: "About | VM Portfolio",
