@@ -18,39 +18,38 @@ import { education } from "@/lib/data"
 
 export const metadata: Metadata = {
   title: "About | VM Portfolio",
-  description: "Detailed background, education, philosophy, and journey of VM.",
+  description: "Detailed background, education, philosophy, and journey of Viraj Mavani.",
+}
+
+const intro = {
+  title: "I'm a Full Stack AI Engineer who believes that the best code is written by those who never stop being students.",
+  paragraphs: [
+    "My journey didn't start with complex neural networks; it started back in India with a simple curiosity about how I could make a computer do the work for me. From those first automation scripts to completing my Master’s in AI at Western University, I’ve always been driven by the transition from 'how does this work?' to 'how can I make this better?'. Moving to Canada to specialize in AI allowed me to take my professional full-stack foundations and ground them in the deep, theoretical research that defines the next generation of software.",
+    "I don't believe in being a 'master' of everything, because in this field, the moment you stop learning, you fall behind. My real expertise isn't just in a specific stack like .NET or React—it’s in the ability to pick up any tool, documentation, or research paper and turn it into a working solution. Whether I’m familiar with a technology or seeing it for the first time, I have the discipline to learn it, implement it, and ship it. To me, a technical challenge isn't a wall; it's just a new topic to master before the next deployment.",
+    "Beyond the terminal, I’m deeply focused on the responsibility we have as engineers. My research into the 'Ethical Dilemmas in AI' taught me that intelligence without alignment is a liability. I’m not interested in building tech for the sake of buzzwords; I want to build systems that are genuinely useful, secure, and aligned with human values. Whether I'm processing millions of records with 99.9% uptime or fine-tuning a model, my goal is to ensure that the final product is as ethically sound as it is technically precise."
+  ]
 }
 
 const journey = [
   {
     icon: Terminal,
-    title: "The Beginning",
-    text: "Started coding at 14, building simple automation scripts and web scrapers. The thrill of making a computer do exactly what I wanted was instantly addictive.",
+    title: "The Automation Roots",
+    text: "My technical journey began with a focus on efficiency. I started by writing Python scripts to automate manual tasks and building my first web scrapers, discovering the power of code to transform unstructured web data into actionable information.",
   },
   {
     icon: Globe,
-    title: "Full Stack Evolution",
-    text: "Progressed from static HTML pages to building complete web applications with React, Node.js, and modern cloud infrastructure. Learned that great software is built at the intersection of user empathy and engineering rigor.",
+    title: "Full Stack Engineering",
+    text: "In my professional roles at Dexoc Solutions and FSP Media, I mastered the art of building enterprise-grade applications. I specialized in the .NET ecosystem, React, and AWS, delivering high-performance APIs and scalable architectures for international clients.",
   },
   {
     icon: Brain,
-    title: "The AI Pivot",
-    text: "Graduate research in NLP opened a new dimension. Understanding how machines can learn patterns, generate language, and reason about data transformed my approach to every problem I solve.",
+    title: "The AI Specialization",
+    text: "My pivot into Artificial Intelligence at Western University allowed me to dive deep into Deep Learning and NLP. My research moved into production-ready AI, focusing on fine-tuning LLMs and developing high-accuracy computer vision models for specialized domains.",
   },
   {
     icon: Database,
-    title: "Data Engineering",
-    text: "Working with production-scale data systems taught me that the best AI model is worthless without reliable data pipelines. I developed deep expertise in ETL design, data modeling, and distributed systems.",
-  },
-  {
-    icon: Code2,
-    title: "The Synthesis",
-    text: "Today, I operate at the intersection of all these disciplines. I build full-stack applications powered by AI, backed by robust data infrastructure. Every project is an opportunity to merge engineering craft with intelligent automation.",
-  },
-  {
-    icon: Users,
-    title: "Looking Forward",
-    text: "I am always seeking opportunities to work on challenging problems with talented teams. Whether it is building an AI-powered product from scratch or optimizing an existing data platform, I bring a polymorphic skill set and a relentless drive for quality.",
+    title: "Large-Scale Systems",
+    text: "Handling data at scale became a core expertise through my work with distributed systems. By leveraging MPI for parallel computing and serverless architectures, I have engineered pipelines capable of processing millions of records with near-perfect integrity.",
   },
 ]
 
@@ -84,20 +83,14 @@ export default function AboutPage() {
               who I am
             </span>
             <h1 className="mb-6 text-balance text-3xl font-medium leading-tight tracking-tight text-foreground lg:text-4xl">
-              Full Stack AI Engineer
-              <br />
-              <span className="text-muted-foreground">building at the edge of software and intelligence.</span>
+              {intro.title}
             </h1>
-            <div className="flex max-w-3xl flex-col gap-4">
-              <p className="text-base leading-relaxed text-muted-foreground">
-                I am a Full Stack AI Engineer passionate about building intelligent systems that bridge the gap between cutting-edge research and production-grade software. With expertise spanning web development, machine learning, and data engineering, I design and ship end-to-end solutions.
-              </p>
-              <p className="text-base leading-relaxed text-muted-foreground">
-                My approach is rooted in first principles: understand the problem deeply, choose the right tools, and build with precision. I believe the best technology is invisible -- it just works, seamlessly and reliably.
-              </p>
-              <p className="text-base leading-relaxed text-muted-foreground">
-                Outside of engineering, I am an avid reader, a contributor to open-source projects, and a lifelong learner who thrives on exploring new domains and connecting disparate ideas.
-              </p>
+            <div className="flex max-w-full flex-col gap-4">
+              {intro.paragraphs.map((paragraph, index) => (
+                <p key={index} className="text-base leading-relaxed text-muted-foreground">
+                  {paragraph}
+                </p>
+              ))}
             </div>
           </div>
         </section>
@@ -177,7 +170,7 @@ export default function AboutPage() {
                 </p>
 
                 <ul className="flex flex-col gap-2">
-                  {edu.highlights.map((h) => (
+                  {edu.highlights?.map((h) => (
                     <li key={h} className="flex items-start gap-2 text-sm text-muted-foreground">
                       <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary" aria-hidden="true" />
                       {h}

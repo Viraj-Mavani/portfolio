@@ -4,6 +4,8 @@ const techStack = [
   "React",
   "Next.js",
   "Python",
+  "C#",
+  ".NET Core",
   "PyTorch",
   "TypeScript",
   "PostgreSQL",

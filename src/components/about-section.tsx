@@ -1,11 +1,16 @@
+"use client"
+
 import { GraduationCap, MapPin, Calendar } from "lucide-react"
-import { education } from "@/lib/data"
+import { aboutContent, education } from "@/lib/data"
+import { useMode } from "@/hooks/use-mode"
 
 interface AboutSectionProps {
   index: number
 }
 
 export function AboutSection({ index }: AboutSectionProps) {
+  const { mode } = useMode()
+  const activeBio = aboutContent[mode] || aboutContent.generalist
 
   return (
     <section id="about" className="border-t border-border" aria-labelledby="about-heading">
@@ -23,27 +28,26 @@ export function AboutSection({ index }: AboutSectionProps) {
 
         <h2 id="about-heading" className="sr-only">About & Education</h2>
 
-        <div className="grid gap-8 lg:grid-cols-2">
+        <div className="grid gap-8 lg:grid-cols-2 items-stretch">
           {/* About text */}
-          <div className="flex flex-col gap-6 rounded-md border border-border bg-card p-8">
+          <div className="flex flex-col gap-6 rounded-md border border-border bg-card p-8 h-full">
             <div className="flex items-start justify-between">
               <span className="font-mono text-[10px] tracking-widest text-primary uppercase">
-                about_me
+                {mode === "generalist" ? "about_me" : `about_${mode.replace("-", "_")}`}
               </span>
               <span className="font-mono text-[10px] text-muted-foreground">
                 {"//"}
               </span>
             </div>
             <div className="flex flex-col gap-4">
-              <p className="text-base leading-relaxed text-muted-foreground">
-                I am a Full Stack AI Engineer passionate about building intelligent systems that bridge the gap between cutting-edge research and production-grade software.
-              </p>
-              <p className="text-base leading-relaxed text-muted-foreground">
-                With expertise spanning web development, machine learning, and data engineering, I design and ship end-to-end solutions -- from scalable backend APIs to interactive frontends and custom AI pipelines.
-              </p>
-              <p className="text-base leading-relaxed text-muted-foreground">
-                I thrive at the intersection of engineering and experimentation, always seeking the most elegant and efficient approach to complex problems.
-              </p>
+              {activeBio.map((paragraph, i) => (
+                <p 
+                  key={i} 
+                  className="text-base leading-relaxed text-muted-foreground text-justify"
+                >
+                  {paragraph}
+                </p>
+              ))}
             </div>
           </div>
 
@@ -68,8 +72,12 @@ export function AboutSection({ index }: AboutSectionProps) {
                   </div>
                 </div>
 
-                <p className="text-sm leading-relaxed text-muted-foreground">
+                <p className="font-mono text-[11px] text-foreground">
                   {edu.focus}
+                </p>
+
+                <p className="text-sm leading-relaxed text-muted-foreground italic border-l-2 border-primary/20 pl-4">
+                  {edu.description}
                 </p>
 
                 <div className="flex items-center gap-4">

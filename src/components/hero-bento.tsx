@@ -5,34 +5,15 @@ import { ArrowRight } from "lucide-react"
 import { TerminalCard } from "./terminal-card"
 import { TechTicker } from "./tech-ticker"
 import { useMode } from "@/hooks/use-mode"
+import { HeroContent } from "@/lib/data"
 
 interface HeroBentoProps {
   index: number
 }
 
-// Map the different modes to specific tailored copy
-const HERO_CONTENT = {
-  generalist: {
-    title: "Full Stack AI Engineer",
-    description: "Merging Full Stack Engineering with AI Research to create production-grade solutions."
-  },
-  fullstack: {
-    title: "Full Stack Developer",
-    description: "Building scalable, secure, and robust web applications and APIs from frontend to database."
-  },
-  "ai-ml": {
-    title: "Machine Learning Engineer",
-    description: "Designing intelligent systems, predictive models, and custom AI data pipelines."
-  },
-  data: {
-    title: "Data Engineer",
-    description: "Architecting distributed web scrapers, data pipelines, and processing millions of records."
-  }
-}
-
 export function HeroBento({ index }: HeroBentoProps) {
   const { mode } = useMode()
-  const content = HERO_CONTENT[mode as keyof typeof HERO_CONTENT] || HERO_CONTENT.generalist
+  const content = HeroContent[mode as keyof typeof HeroContent] || HeroContent.generalist
 
   return (
     <section id="home" className="mx-auto max-w-7xl px-4 pt-36 pb-16 lg:pt-40 lg:pb-24" aria-labelledby="hero-heading">
@@ -63,7 +44,7 @@ export function HeroBento({ index }: HeroBentoProps) {
               <br />
               VM
             </h1>
-            <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground lg:text-lg">
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground lg:text-lg">
               {content.description}
             </p>
           </div>

@@ -1,8 +1,20 @@
+export interface HeroContent {
+  [key: string]: {
+    title: string
+    description: string
+  }
+}
+
+export interface AboutContent {
+  [key: string]: string[];
+}
+
 export interface Education {
   degree: string
   school: string
   location: string
   period: string
+  description: string
   focus?: string
   highlights?: string[]
 }
@@ -41,6 +53,48 @@ export interface Certificate {
   modes: string[]
 }
 
+export const HeroContent: HeroContent= {
+  generalist: {
+    title: "Full Stack AI Engineer",
+    description: "Merging Full Stack Engineering with AI Research to create production-grade solutions."
+  },
+  fullstack: {
+    title: "Full Stack Developer",
+    description: "Architecting robust full-stack applications and high-performance APIs from frontend to database."
+  },
+  "ai-ml": {
+    title: "Machine Learning Engineer",
+    description: "Developing intelligent systems, predictive models, and optimizing neural networks for real-world applications."
+  },
+  data: {
+    title: "Data Engineer",
+    description: "Engineering distributed data pipelines, enterprise web scrapers, and processing millions of records with 99.9% uptime."
+  }
+}
+
+export const aboutContent: AboutContent = {
+  generalist: [
+    "I am a Full Stack AI Engineer dedicated to architecting intelligent systems that bridge the gap between experimental AI research and scalable, production-grade software. I focus on building resilient, data-driven applications that prioritize both performance and intuitive UX.",
+    "With a background rooted in full-stack development and an advanced specialization in AI, I design end-to-end pipelines—from high-performance backends to interactive frontends. I ensure that every layer of the stack is optimized for speed, security, and data integrity.",
+    "I thrive at the intersection of engineering rigor and creative experimentation, seeking the most efficient approach to complex challenges. Beyond implementation, I prioritize software-engineering-first principles while staying current with the evolving AI landscape."
+  ],
+  fullstack: [
+    "As a Full Stack Developer, I specialize in building robust enterprise applications using the .NET ecosystem, React, and Next.js. I focus on creating modular architectures that allow for rapid scaling and easy maintenance in high-stakes, data-intensive business environments.",
+    "Experienced in leading the development of complex systems, integrating JWT-based authentication, real-time synchronization via Azure ServiceBus, and high-integrity data pipelines. My engineering philosophy emphasizes clean code, unit testing, and system reliability.",
+    "I prioritize seamless user experiences and have a proven track record of improving application performance by up to 20% through proactive debugging and optimization. I leverage modern CI/CD pipelines and Azure DevOps to ensure deployment is stable and production-ready."
+  ],
+  "ai-ml": [
+    "Focusing on the intersection of deep learning and software engineering, I leverage my Master's research in Neural Networks to move advanced AI models into production. I link abstract mathematical ideas with practical, scalable code for real-world applications.",
+    "I specialize in developing custom CNN architectures—achieving 96% accuracy for specialized tasks like disease detection—and fine-tuning Large Language Models (LLMs) for domain-specific needs. I focus on making AI accessible and useful for specialized industry requirements.",
+    "Proficient in PyTorch, TensorFlow, and LangChain to build intelligent features while ensuring optimization for resource-constrained environments. My academic background allows me to reduce the computational cost of intelligence while maintaining output quality."
+  ],
+  data: [
+    "I am a Data Engineer focused on the design and implementation of distributed web scrapers and high-throughput ETL pipelines capable of processing millions of enterprise records. I specialize in transforming raw, unstructured information into clean and actionable data assets.",
+    "I specialize in reverse-engineering complex APIs and bypassing sophisticated anti-scraping measures to ensure 99.9% data integrity and uptime. My systems are designed to be resilient, utilizing parallel processing with MPI to handle massive data extraction tasks efficiently.",
+    "Using serverless architectures like AWS Lambda, I build infrastructures that maximize throughput while minimizing cloud costs. I have successfully delivered high-precision datasets to international clients, ensuring deduplication and formatting are handled with precision."
+  ]
+};
+
 export const education: Education[] = [
   {
     degree: "Master of Science in Computer Science",
@@ -48,11 +102,13 @@ export const education: Education[] = [
     location: "ON, Canada",
     period: "2024 - 2025",
     focus: "Specialization in Artificial Intelligence",
+    description: "Conducted advanced research in Large Language Models (LLMs) and Neural Networks to optimize domain-specific AI performance.",
     highlights: [
-      "Published paper on efficient fine-tuning methods for domain-specific LLMs",
-      "Teaching Assistant for Advanced Machine Learning course",
-      "Directed Studies Research in ", // TODO: Project title and description
-      "GPA: 3.58/4.0",
+      "GPA: 3.58/4.0 | University Ranking: Top 1%–2% of universities worldwide // 6th in Canada",
+      "Directed Studies Research: 'Ethical Dilemmas in AI' – A quantitative framework evaluating ethical alignment across ChatGPT, Gemini, Claude, and DeepSeek.",
+      "Developed an ML-Powered Taxi Fare Prediction system using LightGBM and Docker-based automated data pipelines.",
+      "Engineered a Distributed Web Scraper using MPI for parallel computing, optimizing large-scale data extraction throughput.",
+      "Relevant Coursework: Advanced AI, Distributed & Parallel Systems, AI Ethics, and Machine Learning."
     ],
   },
   {
@@ -60,16 +116,17 @@ export const education: Education[] = [
     school: "ATMIYA UNIVERSITY",
     location: "Gujarat, India",
     period: "2019 - 2023",
+    description: "Established a strong foundation in software engineering principles, algorithms, data structures, and distributed system architecture.",
     highlights: [
-      "Dean's List all semesters",
-      "Led the university's Competitive Programming Club",
-      "Senior capstone: ", // TODO: Project title and description
-      "GPA: 3.62/4.0",
+      "GPA: 3.62/4.0 (85.18%)",
+      "Senior Capstone: Full-Stack Amazon Clone – Developed a cross-platform E-commerce app with Flutter, Node.js, and MongoDB featuring real-time payment integration (G-Pay/Apple Pay).",
+      "Designed and implemented a Seller Admin Panel with real-time sales statistics and inventory management.",
+      "Relevant Coursework: Python, .NET C#, Java, Web Development, Theory of Computation, Data Structures, Internet & Network Security, Data Mining, and Cloud Computing."
     ],
   },
 ]
 
-export const skillCategories : SkillCategory[] = [
+export const skillCategories: SkillCategory[] = [
   {
     label: "Languages",
     skills: ["Python", "TypeScript", "JavaScript", "Java", "SQL", "R", "C++"],
@@ -96,7 +153,7 @@ export const skillCategories : SkillCategory[] = [
   },
 ]
 
-export const experiences : Experience[] = [
+export const experiences: Experience[] = [
   {
     role: "Graduate Teaching Assistant",
     company: "Western University",
