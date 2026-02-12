@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowLeft, Github, ExternalLink, Image as ImageIcon, Video, ChevronDown } from "lucide-react"
+
 import { projects } from "@/lib/project-data"
 import { TopNav } from "@/components/top-nav"
 import { Footer } from "@/components/footer"
