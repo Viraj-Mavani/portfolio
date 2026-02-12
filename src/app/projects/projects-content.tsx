@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowLeft, Github, ExternalLink, Image as ImageIcon, Video } from "lucide-react"
-import { projects } from "@/lib/bio-data"
+import { projects } from "@/lib/project-data"
 import { TopNav } from "@/components/top-nav"
 import { Footer } from "@/components/footer"
 
@@ -12,7 +12,8 @@ const modeFilters = [
   { id: "all", label: "All" },
   { id: "fullstack", label: "Full Stack" },
   { id: "ai-ml", label: "AI / ML" },
-  { id: "data", label: "Data" },
+  { id: "data", label: "Web Scraping" },
+  { id: "game", label: "Game Development" },
 ]
 
 export function ProjectsPageContent() {
@@ -115,9 +116,11 @@ export function ProjectsPageContent() {
                 </div>
 
                 {/* Description */}
-                <p className="mb-6 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-                  {project.description}
-                </p>
+                <div className="mb-6 flex max-w-5xl flex-col gap-4">
+                  {(Array.isArray(project.description) ? project.description : [project.description]).map((paragraph, i) => (
+                    <p key={i} className="text-sm leading-relaxed text-muted-foreground text-justify">{paragraph}</p>
+                  ))}
+                </div>
 
                 {/* Media placeholders */}
                 {(project.images || project.video) && (

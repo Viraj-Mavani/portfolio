@@ -33,18 +33,6 @@ export interface Experience {
   tags: string[]
 }
 
-export interface Project {
-  title: string
-  brief: string
-  description: string
-  tags: string[]
-  github?: string
-  live?: string
-  images?: string[]
-  video?: string
-  mode: string[]
-}
-
 export interface Certificate {
   title: string
   issuer: string
@@ -189,60 +177,6 @@ export const experiences: Experience[] = [
     description:
       "Contributed to production-level .NET projects, transitioning classroom concepts into enterprise-grade software solutions. Optimized application performance through hands-on development, code reviews, proactive debugging within the .NET ecosystem, and utilized version control (Git) and collaborative tools to manage codebases.",
     tags: ["C#", ".NET Core", "ASP.NET MVC", "ASP.NET Web API", "LINQ", "SQL", "Entity Framework", "Git" ,"Version Control", "Jira" , "Unit Testing"],
-  },
-]
-
-export const projects: Project[] = [
-  {
-    title: "Aerospace Part Tracking System",
-    brief:
-      "Developed secure system features focusing on scalability and performance, implementing JWT-based authentication for stakeholder security. Engineered real-time data synchronization APIs and middleware using Azure ServiceBus to connect disparate stakeholders. Collaborated on backend architectural design, ensuring high availability and seamless integration of blockchain components for data immutability.",
-    description:
-      "Developed secure system features focusing on scalability and performance, implementing JWT-based authentication for stakeholder security. Engineered real-time data synchronization APIs and middleware using Azure ServiceBus to connect disparate stakeholders. Collaborated on backend architectural design, ensuring high availability and seamless integration of blockchain components for data immutability.",
-    tags: [ ".NET Core", "AngularJS", "PostgreSQL", "Azure DevOps", "Azure ServiceBus", "Blockchain"],
-    live: "https://www.skythread.aero/solution/overview",
-    mode: ["fullstack"],
-  },
-  {
-    title: "Distributed Web Scraper (MPI)",
-    brief:
-      "Engineered a distributed scraper using MPI for parallelism to efficiently handle large-scale data extraction. Integrated modular scheduling and checkpointing to ensure high reliability and deduplication across multi-process runs.",
-    description:
-      "Engineered a distributed scraper using MPI for parallelism to efficiently handle large-scale data extraction. Integrated modular scheduling and checkpointing to ensure high reliability and deduplication across multi-process runs.",
-    tags: ["Python", "Message Passing Interface", "mpi4py", "CloudScraper", "Distributed Computing", "Parallel Programming"],
-    github: "https://github.com/Viraj-Mavani/DistributedWebScraper",
-    mode: ["data", "webscraping"],
-  },
-  {
-    title: "Tomato Leaf Disease Detection",
-    brief:
-      "Developed a custom CNN achieving 96.3% test accuracy for tomato diseases; optimized for resource-constrained devices. Applied transfer learning via ResNet50 and data augmentation to improve model generalization and reduce overfitting.",
-    description:
-      "Developed a custom CNN achieving 96.3% test accuracy for tomato diseases; optimized for resource-constrained devices. Applied transfer learning via ResNet50 and data augmentation to improve model generalization and reduce overfitting.",
-    tags: ["Python", "TensorFlow", "ResNet50", "CNN", "Keras"],
-    github: "https://github.com/Viraj-Mavani/smart_agriculture_system",
-    mode: ["ai-ml", "data"],
-  },
-  {
-    title: "ML-Powered Taxi Fare Prediction",
-    brief:
-      "Implemented an ML-based prediction system using LightGBM, achieving an R^2 score of 83.9%. Developed a Docker-based pipeline to automate data extraction from map images, streamlining the ingestion of travel features.",
-    description:
-      "Implemented an ML-based prediction system using LightGBM, achieving an R^2 score of 83.9%. Developed a Docker-based pipeline to automate data extraction from map images, streamlining the ingestion of travel features.",
-    tags: ["Python", "LightGBM", "Docker", "XGBoost", "Scikit-learn"],
-    github: "https://github.com/Viraj-Mavani/ML-Powered-Taxi-Fare-Prediction-using-Docker",
-    mode: ["ai-ml", "data"],
-  },
-  {
-    title: "Web Scraping Automation for Business Registries",
-    brief:
-      "Developed 15+ Python-based web scraping systems targeting dynamic business registry websites across various regions. Each extracting millions of data points for international client, handling JavaScript rendering, pagination, and utilized reverse engineering techniques to bypass anti-scraping with 99.9% uptime. Post-processed large datasets for deduplication, formatting, and export to CSV/JSON.",
-    description:
-      "Developed 15+ Python-based web scraping systems targeting dynamic business registry websites across various regions. Each extracting millions of data points for international client, handling JavaScript rendering, pagination, and utilized reverse engineering techniques to bypass anti-scraping with 99.9% uptime. Post-processed large datasets for deduplication, formatting, and export to CSV/JSON.",
-    tags: ["Python", "Selenium", "Scrapy", "BeautifulSoup", "Docker"],
-    images: ["/projects/webscraping_1.png"],
-    live: "https://www.upwork.com/freelancers/~0100fa5d569b04d18d?p=1927504018187304960",
-    mode: ["data", "webscraping"],
   },
 ]
 
