@@ -3,16 +3,23 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowLeft, Github, ExternalLink, Image as ImageIcon, Video } from "lucide-react"
-import { projects } from "@/lib/bio-data"
+import { ArrowLeft, Github, ExternalLink, Image as ImageIcon, Video, ChevronDown } from "lucide-react"
+import { projects } from "@/lib/project-data"
 import { TopNav } from "@/components/top-nav"
 import { Footer } from "@/components/footer"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 const modeFilters = [
   { id: "all", label: "All" },
   { id: "fullstack", label: "Full Stack" },
   { id: "ai-ml", label: "AI / ML" },
-  { id: "data", label: "Data" },
+  { id: "data", label: "Web Scraping" },
+  { id: "game", label: "Game Development" },
 ]
 
 export function ProjectsPageContent() {
@@ -53,7 +60,8 @@ export function ProjectsPageContent() {
           <span className="mr-2 font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
             filter
           </span>
-          <div className="flex items-center gap-1 rounded-sm bg-secondary p-0.5">
+          {/* Desktop view */}
+          <div className="hidden items-center gap-1 rounded-sm bg-secondary p-0.5 md:flex">
             {modeFilters.map((filter) => (
               <button
                 key={filter.id}
@@ -68,6 +76,26 @@ export function ProjectsPageContent() {
               </button>
             ))}
           </div>
+
+          {/* Mobile view */}
+          <div className="md:hidden">
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-2 rounded-sm bg-secondary px-3 py-1.5 font-mono text-xs text-primary outline-none transition-colors hover:bg-secondary/80">
+                {modeFilters.find((f) => f.id === activeFilter)?.label}
+                <ChevronDown className="h-3 w-3 opacity-50" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="font-mono text-xs">
+                {modeFilters.map((filter) => (
+                    <DropdownMenuItem 
+                      key={filter.id} 
+                      onClick={() => setActiveFilter(filter.id)}
+                      className={activeFilter === filter.id ? "text-primary focus:text-primary" : ""}>
+                      {filter.label}
+                    </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
 
         {/* Project list */}
@@ -77,7 +105,7 @@ export function ProjectsPageContent() {
               key={project.title}
               className="group rounded-md border border-border bg-card transition-colors hover:border-primary/30"
             >
-              <div className="p-8">
+              <div className="p-4 md:p-8 lg:p-12">
                 {/* Top row */}
                 <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                   <div className="flex flex-col gap-1">
@@ -115,9 +143,11 @@ export function ProjectsPageContent() {
                 </div>
 
                 {/* Description */}
-                <p className="mb-6 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-                  {project.description}
-                </p>
+                <div className="mb-6 flex max-w-5xl flex-col gap-4">
+                  {(Array.isArray(project.description) ? project.description : [project.description]).map((paragraph, i) => (
+                    <p key={i} className="text-sm leading-relaxed text-muted-foreground text-justify">{paragraph}</p>
+                  ))}
+                </div>
 
                 {/* Media placeholders */}
                 {(project.images || project.video) && (
