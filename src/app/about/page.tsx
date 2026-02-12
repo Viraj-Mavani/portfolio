@@ -98,16 +98,16 @@ export default function AboutPage() {
           
           {/* Left Block: Intro Content */}
           {/* Desktop: Spans 3 of 4 columns (75%). Tablet/Mobile: Default auto (100%) */}
-          <div className="rounded-md border border-border bg-card p-8 lg:col-span-3 lg:p-10">
+          <div className="rounded-md border border-border bg-card p-4 lg:col-span-3 md:p-8 lg:p-10">
             <span className="mb-4 inline-block font-mono text-[10px] tracking-widest text-primary uppercase">
               who I am
             </span>
-            <h1 className="mb-6 text-balance text-3xl font-medium leading-tight tracking-tight text-foreground lg:text-4xl">
+            <h1 className="mb-6 text-balance text-md font-medium leading-tight tracking-tight text-foreground md:text-2xl lg:text-3xl">
               {intro.title}
             </h1>
             <div className="flex max-w-full flex-col gap-4 text-justify">
               {intro.paragraphs.map((paragraph, index) => (
-                <p key={index} className="text-base leading-relaxed text-muted-foreground">
+                <p key={index} className="text-xs md:text-base leading-relaxed text-muted-foreground">
                   {paragraph}
                 </p>
               ))}
@@ -119,7 +119,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:flex lg:flex-col">
             
             {/* Card 2: Status */}
-            <div className="flex flex-col justify-center gap-4 rounded-md border border-border bg-card p-6">
+            <div className="flex flex-col justify-center gap-4 rounded-md border border-border bg-card p-4 md:p-8 lg:p-6">
               <div className="flex items-center gap-3">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -133,7 +133,7 @@ export default function AboutPage() {
             </div>
 
             {/* Card 3: Location */}
-            <div className="flex flex-col justify-center gap-4 rounded-md border border-border bg-card p-6">
+            <div className="flex flex-col justify-center gap-4 rounded-md border border-border bg-card p-4 md:p-8 lg:p-6">
               <div className="space-y-1">
                 <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">Location</span>
                 <p className="text-sm">London, ON, Canada</p>
@@ -155,7 +155,7 @@ export default function AboutPage() {
             {journey.map((item) => (
               <div
                 key={item.title}
-                className="group flex w-full flex-col gap-4 rounded-md border border-border bg-card p-6 transition-colors hover:border-primary/30 md:w-[calc(50%-0.5rem)] lg:w-[calc(33.33%-0.67rem)]"
+                className="group flex w-full flex-col gap-4 rounded-md border border-border bg-card p-4 md:p-6 transition-colors hover:border-primary/30 md:w-[calc(50%-0.5rem)] lg:w-[calc(33.33%-0.67rem)]"
               >
                 <div className="flex h-9 w-9 items-center justify-center rounded-sm border border-border bg-secondary text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                   <item.icon className="h-4 w-4" strokeWidth={1.5} />
@@ -180,7 +180,7 @@ export default function AboutPage() {
             {education.map((edu) => (
               <div
                 key={edu.degree}
-                className="group rounded-md border border-border bg-card p-8 transition-colors hover:border-primary/30"
+                className="group rounded-md border border-border bg-card p-4 md:p-8 transition-colors hover:border-primary/30"
               >
                 <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                   <div className="flex items-start gap-4">
@@ -214,7 +214,7 @@ export default function AboutPage() {
 
                 <ul className="flex flex-col gap-2">
                   {edu.highlights?.map((h) => (
-                    <li key={h} className="flex items-start gap-2 text-sm text-muted-foreground text-justify">
+                    <li key={h} className="flex items-start gap-2 text-xs md:text-sm text-muted-foreground text-justify">
                       <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary" aria-hidden="true" />
                       {h}
                     </li>
