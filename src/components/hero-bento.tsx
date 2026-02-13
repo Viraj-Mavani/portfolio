@@ -16,7 +16,7 @@ export function HeroBento({ index }: HeroBentoProps) {
   const content = HeroContent[mode as keyof typeof HeroContent] || HeroContent.generalist
 
   return (
-    <section id="home" className="mx-auto max-w-7xl px-4 pt-36 pb-16 lg:pt-40 lg:pb-24" aria-labelledby="hero-heading">
+    <section id="home" className="mx-auto max-w-7xl px-4 pt-32 pb-16 md:pt-36 lg:pt-40 lg:pb-24" aria-labelledby="hero-heading">
       {/* Section label */}
       <div className="mb-8 flex items-center gap-4">
         <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">

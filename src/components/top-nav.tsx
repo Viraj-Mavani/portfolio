@@ -1,10 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { useTheme } from "next-themes"
-import { Sun, Moon, Menu, Mail, Github, Linkedin, MessageSquare, ChevronDown, FileText } from "lucide-react"
+import { Sun, Moon, Menu, ChevronDown, FileText } from "lucide-react"
 import {
   Sheet,
   SheetContent,
@@ -51,12 +51,26 @@ const RESUMES = [
 export function TopNav() {
   const { theme, setTheme } = useTheme()
   const [open, setOpen] = useState(false)
-  
-  // const [activeMode, setActiveMode] = useState("generalist") 
   const { mode: activeMode, setMode: setActiveMode } = useMode() 
 
   const pathname = usePathname()
-  const isHome = pathname === "/"
+
+  // --- Resume Tooltip Logic ---
+  const [showResumeTooltip, setShowResumeTooltip] = useState(false)
+
+  // Trigger: Only on initial app load
+  useEffect(() => {
+    const hasShown = sessionStorage.getItem("hasShownResumeTooltip")
+    if (!hasShown) {
+      sessionStorage.setItem("hasShownResumeTooltip", "true")
+      const showTimer = setTimeout(() => setShowResumeTooltip(true), 0)
+      const hideTimer = setTimeout(() => setShowResumeTooltip(false), 2500)
+      return () => {
+        clearTimeout(showTimer)
+        clearTimeout(hideTimer)
+      }
+    }
+  }, [])
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -129,45 +143,57 @@ export function TopNav() {
           {/* Right box - Theme Toggle + Drawer Button */}
           <div className="flex items-center gap-1 rounded-md border border-border bg-card/80 px-2 py-1.5 backdrop-blur-xl">
           
-            {/* Dynamic Resume Button */}
-            {activeMode === "generalist" ? (
-              // If Generalist: Show Dropdown Menu
-              <DropdownMenu>
-                <DropdownMenuTrigger className="flex h-8 w-8 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground sm:h-auto sm:w-auto sm:border sm:border-border sm:bg-transparent sm:px-3 sm:py-1.5 sm:font-mono sm:text-xs sm:hover:border-primary sm:hover:bg-transparent outline-none">
-                  <FileText className="h-4 w-4 sm:hidden" />
-                  <span className="hidden sm:flex sm:items-center sm:gap-1">
-                    Resume <ChevronDown className="h-3 w-3 opacity-70" />
-                  </span>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="min-w-[160px] font-mono text-xs">
-                  {RESUMES.map((resume) => (
-                    <DropdownMenuItem key={resume.id} asChild className="cursor-pointer">
-                      <a href={resume.href} target="_blank" rel="noopener noreferrer">
-                        {resume.label}
-                      </a>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              // If Specific Mode: Show Direct Link
-              (() => {
-                const resumeId = activeMode === "ai-ml" ? "data" : activeMode //TODO: set diiferent resume for data
-                const resume = RESUMES.find((r) => r.id === resumeId)
-                if (!resume) return null
-                return (
-                  <a
-                    href={resume.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-8 w-8 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground sm:h-auto sm:w-auto sm:border sm:border-border sm:bg-transparent sm:px-3 sm:py-1.5 sm:font-mono sm:text-xs sm:hover:border-primary sm:hover:bg-transparent"
-                  >
+            {/* Dynamic Resume Button with Tooltip Wrapper */}
+            <div className="relative flex items-center justify-center">
+              {activeMode === "generalist" ? (
+                // If Generalist: Show Dropdown Menu
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="flex h-8 w-8 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground sm:h-auto sm:w-auto sm:border sm:border-border sm:bg-transparent sm:px-3 sm:py-1.5 sm:font-mono sm:text-xs sm:hover:border-primary sm:hover:bg-transparent outline-none">
                     <FileText className="h-4 w-4 sm:hidden" />
-                    <span className="hidden sm:inline">Resume</span>
-                  </a>
-                )
-              })()
-            )}
+                    <span className="hidden sm:flex sm:items-center sm:gap-1">
+                      Resume <ChevronDown className="h-3 w-3 opacity-70" />
+                    </span>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="min-w-[160px] font-mono text-xs">
+                    {RESUMES.map((resume) => (
+                      <DropdownMenuItem key={resume.id} asChild className="cursor-pointer">
+                        <a href={resume.href} target="_blank" rel="noopener noreferrer">
+                          {resume.label}
+                        </a>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                // If Specific Mode: Show Direct Link
+                (() => {
+                  const resumeId = activeMode === "ai-ml" ? "data" : activeMode //TODO: set diiferent resume for data
+                  const resume = RESUMES.find((r) => r.id === resumeId)
+                  if (!resume) return null
+                  return (
+                    <a
+                      href={resume.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex h-8 w-8 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground sm:h-auto sm:w-auto sm:border sm:border-border sm:bg-transparent sm:px-3 sm:py-1.5 sm:font-mono sm:text-xs sm:hover:border-primary sm:hover:bg-transparent"
+                    >
+                      <FileText className="h-4 w-4 sm:hidden" />
+                      <span className="hidden sm:inline">Resume</span>
+                    </a>
+                  )
+                })()
+              )}
+
+              {/* Mobile Tooltip - Shows only on initial load */}
+              <div 
+                className={`absolute top-full mt-3 left-1/2 -translate-x-1/2 px-2.5 py-1 bg-primary text-primary-foreground text-[10px] font-mono font-medium rounded shadow-lg pointer-events-none transition-opacity duration-300 sm:hidden ${
+                  showResumeTooltip ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 border-4 border-transparent border-b-primary"></div>
+                Resume
+              </div>
+            </div>
 
             <div className="mx-1 h-4 w-px bg-border" aria-hidden="true" />
 
