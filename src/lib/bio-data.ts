@@ -117,11 +117,11 @@ export const education: Education[] = [
 export const skillCategories: SkillCategory[] = [
   {
     label: "Languages",
-    skills: ["Python", "TypeScript", "JavaScript", "Java", "SQL", "R", "C++"],
+    skills: ["Python", "TypeScript", "JavaScript", "C#", "Java", "SQL", "C++", "R"],
   },
   {
     label: "Frameworks / Web",
-    skills: ["React", "Next.js", "Node.js", "FastAPI", "Flask", "Django", "Tailwind CSS"],
+    skills: ["React", "Next.js", ".NET Core", "Node.js", "FastAPI", "Tailwind CSS"],
   },
   {
     label: "Databases",
@@ -137,7 +137,7 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     label: "Cloud & Tools",
-    skills: ["AWS", "GCP", "Docker", "Kubernetes", "Git", "CI/CD", "Vercel", "Terraform"],
+    skills: ["AWS", "Azure", "GCP", "Docker", "Kubernetes", "Git", "Terraform", "CI/CD"],
   },
 ]
 
@@ -148,8 +148,8 @@ export const experiences: Experience[] = [
     location: "London, ON",
     period: "Jan 2024 - Apr 2025",
     description:
-      "Supported 200+ students in CS2034b–Data Analytics: Principles through labs, tutorials, and office hours. Facilitated student learning by clarifying complex concepts in data analytics, Python, and machine learning. Contributed to academic success and improved average course satisfaction scores.",
-    tags: ["Python", "VBA", "Regex", "Pandas", "NumPy", "Matplotlib", "Microsoft Excel", "SQL", "Jupyter Notebooks"],
+      "Mentored 200+ students in CS2034b (Data Analytics: Principles), delivering comprehensive labs and tutorials on Python, machine learning, and data visualization. Facilitated academic success by simplifying complex algorithmic concepts, resulting in improved average course satisfaction scores and student performance metrics.",
+    tags: ["Python", "Pandas", "NumPy", "Matplotlib", "Scikit-learn", "SQL", "Jupyter Notebooks", "VBA", "Data Analytics"],
   },
   {
     role: "Full Stack Developer",
@@ -157,8 +157,8 @@ export const experiences: Experience[] = [
     location: "Ahmedabad, India",
     period: "Sep 2023 - Jul 2024",
     description:
-      "Worked as Full Stack Developer with expertise in Python, C#, JavaScript, and AngularJS, integrating front-end and back-end systems to streamline workflows and improving client system performance by 20%. Led 15+ web scraping projects, processing millions of data, with foreign clients, delivering accurate datasets with 99%+ data integrity. Implemented AWS Lambda functions to streamline data processing and storage, ensuring seamless integration within the AWS cloud infrastructure. Mentored junior developers and conducted code reviews to improve team delivery standards.",
-    tags: ["Python", "C#", ".NET Core", "ASP.NET Web API", "JavaScript (ES6+)", "AngularJS", "SQL", "PostgreSQL", "JWT Token", "Azure DevOps", "Azure ServiceBus", "AWS Lambda", "Git/GitHub", "CI/CD Pipelines", "Docker", "Web Scraping", "Selenium", "Scrapy", "Jira", "HTML5", "CSS3", "xUnit", "Agile/Scrum", "Requirement Analysis"],
+      "Engineered scalable full-stack solutions using .NET Core and AngularJS, optimizing front-end/back-end integration to boost client system performance by 20%. Led 15+ enterprise web scraping projects for international clients, processing millions of records with 99%+ data integrity. Implemented serverless AWS Lambda pipelines to streamline data storage, while mentoring junior developers to elevate team coding standards.",
+    tags: ["C#", ".NET Core", "AngularJS", "JWT Token", "Python", "AWS Lambda", "PostgreSQL", "SQL", "Azure DevOps/ServiceBus", "Docker", "Selenium", "Scrapy", "CI/CD", "Web Scraping", "xUnit"],
   },
   {
     role: "Software Engineer",
@@ -166,17 +166,17 @@ export const experiences: Experience[] = [
     location: "Ahmedabad, India",
     period: "Mar 2023 - Aug 2023",
     description:
-      "Designed and developed .NET-based backend applications for diverse industries, ensuring modular architecture and timely project delivery. Partnered with stakeholders to translate business requirements into technical specifications and functional solutions. Enhanced system reliability & code quality by implementing comprehensive unit testing and rigorous debugging protocols.",
-    tags: ["C#", ".NET Core", "ASP.NET Web API", "JavaScript (ES6+)", "AngularJS", "SQL", "PostgreSQL", "Entity Framework", "Dapper", "Microsoft SQL Server", "Git" ,"Version Control"],
+      "Architected modular .NET backend systems for diverse industry clients, ensuring high availability and timely delivery. Partnered directly with stakeholders to translate complex business requirements into technical specifications. Enhanced system reliability and code maintainability by establishing comprehensive unit testing protocols and rigorous debugging cycles.",
+    tags: ["C#", ".NET Core", "ASP.NET Web API", "React", "SQL", "PostgreSQL", "Entity Framework", "Dapper", "MSSQL", "Git", "System Architecture"],
   },
   {
-    role: ".Net Developer Intern",
+    role: ".NET Developer Intern",
     company: "TatvaSoft",
     location: "Ahmedabad, India",
     period: "Dec 2022 - Feb 2023",
     description:
-      "Contributed to production-level .NET projects, transitioning classroom concepts into enterprise-grade software solutions. Optimized application performance through hands-on development, code reviews, proactive debugging within the .NET ecosystem, and utilized version control (Git) and collaborative tools to manage codebases.",
-    tags: ["C#", ".NET Core", "ASP.NET MVC", "ASP.NET Web API", "LINQ", "SQL", "Entity Framework", "Git" ,"Version Control", "Jira" , "Unit Testing"],
+      "Contributed to production-level enterprise software, translating theoretical concepts into robust .NET solutions. Optimized application performance through proactive debugging and code refactoring within the .NET ecosystem. Collaborated with senior teams using Git and Agile methodologies to maintain high-velocity release cycles.",
+    tags: ["C#", ".NET Core", "ASP.NET MVC", "LINQ", "SQL", "Entity Framework", "Git", "Unit Testing", "Agile"],
   },
 ]
 
