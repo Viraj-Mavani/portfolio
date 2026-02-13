@@ -98,7 +98,7 @@ export default function AboutPage() {
           
           {/* Left Block: Intro Content */}
           {/* Desktop: Spans 3 of 4 columns (75%). Tablet/Mobile: Default auto (100%) */}
-          <div className="rounded-md border border-border bg-cardlg:col-span-3 p-4 md:p-8 lg:p-10">
+          <div className="rounded-md border border-border bg-card lg:col-span-3 p-4 md:p-8 lg:p-10">
             <span className="mb-4 inline-block font-mono text-[10px] tracking-widest text-primary uppercase">
               who I am
             </span>
