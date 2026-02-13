@@ -36,7 +36,7 @@ export function ProjectsSection({ index }: ProjectsSectionProps) {
           {filteredProjects.slice(0, 4).map((project, index) => (
             <div
               key={project.title}
-              className="group relative flex flex-col gap-5 rounded-md border border-border bg-card p-8 transition-colors hover:border-primary/30"
+              className="group relative flex flex-col gap-5 rounded-md border border-border bg-card px-4 py-6 md:p-4 md:py-6 lg:p-8 transition-colors hover:border-primary/30"
             >
               {/* Header */}
               <div className="flex items-start justify-between">
@@ -44,7 +44,7 @@ export function ProjectsSection({ index }: ProjectsSectionProps) {
                   <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
                     project_{String(index + 1).padStart(2, "0")} / brief description
                   </span>
-                  <h3 className="text-lg font-medium text-foreground">
+                  <h3 className="text-md md:text-lg font-medium text-foreground">
                     {project.title}
                   </h3>
                 </div>
@@ -75,7 +75,7 @@ export function ProjectsSection({ index }: ProjectsSectionProps) {
               </div>
 
               {/* Brief Description */}
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="text-xs md:text-sm leading-relaxed text-muted-foreground text-justify">
                 {project.brief}
               </p>
 

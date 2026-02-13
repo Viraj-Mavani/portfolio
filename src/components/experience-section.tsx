@@ -27,7 +27,7 @@ export function ExperienceSection({ index }: ExperienceSectionProps) {
           {experiences.map((exp, index) => (
             <div
               key={exp.role}
-              className="group relative flex flex-col gap-6 rounded-md border border-border bg-card p-8 transition-colors hover:border-primary/30"
+              className="group relative flex flex-col gap-6 rounded-md border border-border bg-card px-4 py-6 md:p-6 lg:p-8 transition-colors hover:border-primary/30"
             >
               {/* Top row */}
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
@@ -53,7 +53,7 @@ export function ExperienceSection({ index }: ExperienceSectionProps) {
               </div>
 
               {/* Description */}
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="text-xs md:text-sm leading-relaxed text-muted-foreground text-justify">
                 {exp.description}
               </p>
 

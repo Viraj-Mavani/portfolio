@@ -46,7 +46,7 @@ export function ServicesStrip({ index }: ServicesStripProps) {
           {services.map((service) => (
             <div
               key={service.title}
-              className="group flex flex-col gap-6 bg-background p-8 transition-colors hover:bg-card"
+              className="group flex flex-col gap-6 bg-background p-4 lg:p-8 transition-colors hover:bg-card"
             >
               <div className="flex items-start justify-between">
                 <service.icon
@@ -60,10 +60,10 @@ export function ServicesStrip({ index }: ServicesStripProps) {
               </div>
 
               <div className="flex flex-col gap-3">
-                <h3 className="text-lg font-medium tracking-tight text-foreground">
+                <h3 className="text-md lg:text-lg font-medium tracking-tight text-foreground">
                   {service.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
+                <p className="text-xs lg:text-sm leading-relaxed text-muted-foreground">
                   {service.description}
                 </p>
               </div>

@@ -26,7 +26,7 @@ export function SkillsSection({ index }: SkillsSectionProps) {
           {skillCategories.map((category) => (
             <div
               key={category.label}
-              className="group flex flex-col gap-5 bg-background p-8 transition-colors hover:bg-card"
+              className="group flex flex-col gap-5 bg-background p-4 md:p-6 lg:p-8 transition-colors hover:bg-card"
             >
               <div className="flex items-center justify-between">
                 <span className="font-mono text-[10px] tracking-widest text-primary uppercase">

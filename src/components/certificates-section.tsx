@@ -46,7 +46,7 @@ export function CertificatesSection({ index }: CertificatesSectionProps) {
           {visible.map((cert, index) => (
             <div
               key={cert.title}
-              className={`group flex flex-col gap-3 bg-background p-6 transition-colors hover:bg-card ${!expanded && index === 3 ? "lg:hidden" : ""}`}
+              className={`group flex flex-col gap-2 lg:gap-3 bg-background p-4 md:p-6 transition-colors hover:bg-card ${!expanded && index === 3 ? "lg:hidden" : ""}`}
             >
               <div className="flex items-start justify-between">
                 <div className="flex h-8 w-8 items-center justify-center rounded-sm border border-border bg-secondary text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">

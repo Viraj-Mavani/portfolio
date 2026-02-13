@@ -113,7 +113,7 @@ export function ProjectsPageContent() {
                     <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
                       project_{String(index + 1).padStart(2, "0")}
                     </span>
-                    <h2 className="text-xl font-medium text-foreground">
+                    <h2 className="text-md md:text-xl font-medium text-foreground">
                       {project.title}
                     </h2>
                   </div>
@@ -146,7 +146,7 @@ export function ProjectsPageContent() {
                 {/* Description */}
                 <div className="mb-6 flex max-w-5xl flex-col gap-4">
                   {(Array.isArray(project.description) ? project.description : [project.description]).map((paragraph, i) => (
-                    <p key={i} className="text-sm leading-relaxed text-muted-foreground text-justify">{paragraph}</p>
+                    <p key={i} className="text-xs md:text-sm leading-relaxed text-muted-foreground text-justify">{paragraph}</p>
                   ))}
                 </div>
 

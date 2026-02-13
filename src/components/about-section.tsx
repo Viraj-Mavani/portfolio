@@ -30,7 +30,7 @@ export function AboutSection({ index }: AboutSectionProps) {
 
         <div className="grid gap-8 lg:grid-cols-2 items-stretch">
           {/* About text */}
-          <div className="flex flex-col gap-6 rounded-md border border-border bg-card p-8 h-full">
+          <div className="flex flex-col gap-6 rounded-md border border-border bg-card p-4 md:p-8 h-full">
             <div className="flex items-start justify-between">
               <span className="font-mono text-[10px] tracking-widest text-primary uppercase">
                 {mode === "generalist" ? "about_me" : `about_${mode.replace("-", "_")}`}
@@ -43,7 +43,7 @@ export function AboutSection({ index }: AboutSectionProps) {
               {activeBio.map((paragraph, i) => (
                 <p 
                   key={i} 
-                  className="text-base leading-relaxed text-muted-foreground text-justify"
+                  className="text-xs md:text-base leading-relaxed text-muted-foreground text-justify"
                 >
                   {paragraph}
                 </p>
@@ -56,7 +56,7 @@ export function AboutSection({ index }: AboutSectionProps) {
             {education.map((edu) => (
               <div
                 key={edu.degree}
-                className="group flex flex-col gap-4 rounded-md border border-border bg-card p-8 transition-colors hover:border-primary/30"
+                className="group flex flex-col gap-4 rounded-md border border-border bg-card px-4 py-6 md:p-8 transition-colors hover:border-primary/30"
               >
                 <div className="flex items-start gap-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm border border-border bg-secondary text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
@@ -76,7 +76,7 @@ export function AboutSection({ index }: AboutSectionProps) {
                   {edu.focus}
                 </p>
 
-                <p className="text-sm leading-relaxed text-muted-foreground italic border-l-2 border-primary/20 pl-4">
+                <p className="text-xs md:text-sm leading-relaxed text-muted-foreground italic border-l-2 border-primary/20 pl-4">
                   {edu.description}
                 </p>
 
