@@ -4,7 +4,7 @@ import { useState } from "react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { useTheme } from "next-themes"
-import { Sun, Moon, Menu, Mail, Github, Linkedin, MessageSquare, ChevronDown } from "lucide-react"
+import { Sun, Moon, Menu, Mail, Github, Linkedin, MessageSquare, ChevronDown, FileText } from "lucide-react"
 import {
   Sheet,
   SheetContent,
@@ -133,8 +133,11 @@ export function TopNav() {
             {activeMode === "generalist" ? (
               // If Generalist: Show Dropdown Menu
               <DropdownMenu>
-                <DropdownMenuTrigger className="hidden rounded-sm border border-border px-3 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:border-primary hover:text-foreground sm:flex sm:items-center sm:gap-1 outline-none">
-                  Resume <ChevronDown className="h-3 w-3 opacity-70" />
+                <DropdownMenuTrigger className="flex h-8 w-8 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground sm:h-auto sm:w-auto sm:border sm:border-border sm:bg-transparent sm:px-3 sm:py-1.5 sm:font-mono sm:text-xs sm:hover:border-primary sm:hover:bg-transparent outline-none">
+                  <FileText className="h-4 w-4 sm:hidden" />
+                  <span className="hidden sm:flex sm:items-center sm:gap-1">
+                    Resume <ChevronDown className="h-3 w-3 opacity-70" />
+                  </span>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="min-w-[160px] font-mono text-xs">
                   {RESUMES.map((resume) => (
@@ -157,15 +160,16 @@ export function TopNav() {
                     href={resume.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hidden rounded-sm border border-border px-3 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:border-primary hover:text-foreground sm:block"
+                    className="flex h-8 w-8 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground sm:h-auto sm:w-auto sm:border sm:border-border sm:bg-transparent sm:px-3 sm:py-1.5 sm:font-mono sm:text-xs sm:hover:border-primary sm:hover:bg-transparent"
                   >
-                    Resume
+                    <FileText className="h-4 w-4 sm:hidden" />
+                    <span className="hidden sm:inline">Resume</span>
                   </a>
                 )
               })()
             )}
 
-            <div className="hidden sm:block mx-1 h-4 w-px bg-border" aria-hidden="true" />
+            <div className="mx-1 h-4 w-px bg-border" aria-hidden="true" />
 
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -189,7 +193,7 @@ export function TopNav() {
               </SheetTrigger>
               <SheetContent
                 side="right"
-                className="border-border bg-card w-96 overflow-y-auto"
+                className="border-border bg-card w-full max-w-96 overflow-y-auto"
               >
                 <SheetHeader className="border-b border-border pb-4">
                   <SheetTitle className="flex items-center gap-2 font-mono text-sm tracking-wider text-foreground">
@@ -199,6 +203,30 @@ export function TopNav() {
                     Navigation
                   </SheetTitle>
                 </SheetHeader>
+
+                {/* Section 0.5: Resume */}
+                <div className="py-6">
+                  <span className="mb-4 block font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
+                    Resume
+                  </span>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger className="flex w-full items-center justify-between rounded-sm border border-border px-3 py-2.5 font-mono text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground outline-none">
+                      <span>Download Resume</span>
+                      <ChevronDown className="h-4 w-4 opacity-50" />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="start" className="w-56 font-mono text-xs">
+                      {RESUMES.map((resume) => (
+                        <DropdownMenuItem key={resume.id} asChild className="cursor-pointer">
+                          <a href={resume.href} target="_blank" rel="noopener noreferrer">
+                            {resume.label}
+                          </a>
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+
+                <div className="h-px bg-border" aria-hidden="true" />
 
                 {/* Section 1: Explore */}
                 <div className="py-6">
