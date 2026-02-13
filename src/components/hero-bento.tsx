@@ -16,7 +16,7 @@ export function HeroBento({ index }: HeroBentoProps) {
   const content = HeroContent[mode as keyof typeof HeroContent] || HeroContent.generalist
 
   return (
-    <section id="home" className="mx-auto max-w-7xl px-4 pt-32 pb-16 md:pt-36 lg:pt-40 lg:pb-24" aria-labelledby="hero-heading">
+    <section id="home" className="mx-auto max-w-7xl px-4 pt-36 pb-16 lg:pt-40 lg:pb-24" aria-labelledby="hero-heading">
       {/* Section label */}
       <div className="mb-8 flex items-center gap-4">
         <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
@@ -29,14 +29,17 @@ export function HeroBento({ index }: HeroBentoProps) {
       </div>
 
       {/* Bento Grid */}
-      <div className="grid gap-3 grid-cols-1 md:grid-cols-3 md:grid-rows-[1fr_auto]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:grid-rows-[1fr_auto]">
         {/* Card 1 - Intro */}
-        <div className="order-1 md:order-none flex flex-col justify-between rounded-md border border-border bg-card p-6 md:col-span-2 md:row-span-1 md:p-8 lg:p-10">
+        <div className="sm:col-span-2 md:col-span-2 flex flex-col justify-between rounded-md border border-border bg-card p-6 md:p-8 lg:p-10">
           <div>
             <span className="mb-4 inline-block font-mono text-[10px] tracking-widest text-primary uppercase">
               {content.title}
             </span>
-            <h1 id="hero-heading" className="text-balance text-3xl font-medium leading-tight tracking-tight text-foreground md:text-4xl lg:text-5xl">
+            <h1
+              id="hero-heading"
+              className="text-balance text-3xl font-medium leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+            >
               Hello, I am
               <br />
               VM
@@ -44,7 +47,7 @@ export function HeroBento({ index }: HeroBentoProps) {
             <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground lg:text-lg">
               {content.description}
             </p>
-          </div>          
+          </div>
           <div className="mt-8">
             <Link
               href="/about"
@@ -57,12 +60,12 @@ export function HeroBento({ index }: HeroBentoProps) {
         </div>
 
         {/* Card 2 - Terminal (Tall, Right, spans 2 rows) */}
-        <div className="order-3 md:order-none min-h-[425px] lg:min-h-[440px] md:row-span-2">
+        <div className="sm:col-span-2 md:col-span-1 min-h-[425px] lg:min-h-[440px] md:row-span-2">
           <TerminalCard />
         </div>
 
         {/* Card 3 - Status (Small, Bottom Left) */}
-        <div className="order-2 md:order-none flex items-center gap-4 rounded-md border border-border bg-card px-6 py-5">
+        <div className="flex items-center gap-4 rounded-md border border-border bg-card px-6 py-5">
           <div className="relative flex items-center justify-center">
             <span className="absolute h-3 w-3 animate-ping rounded-full bg-emerald-400/40" aria-hidden="true" />
             <span className="relative h-2.5 w-2.5 rounded-full bg-emerald-400" aria-hidden="true" />
@@ -78,7 +81,7 @@ export function HeroBento({ index }: HeroBentoProps) {
         </div>
 
         {/* Card 4 - Tech Stack Ticker (Small, Bottom Center) */}
-        <div className="order-4 md:order-none min-h-[72px]">
+        <div className="min-h-[72px]">
           <TechTicker />
         </div>
       </div>
