@@ -21,7 +21,8 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 import { useMode } from "@/hooks/use-mode"
-import { SITE_CONFIG } from "@/lib/site-config"
+import { SITE_CONFIG } from "@/config/site-config"
+import { SITE_METADATA } from "@/lib/site-metadata"
 import { socialLinks } from "@/components/footer"
 
 const exploreLinks = [
@@ -82,7 +83,7 @@ export function TopNav() {
             <Link href="/" className="flex items-center gap-2">
               <div className="relative h-7 w-7 overflow-hidden rounded-sm">
                 <Image
-                  src={SITE_CONFIG.logo}
+                  src={SITE_METADATA.logo}
                   alt="Logo"
                   fill
                   className="object-cover"
@@ -231,7 +232,7 @@ export function TopNav() {
                   <SheetTitle className="flex items-center gap-2 font-mono text-sm tracking-wider text-foreground">
                     <div className="relative h-6 w-6 overflow-hidden rounded-sm">
                       <Image
-                        src={SITE_CONFIG.logo}
+                        src={SITE_METADATA.logo}
                         alt="Logo"
                         fill
                         className="object-cover"
