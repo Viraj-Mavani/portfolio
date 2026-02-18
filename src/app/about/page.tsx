@@ -16,6 +16,7 @@ import {
 import { TopNav } from "@/components/top-nav"
 import { Footer } from "@/components/footer"
 import { education } from "@/lib/bio-data"
+import { BentoGallery } from "@/components/bento-gallery"
 
 export const metadata: Metadata = {
   title: "About | VM Portfolio",
@@ -86,12 +87,18 @@ export default function AboutPage() {
 
         {/* Page header */}
         <div className="mb-10 flex items-center gap-4">
-          <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
-            about me
+          <span className="font-mono text-2xl font-bold tracking-widest text-foreground md:text-3xl lg:text-4xl uppercase">
+            About Me
           </span>
           <div className="h-px flex-1 bg-border" aria-hidden="true" />
         </div>
-        
+        <p className="mt-2 font-mono text-xs md:text-sm text-muted-foreground">
+          {">"} initiating background check... <br /><br />
+        </p>
+
+        {/* The Asymmetrical Photo Grid */}
+        <BentoGallery />
+            
         {/* Intro section */}
         {/* Mobile/Tablet: 1 column (vertical stack). Desktop: 4 columns (3:1 ratio) */}
         <section className="mb-16 grid gap-4 grid-cols-1 lg:grid-cols-4">

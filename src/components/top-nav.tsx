@@ -45,9 +45,10 @@ const modes = [
 ]
 
 const RESUMES = [
-  { id: "fullstack", label: "Full Stack Resume", href: "/resumes/Viraj_Mavani_Resume_FullStack.pdf" },
+  { id: "fullstack", label: "Full Stack Resume", href: "/resumes/Viraj Mavani_Resume_FullStack.pdf" },
   // { id: "fullstack", label: "Full Stack Resume", href: "https://uwoca-my.sharepoint.com/:b:/g/personal/vmavani2_uwo_ca/IQDtOwLXU5P2R4ujwpNLHlqiAcM00LiuTindE7b4bi-x3Uk?e=Nvd39I" },
-  { id: "data", label: "AI / ML Resume", href: "/resumes/Viraj_Mavani_Resume_Data.pdf" },
+  { id: "data", label: "AI / ML Resume", href: "/resumes/Viraj Mavani_Resume_DA.pdf" },
+  // { id: "data", label: "AI / ML Resume", href: "https://uwoca-my.sharepoint.com/:b:/g/personal/vmavani2_uwo_ca/IQCinxObn6-5SYuUk8kjK4C0AUwPl-qwzOxUMNR7Ho9vEew?e=RSl3ZQ" },
 ]
 
 export function TopNav() {
@@ -79,7 +80,7 @@ export function TopNav() {
       <div className="mx-auto max-w-7xl px-4 py-4">
         <div className="flex items-center gap-4">
           {/* Left box - Logo / Name */}
-          <div className="flex items-center rounded-md border border-border bg-card/80 px-4 py-2 backdrop-blur-xl">
+          <div className="flex items-center rounded-md border border-border bg-card/80 px-2 py-2 md:px-4 md:py-2 backdrop-blur-xl">
             <Link href="/" className="flex items-center gap-2">
               <div className="relative h-7 w-7 overflow-hidden rounded-sm">
                 <Image

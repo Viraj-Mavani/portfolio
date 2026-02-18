@@ -1,5 +1,7 @@
 "use client"
 
+import { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { TerminalCard } from "./terminal-card"
@@ -14,6 +16,7 @@ interface HeroBentoProps {
 export function HeroBento({ index }: HeroBentoProps) {
   const { mode } = useMode()
   const content = HeroContent[mode as keyof typeof HeroContent] || HeroContent.generalist
+  const [isHovered, setIsHovered] = useState(false)
 
   return (
     <section id="home" className="mx-auto max-w-7xl px-4 pt-32 pb-16 md:pt-36 lg:pt-40 lg:pb-24" aria-labelledby="hero-heading">
@@ -42,7 +45,58 @@ export function HeroBento({ index }: HeroBentoProps) {
             >
               Hello, I am
               <br />
-              VM
+              <motion.span
+                className="text-primary inline-flex cursor-pointer select-none"
+                onHoverStart={() => setIsHovered(true)}
+                onHoverEnd={() => setIsHovered(false)}
+                onTap={() => setIsHovered(!isHovered)}
+                layout
+              >
+                <motion.span layout>V</motion.span>
+                <AnimatePresence>
+                  {isHovered && (
+                    <motion.span
+                      initial={{ opacity: 0, width: 0 }}
+                      animate={{ opacity: 1, width: "auto" }}
+                      exit={{ opacity: 0, width: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      iraj
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+                
+                <AnimatePresence>
+                  {isHovered && (
+                    <motion.span
+                      initial={{ opacity: 0, width: 0 }}
+                      animate={{ opacity: 1, width: "auto" }}
+                      exit={{ opacity: 0, width: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="overflow-hidden whitespace-pre"
+                    >
+                      {" "}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+
+                <motion.span layout>M</motion.span>
+                <AnimatePresence>
+                  {isHovered && (
+                    <motion.span
+                      initial={{ opacity: 0, width: 0 }}
+                      animate={{ opacity: 1, width: "auto" }}
+                      exit={{ opacity: 0, width: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      avani
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+                <motion.span layout>.</motion.span>
+              </motion.span>
             </h1>
             <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground lg:text-lg">
               {content.description}

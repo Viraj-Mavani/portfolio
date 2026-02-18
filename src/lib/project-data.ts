@@ -103,6 +103,7 @@ export const projects: Project[] = [
     ],
     tags: ["Next.js 14", "TypeScript", "Tailwind CSS", "Framer Motion", "Context API", "Lucide React", "shadcn/ui"],
     mode: ["fullstack"],
+    live: "https://virajmavani.dev",
   },
   {
     title: "E-commerce Platform",

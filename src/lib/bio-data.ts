@@ -184,7 +184,7 @@ export const certificates: Certificate[] = [
   {
     title: "Generative AI with Large Language Models",
     issuer: "Amazon Web Services",
-    date: "2024",
+    date: "2026",
     credentialUrl: "#",
     modes: ["ai-ml"],
   },
