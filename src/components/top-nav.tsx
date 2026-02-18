@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
+import Image from "next/image"
 import { useTheme } from "next-themes"
 import { Sun, Moon, Menu, ChevronDown, FileText } from "lucide-react"
 import {
@@ -21,6 +22,7 @@ import {
 
 import { useMode } from "@/hooks/use-mode"
 import { SITE_CONFIG } from "@/config/site-config"
+import { SITE_METADATA } from "@/lib/site-metadata"
 import { socialLinks } from "@/components/footer"
 
 const exploreLinks = [
@@ -79,9 +81,14 @@ export function TopNav() {
           {/* Left box - Logo / Name */}
           <div className="flex items-center rounded-md border border-border bg-card/80 px-4 py-2 backdrop-blur-xl">
             <Link href="/" className="flex items-center gap-2">
-              <span className="flex h-7 w-7 items-center justify-center rounded-sm bg-primary font-mono text-xs font-bold text-primary-foreground">
-                VM
-              </span>
+              <div className="relative h-7 w-7 overflow-hidden rounded-sm">
+                <Image
+                  src={SITE_METADATA.logo}
+                  alt="Logo"
+                  fill
+                  className="object-cover"
+                />
+              </div>
               <span className="hidden font-mono text-xs tracking-wider text-foreground sm:block">
                 viraj.dev
               </span>
@@ -223,9 +230,14 @@ export function TopNav() {
               >
                 <SheetHeader className="border-b border-border pb-4">
                   <SheetTitle className="flex items-center gap-2 font-mono text-sm tracking-wider text-foreground">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-sm bg-primary font-mono text-[10px] font-bold text-primary-foreground">
-                      VM
-                    </span>
+                    <div className="relative h-6 w-6 overflow-hidden rounded-sm">
+                      <Image
+                        src={SITE_METADATA.logo}
+                        alt="Logo"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
                     Navigation
                   </SheetTitle>
                 </SheetHeader>

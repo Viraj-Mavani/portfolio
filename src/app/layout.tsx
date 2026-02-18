@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import { ThemeProvider } from "@/components/theme-provider"
 import { ModeProvider } from "@/hooks/use-mode"
+import { SITE_METADATA } from "@/lib/site-metadata"
 
 import './globals.css'
 
@@ -10,8 +11,11 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains' })
 
 export const metadata: Metadata = {
-  title: 'Viraj Mavani',
-  description: 'Full Stack AI Engineer. Merging Full Stack Engineering with AI Research.',
+  title: SITE_METADATA.title,
+  description: SITE_METADATA.description,
+  icons: {
+    icon: SITE_METADATA.favicon,
+  },
 }
 
 export const viewport: Viewport = {
