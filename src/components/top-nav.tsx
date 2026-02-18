@@ -45,9 +45,10 @@ const modes = [
 ]
 
 const RESUMES = [
-  { id: "fullstack", label: "Full Stack Resume", href: "/resumes/Viraj_Mavani_Resume_FullStack.pdf" },
+  { id: "fullstack", label: "Full Stack Resume", href: "/resumes/Viraj Mavani_Resume_FullStack.pdf" },
   // { id: "fullstack", label: "Full Stack Resume", href: "https://uwoca-my.sharepoint.com/:b:/g/personal/vmavani2_uwo_ca/IQDtOwLXU5P2R4ujwpNLHlqiAcM00LiuTindE7b4bi-x3Uk?e=Nvd39I" },
-  { id: "data", label: "AI / ML Resume", href: "/resumes/Viraj_Mavani_Resume_Data.pdf" },
+  { id: "data", label: "AI / ML Resume", href: "/resumes/Viraj Mavani_Resume_DA.pdf" },
+  // { id: "data", label: "AI / ML Resume", href: "https://uwoca-my.sharepoint.com/:b:/g/personal/vmavani2_uwo_ca/IQCinxObn6-5SYuUk8kjK4C0AUwPl-qwzOxUMNR7Ho9vEew?e=RSl3ZQ" },
 ]
 
 export function TopNav() {
