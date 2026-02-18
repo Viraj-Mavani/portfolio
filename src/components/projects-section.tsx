@@ -1,9 +1,11 @@
 "use client"
 
+import { motion } from "framer-motion"
 import { Github, ExternalLink, ArrowRight } from "lucide-react"
 import { projects } from "@/lib/project-data"
 import Link from "next/link"
 import { useMode } from "@/hooks/use-mode"
+import { sectionVariants, cardVariant, fadeUpVariant } from "@/lib/animations"
 
 interface ProjectsSectionProps {
   index: number
@@ -32,9 +34,15 @@ export function ProjectsSection({ index }: ProjectsSectionProps) {
 
         <h2 id="projects-heading" className="sr-only">Projects</h2>
 
-        <div className="grid gap-4 md:grid-cols-2">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={sectionVariants}
+          className="grid gap-4 md:grid-cols-2">
           {filteredProjects.slice(0, 4).map((project, index) => (
-            <div
+            <motion.div
+              variants={cardVariant}
               key={project.title}
               className="group relative flex flex-col gap-5 rounded-md border border-border bg-card px-4 py-6 md:p-4 md:py-6 lg:p-8 transition-colors hover:border-primary/30"
             >
@@ -90,13 +98,18 @@ export function ProjectsSection({ index }: ProjectsSectionProps) {
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* More Projects button */}
         {filteredProjects.length > 4 && (
-          <div className="mt-8 flex justify-center">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUpVariant}
+            className="mt-8 flex justify-center">
             <Link
               href="/projects"
               className="group inline-flex items-center gap-3 rounded-sm border border-border px-6 py-3 font-mono text-sm text-muted-foreground transition-all hover:border-primary hover:text-foreground hover:gap-4"
@@ -104,7 +117,7 @@ export function ProjectsSection({ index }: ProjectsSectionProps) {
               View All {mode === "generalist" ? "" : mode} Projects
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
             </Link>
-          </div>
+          </motion.div>
         )}
       </div>
     </section>

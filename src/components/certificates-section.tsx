@@ -1,9 +1,11 @@
 "use client"
 
 import { useState } from "react"
+import { motion } from "framer-motion"
 import { Award, ExternalLink, ChevronDown, ChevronUp } from "lucide-react"
 import { certificates } from "@/lib/bio-data"
 import { useMode } from "@/hooks/use-mode"
+import { sectionVariants, cardVariant } from "@/lib/animations"
 
 const INITIAL_COUNT = 4
 
@@ -42,9 +44,15 @@ export function CertificatesSection({ index }: CertificatesSectionProps) {
 
         <h2 id="certificates-heading" className="sr-only">Certificates</h2>
 
-        <div className="grid gap-px border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={sectionVariants}
+          className="grid gap-px border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
           {visible.map((cert, index) => (
-            <div
+            <motion.div
+              variants={cardVariant}
               key={cert.title}
               className={`group flex flex-col gap-2 lg:gap-3 bg-background p-4 md:p-6 transition-colors hover:bg-card ${!expanded && index === 3 ? "lg:hidden" : ""}`}
             >
@@ -89,7 +97,7 @@ export function CertificatesSection({ index }: CertificatesSectionProps) {
                   ))}
                 </div>
               </div>
-             </div>
+             </motion.div>
           ))}
           {Array.from({ length: emptySlots }).map((_, i) => {
             const showOnMd = visible.length % 2 !== 0 && i === 0
@@ -101,7 +109,7 @@ export function CertificatesSection({ index }: CertificatesSectionProps) {
               />
             )
           })}
-        </div>
+        </motion.div>
 
         {/* Expand/Collapse button */}
         {hasMore && (

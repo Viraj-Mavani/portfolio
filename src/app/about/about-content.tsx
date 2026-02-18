@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion, easeOut } from "framer-motion"
+import { motion } from "framer-motion"
 import Link from "next/link"
 import {
   ArrowLeft,
@@ -17,6 +17,7 @@ import {
 } from "lucide-react"
 import { education } from "@/lib/bio-data"
 import { BentoGallery } from "@/components/bento-gallery"
+import { fadeUpVariant, sectionVariants, cardVariant } from "@/lib/animations"
 
 const intro = {
   title: "I'm a Full Stack AI Engineer who believes that the best code is written by those who never stop being students.",
@@ -79,36 +80,6 @@ export function AboutContent() {
 
     return () => clearInterval(interval)
   }, [isTypingComplete])
-
-  // Animation: Blocks (Gallery, Intro)
-  const fadeUpVariant = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.6, ease: easeOut }
-    }
-  }
-
-  // Animations: Cards stagger in as you scroll
-  const sectionVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15
-      }
-    }
-  }
-
-  const cardVariant = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.5, ease: easeOut }
-    }
-  }
 
   return (
     <div className="mx-auto max-w-7xl px-4 pt-24 pb-16 lg:pt-28">
