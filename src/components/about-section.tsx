@@ -1,5 +1,7 @@
 "use client"
 
+import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 import { GraduationCap, MapPin, Calendar } from "lucide-react"
 import { aboutContent, education } from "@/lib/bio-data"
 import { useMode } from "@/hooks/use-mode"
@@ -11,9 +13,38 @@ interface AboutSectionProps {
 export function AboutSection({ index }: AboutSectionProps) {
   const { mode } = useMode()
   const activeBio = aboutContent[mode] || aboutContent.generalist
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024)
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
 
   return (
     <section id="about" className="border-t border-border" aria-labelledby="about-heading">
+
+      {process.env.NODE_ENV === 'development' && (
+        <>
+          {/* TOP LINE: Trigger starts here */}
+          <div 
+            className="fixed left-0 right-0 z-50 border-t-2 border-dashed border-blue-500 pointer-events-none"
+            style={{ top: '45%' }}
+          >
+            <span className="bg-blue-500 text-white text-[10px] px-1 font-mono">TOP MARGIN</span>
+          </div>
+
+          {/* BOTTOM LINE: Trigger ends here */}
+          <div 
+            className="fixed left-0 right-0 z-50 border-t-2 border-dashed border-red-500 pointer-events-none"
+            style={{ bottom: '45%' }}
+          >
+            <span className="bg-red-500 text-white text-[10px] px-1 font-mono">BOTTOM MARGIN</span>
+          </div>
+        </>
+      )}
+
       <div className="mx-auto max-w-7xl px-4 py-16 lg:py-24">
         {/* Section label */}
         <div className="mb-12 flex items-center gap-4">
@@ -54,9 +85,13 @@ export function AboutSection({ index }: AboutSectionProps) {
           {/* Education */}
           <div className="flex flex-col gap-4">
             {education.map((edu) => (
-              <div
+              <motion.div
                 key={edu.degree}
-                className="group flex flex-col gap-4 rounded-md border border-border bg-card px-4 py-6 md:p-8 transition-colors hover:border-primary/30"
+                initial={{ opacity: 1 }}
+                whileInView={isMobile ? { borderColor: "hsl(var(--primary) / 0.3)" } : {}}
+                viewport={{ margin: "-45% 0px -45% 0px" }}
+                transition={{ duration: 0.3 }}
+                className="group flex flex-col gap-4 rounded-md border border-border bg-card px-4 py-6 md:p-8 transition-colors lg:hover:border-primary/30"
               >
                 <div className="flex items-start gap-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm border border-border bg-secondary text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
@@ -90,7 +125,7 @@ export function AboutSection({ index }: AboutSectionProps) {
                     {edu.period}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

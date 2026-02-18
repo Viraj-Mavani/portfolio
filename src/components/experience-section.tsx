@@ -1,3 +1,7 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 import { Briefcase, Calendar, MapPin } from "lucide-react"
 import { experiences } from "@/lib/bio-data"
 
@@ -6,6 +10,14 @@ interface ExperienceSectionProps {
 }
 
 export function ExperienceSection({ index }: ExperienceSectionProps) {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024)
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
 
   return (
     <section id="experience" className="border-t border-border" aria-labelledby="experience-heading">
@@ -25,9 +37,13 @@ export function ExperienceSection({ index }: ExperienceSectionProps) {
 
         <div className="flex flex-col gap-4">
           {experiences.map((exp, index) => (
-            <div
+            <motion.div
               key={exp.role}
-              className="group relative flex flex-col gap-6 rounded-md border border-border bg-card px-4 py-6 md:p-6 lg:p-8 transition-colors hover:border-primary/30"
+              initial={{ opacity: 1 }}
+              whileInView={isMobile ? { borderColor: "hsl(var(--primary) / 0.3)" } : {}}
+              viewport={{ margin: "-45% 0px -45% 0px" }}
+              transition={{ duration: 0.3 }}
+              className="group relative flex flex-col gap-6 rounded-md border border-border bg-card px-4 py-6 md:p-6 lg:p-8 transition-colors lg:hover:border-primary/30"
             >
               {/* Top row */}
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
@@ -73,7 +89,7 @@ export function ExperienceSection({ index }: ExperienceSectionProps) {
               <span className="absolute right-8 top-8 font-mono text-[10px] text-muted-foreground/50">
                 {String(index + 1).padStart(2, "0")}
               </span>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

@@ -1,5 +1,7 @@
 "use client"
 
+import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 import { Github, ExternalLink, ArrowRight } from "lucide-react"
 import { projects } from "@/lib/project-data"
 import Link from "next/link"
@@ -11,6 +13,14 @@ interface ProjectsSectionProps {
 
 export function ProjectsSection({ index }: ProjectsSectionProps) {
   const { mode } = useMode()
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024)
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
 
   const filteredProjects = projects.filter((project) => 
     mode === "generalist" || project.mode.includes(mode)
@@ -34,9 +44,13 @@ export function ProjectsSection({ index }: ProjectsSectionProps) {
 
         <div className="grid gap-4 md:grid-cols-2">
           {filteredProjects.slice(0, 4).map((project, index) => (
-            <div
+            <motion.div
               key={project.title}
-              className="group relative flex flex-col gap-5 rounded-md border border-border bg-card px-4 py-6 md:p-4 md:py-6 lg:p-8 transition-colors hover:border-primary/30"
+              initial={{ opacity: 1 }}
+              whileInView={isMobile ? { borderColor: "hsl(var(--primary) / 0.3)" } : {}}
+              viewport={{ margin: "-45% 0px -45% 0px" }}
+              transition={{ duration: 0.3 }}
+              className="group relative flex flex-col gap-5 rounded-md border border-border bg-card px-4 py-6 md:p-4 md:py-6 lg:p-8 transition-colors lg:hover:border-primary/30"
             >
               {/* Header */}
               <div className="flex items-start justify-between">
@@ -90,7 +104,7 @@ export function ProjectsSection({ index }: ProjectsSectionProps) {
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
