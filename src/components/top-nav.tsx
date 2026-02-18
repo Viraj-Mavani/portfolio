@@ -79,7 +79,7 @@ export function TopNav() {
       <div className="mx-auto max-w-7xl px-4 py-4">
         <div className="flex items-center gap-4">
           {/* Left box - Logo / Name */}
-          <div className="flex items-center rounded-md border border-border bg-card/80 px-4 py-2 backdrop-blur-xl">
+          <div className="flex items-center rounded-md border border-border bg-card/80 px-2 py-2 md:px-4 md:py-2 backdrop-blur-xl">
             <Link href="/" className="flex items-center gap-2">
               <div className="relative h-7 w-7 overflow-hidden rounded-sm">
                 <Image
