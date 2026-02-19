@@ -17,7 +17,7 @@ import {
 } from "lucide-react"
 import { education } from "@/lib/bio-data"
 import { BentoGallery } from "@/components/bento-gallery"
-import { fadeUpVariant, sectionVariants, cardVariantUp } from "@/lib/animations"
+import { fadeUpVariant, sectionVariants, cardVariantRight } from "@/lib/animations"
 
 const intro = {
   title: "I'm a Full Stack AI Engineer who believes that the best code is written by those who never stop being students.",
@@ -202,7 +202,7 @@ export function AboutContent() {
               {journey.map((item) => (
                 <motion.div
                   key={item.title}
-                  variants={cardVariantUp} // Individual card animation
+                  variants={cardVariantRight} // Individual card animation
                   className="group flex w-full flex-col gap-4 rounded-md border border-border bg-card p-4 md:p-6 transition-colors hover:border-primary/30 md:w-[calc(50%-0.5rem)] lg:w-[calc(33.33%-0.67rem)]"
                 >
                   <div className="flex h-9 w-9 items-center justify-center rounded-sm border border-border bg-secondary text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
@@ -233,7 +233,7 @@ export function AboutContent() {
               {education.map((edu) => (
                 <motion.div
                   key={edu.degree}
-                  variants={cardVariantUp}
+                  variants={cardVariantRight}
                   className="group rounded-md border border-border bg-card p-4 md:p-8 transition-colors hover:border-primary/30"
                 >
                   <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">

@@ -5,6 +5,7 @@ export const fadeUpVariant: Variants = {
   visible: {
     opacity: 1,
     y: 0,
+    x: 0,
     transition: { duration: 0.6, ease: "easeOut" }
   }
 }
@@ -24,6 +25,7 @@ export const cardVariantUp: Variants = {
   visible: {
     opacity: 1,
     y: 0,
+    x: 0,
     transition: { duration: 0.5, ease: "easeOut" }
   }
 }
@@ -33,6 +35,7 @@ export const cardVariantDown: Variants = {
   visible: {
     opacity: 1,
     y: 0,
+    x: 0,
     transition: { duration: 0.5, ease: "easeOut" }
   }
 }
@@ -42,6 +45,7 @@ export const cardVariantLeft: Variants = {
   visible: {
     opacity: 1,
     x: 0,
+    y: 0,
     transition: { duration: 0.5, ease: "easeOut" }
   }
 }
@@ -51,6 +55,7 @@ export const cardVariantRight: Variants = {
   visible: {
     opacity: 1,
     x: 0,
+    y: 0,
     transition: { duration: 0.5, ease: "easeOut" }
   }
 }

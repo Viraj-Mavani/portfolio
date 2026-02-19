@@ -7,18 +7,77 @@ import { ArrowRight } from "lucide-react"
 import { TerminalCard } from "./terminal-card"
 import { TechTicker } from "./tech-ticker"
 import { useMode } from "@/hooks/use-mode"
+// import { useIsMobile } from "@/hooks/use-mobile"
+// import { useIsTablet } from "@/hooks/use-tablet"
 import { HeroContent } from "@/lib/bio-data"
-import { fadeUpVariant, sectionVariants, cardVariantUp } from "@/lib/animations"
+import { sectionVariants, cardVariantUp, cardVariantLeft, cardVariantRight, cardVariantDown } from "@/lib/animations"
 
 interface HeroBentoProps {
   index: number
 }
 
 export function HeroBento({ index }: HeroBentoProps) {
+  // const [mounted, setMounted] = useState(false) 
   const { mode } = useMode()
   const content = HeroContent[mode as keyof typeof HeroContent] || HeroContent.generalist
   const [isHovered, setIsHovered] = useState(false)
 
+  // const isMobile = useIsMobile()
+  // const isTablet = useIsTablet()
+
+  // useEffect(() => {
+  //   setMounted(true)
+  // }, [])
+
+  // // Debug: Monitor device state
+  // useEffect(() => {
+  //   console.log("Device Check:", { 
+  //     isMobile, 
+  //     isTablet, 
+  //     width: typeof window !== 'undefined' ? window.innerWidth : 'SSR' 
+  //   });
+  // }, [isMobile, isTablet]);
+  
+  // const getCard1Variant = () => {
+  //   if (isMobile) { console.log("Card 1: Mobile (Right)"); return cardVariantRight; }
+  //   if (isTablet) { console.log("Card 1: Tablet (Down)"); return cardVariantDown; }
+  //   console.log("Card 1: Desktop (Down)");
+  //   return cardVariantDown;
+  // }
+
+  // const getCard2Variant = () => {
+  //   if (isMobile) { console.log("Card 2: Mobile (Right)"); return cardVariantRight; }
+  //   if (isTablet) { console.log("Card 2: Tablet (Left)"); return cardVariantLeft; }
+  //   console.log("Card 2: Desktop (Left)");
+  //   return cardVariantLeft;
+  // }
+  
+  // const getCard1Variant = () => {
+  //   if (isMobile) return cardVariantRight
+  //   if (isTablet) return cardVariantDown 
+  //   return cardVariantDown
+  // }
+
+  // const getCard2Variant = () => {
+  //   if (isMobile) return cardVariantRight
+  //   if (isTablet) return cardVariantLeft
+  //   return cardVariantLeft
+  // }
+
+  // const getCard3Variant = () => {
+  //   if (isMobile) return cardVariantRight;
+  //   if (isTablet) return cardVariantRight;
+  //   return cardVariantRight
+  // }
+  
+  // const getCard4Variant = () => {
+  //   if (isMobile) return cardVariantRight;
+  //   if (isTablet) return cardVariantLeft;
+  //   return cardVariantUp
+  // }
+
+  // if (!mounted) return <div className="min-h-screen" />; 
+  
   return (
     <section id="home" className="mx-auto max-w-7xl px-4 pt-32 pb-16 md:pt-36 lg:pt-40 lg:pb-24" aria-labelledby="hero-heading">
       {/* Section label */}
@@ -34,13 +93,14 @@ export function HeroBento({ index }: HeroBentoProps) {
 
       {/* Bento Grid */}
       <motion.div 
+        // key={isMobile ? "mobile" : isTablet ? "tablet" : "desktop"} // Ensures re-animation on resize
         initial="hidden"
         animate="visible"
         variants={sectionVariants}
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:grid-rows-[1fr_auto]"
       >
         {/* Card 1 - Intro */}
-        <motion.div variants={cardVariantUp} className="sm:col-span-2 md:col-span-2 flex flex-col justify-between rounded-md border border-border bg-card p-6 md:p-8 lg:p-10">
+        <motion.div variants={cardVariantDown} className="sm:col-span-2 md:col-span-2 flex flex-col justify-between rounded-md border border-border bg-card p-6 md:p-8 lg:p-10">
           <div>
             <span className="mb-4 inline-block font-mono text-[10px] tracking-widest text-primary uppercase">
               {content.title}
@@ -120,12 +180,12 @@ export function HeroBento({ index }: HeroBentoProps) {
         </motion.div>
 
         {/* Card 2 - Terminal (Tall, Right, spans 2 rows) */}
-        <motion.div variants={cardVariantUp} className="sm:col-span-2 md:col-span-1 min-h-[425px] lg:min-h-[440px] md:row-span-2">
+        <motion.div variants={cardVariantLeft} className="sm:col-span-2 md:col-span-1 min-h-[425px] lg:min-h-[440px] md:row-span-2">
           <TerminalCard />
         </motion.div>
 
         {/* Card 3 - Status (Small, Bottom Left) */}
-        <motion.div variants={cardVariantUp} className="flex items-center gap-4 rounded-md border border-border bg-card px-6 py-5">
+        <motion.div variants={cardVariantRight} className="flex items-center gap-4 rounded-md border border-border bg-card px-6 py-5">
           <div className="relative flex items-center justify-center">
             <span className="absolute h-3 w-3 animate-ping rounded-full bg-emerald-400/40" aria-hidden="true" />
             <span className="relative h-2.5 w-2.5 rounded-full bg-emerald-400" aria-hidden="true" />
