@@ -15,7 +15,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { fadeUpVariant, sectionVariants, cardVariantUp, cardVariantRight } from "@/lib/animations"
+import { fadeUpVariant, sectionVariants, cardVariantRight } from "@/lib/animations"
 
 const modeFilters = [
   { id: "all", label: "All" },
@@ -113,6 +113,7 @@ export function ProjectsPageContent() {
 
         {/* Project list */}
         <motion.div 
+          key={activeFilter}
           initial="hidden"
           animate="visible"
           variants={sectionVariants}

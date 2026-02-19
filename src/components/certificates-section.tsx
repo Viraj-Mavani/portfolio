@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import { Award, ExternalLink, ChevronDown, ChevronUp } from "lucide-react"
 import { certificates } from "@/lib/bio-data"
 import { useMode } from "@/hooks/use-mode"
-import { sectionVariants, cardVariantUp } from "@/lib/animations"
+import { sectionVariants, cardVariantUp, fadeUpVariant } from "@/lib/animations"
 
 const INITIAL_COUNT = 4
 
@@ -45,6 +45,7 @@ export function CertificatesSection({ index }: CertificatesSectionProps) {
         <h2 id="certificates-heading" className="sr-only">Certificates</h2>
 
         <motion.div 
+          key={expanded ? "expanded" : "collapsed"}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
@@ -102,7 +103,8 @@ export function CertificatesSection({ index }: CertificatesSectionProps) {
           {Array.from({ length: emptySlots }).map((_, i) => {
             const showOnMd = visible.length % 2 !== 0 && i === 0
             return (
-              <div
+              <motion.div
+                variants={cardVariantUp}
                 key={`empty-${i}`}
                 className={`hidden bg-background ${showOnMd ? "md:block" : "lg:block"} ${!expanded && visible.length === 4 ? "lg:hidden" : ""}`}
                 aria-hidden="true"
@@ -113,7 +115,12 @@ export function CertificatesSection({ index }: CertificatesSectionProps) {
 
         {/* Expand/Collapse button */}
         {hasMore && (
-          <div className={`mt-6 flex justify-center ${!expanded && filteredCertificates.length === 4 ? "md:hidden lg:flex" : ""}`}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUpVariant}
+            className={`mt-6 flex justify-center ${!expanded && filteredCertificates.length === 4 ? "md:hidden lg:flex" : ""}`}>
             <button
               onClick={() => setExpanded((prev) => !prev)}
               className="group inline-flex items-center gap-2 rounded-sm border border-border px-5 py-2.5 font-mono text-xs text-muted-foreground transition-all hover:border-primary hover:text-foreground"
@@ -127,7 +134,7 @@ export function CertificatesSection({ index }: CertificatesSectionProps) {
                 <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:translate-y-0.5" />
               )}
             </button>
-          </div>
+          </motion.div>
         )}
       </div>
     </section>

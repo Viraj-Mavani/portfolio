@@ -5,7 +5,7 @@ import { Github, ExternalLink, ArrowRight } from "lucide-react"
 import { projects } from "@/lib/project-data"
 import Link from "next/link"
 import { useMode } from "@/hooks/use-mode"
-import { sectionVariants, cardVariantUp, fadeUpVariant } from "@/lib/animations"
+import { sectionVariants, fadeUpVariant, cardVariantRight, cardVariantLeft } from "@/lib/animations"
 
 interface ProjectsSectionProps {
   index: number
@@ -42,7 +42,7 @@ export function ProjectsSection({ index }: ProjectsSectionProps) {
           className="grid gap-4 md:grid-cols-2">
           {filteredProjects.slice(0, 4).map((project, index) => (
             <motion.div
-              variants={cardVariantUp}
+              variants={index % 2 === 0 ? cardVariantRight : cardVariantLeft}
               key={project.title}
               className="group relative flex flex-col gap-5 rounded-md border border-border bg-card px-4 py-6 md:p-4 md:py-6 lg:p-8 transition-colors hover:border-primary/30"
             >
