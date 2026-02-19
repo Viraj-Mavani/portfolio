@@ -1,4 +1,8 @@
+"use client"
+
+import { motion } from "framer-motion"
 import { Globe, Brain, BarChart3 } from "lucide-react"
+import { sectionVariants, cardVariantUp } from "@/lib/animations"
 
 interface ServicesStripProps {
   index: number
@@ -42,9 +46,15 @@ export function ServicesStrip({ index }: ServicesStripProps) {
 
         <h2 id="services-heading" className="sr-only">Services</h2>
 
-        <div className="grid gap-px border border-border bg-border md:grid-cols-3">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={sectionVariants}
+          className="grid gap-px border border-border bg-border md:grid-cols-3">
           {services.map((service) => (
-            <div
+            <motion.div
+              variants={cardVariantUp}
               key={service.title}
               className="group flex flex-col gap-6 bg-background p-4 lg:p-8 transition-colors hover:bg-card"
             >
@@ -78,9 +88,9 @@ export function ServicesStrip({ index }: ServicesStripProps) {
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

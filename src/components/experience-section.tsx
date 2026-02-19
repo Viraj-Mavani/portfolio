@@ -1,5 +1,9 @@
+"use client"
+
+import { motion } from "framer-motion"
 import { Briefcase, Calendar, MapPin } from "lucide-react"
 import { experiences } from "@/lib/bio-data"
+import { sectionVariants, cardVariantUp } from "@/lib/animations"
 
 interface ExperienceSectionProps {
   index: number
@@ -23,9 +27,15 @@ export function ExperienceSection({ index }: ExperienceSectionProps) {
 
         <h2 id="experience-heading" className="sr-only">Work Experience</h2>
 
-        <div className="flex flex-col gap-4">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={sectionVariants}
+          className="flex flex-col gap-4">
           {experiences.map((exp, index) => (
-            <div
+            <motion.div
+              variants={cardVariantUp}
               key={exp.role}
               className="group relative flex flex-col gap-6 rounded-md border border-border bg-card px-4 py-6 md:p-6 lg:p-8 transition-colors hover:border-primary/30"
             >
@@ -73,9 +83,9 @@ export function ExperienceSection({ index }: ExperienceSectionProps) {
               <span className="absolute right-8 top-8 font-mono text-[10px] text-muted-foreground/50">
                 {String(index + 1).padStart(2, "0")}
               </span>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

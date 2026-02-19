@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { motion } from "framer-motion"
 import { ArrowLeft, Github, ExternalLink, Image as ImageIcon, Video, ChevronDown } from "lucide-react"
 
 import { projects } from "@/lib/project-data"
@@ -14,6 +15,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { fadeUpVariant, sectionVariants, cardVariantRight } from "@/lib/animations"
 
 const modeFilters = [
   { id: "all", label: "All" },
@@ -46,7 +48,12 @@ export function ProjectsPageContent() {
         </Link>
 
         {/* Page header */}
-        <div className="mb-10 flex items-center gap-4">
+        <motion.div 
+          initial="hidden"
+          animate="visible"
+          variants={fadeUpVariant}
+          className="mb-10 flex items-center gap-4"
+        >
           <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
             all projects
           </span>
@@ -54,10 +61,15 @@ export function ProjectsPageContent() {
           <span className="font-mono text-[10px] tracking-widest text-muted-foreground">
             {String(filtered.length).padStart(2, "0")} results
           </span>
-        </div>
+        </motion.div>
 
         {/* Mode filter bar */}
-        <div className="mb-10 flex items-center gap-2">
+        <motion.div 
+          initial="hidden"
+          animate="visible"
+          variants={fadeUpVariant}
+          className="mb-10 flex items-center gap-2"
+        >
           <span className="mr-2 font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
             filter
           </span>
@@ -97,12 +109,19 @@ export function ProjectsPageContent() {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-        </div>
+        </motion.div>
 
         {/* Project list */}
-        <div className="flex flex-col gap-6">
+        <motion.div 
+          key={activeFilter}
+          initial="hidden"
+          animate="visible"
+          variants={sectionVariants}
+          className="flex flex-col gap-6"
+        >
           {filtered.map((project, index) => (
-            <article
+            <motion.article
+              variants={cardVariantRight}
               key={project.title}
               className="group rounded-md border border-border bg-card transition-colors hover:border-primary/30"
             >
@@ -196,9 +215,9 @@ export function ProjectsPageContent() {
                   ))}
                 </div>
               </div>
-            </article>
+            </motion.article>
           ))}
-        </div>
+        </motion.div>
 
         {filtered.length === 0 && (
           <div className="flex flex-col items-center gap-3 py-20">

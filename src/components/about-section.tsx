@@ -1,8 +1,10 @@
 "use client"
 
+import { motion } from "framer-motion"
 import { GraduationCap, MapPin, Calendar } from "lucide-react"
 import { aboutContent, education } from "@/lib/bio-data"
 import { useMode } from "@/hooks/use-mode"
+import { sectionVariants, cardVariantLeft, cardVariantRight } from "@/lib/animations"
 
 interface AboutSectionProps {
   index: number
@@ -28,9 +30,14 @@ export function AboutSection({ index }: AboutSectionProps) {
 
         <h2 id="about-heading" className="sr-only">About & Education</h2>
 
-        <div className="grid gap-8 lg:grid-cols-2 items-stretch">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={sectionVariants}
+          className="grid gap-8 lg:grid-cols-2 items-stretch">
           {/* About text */}
-          <div className="flex flex-col gap-6 rounded-md border border-border bg-card p-4 md:p-8 h-full">
+          <motion.div variants={cardVariantRight} className="flex flex-col gap-6 rounded-md border border-border bg-card p-4 md:p-8 h-full">
             <div className="flex items-start justify-between">
               <span className="font-mono text-[10px] tracking-widest text-primary uppercase">
                 {mode === "generalist" ? "about_me" : `about_${mode.replace("-", "_")}`}
@@ -49,12 +56,13 @@ export function AboutSection({ index }: AboutSectionProps) {
                 </p>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Education */}
-          <div className="flex flex-col gap-4">
+          <motion.div variants={sectionVariants} className="flex flex-col gap-4">
             {education.map((edu) => (
-              <div
+              <motion.div
+                variants={cardVariantLeft}
                 key={edu.degree}
                 className="group flex flex-col gap-4 rounded-md border border-border bg-card px-4 py-6 md:p-8 transition-colors hover:border-primary/30"
               >
@@ -90,10 +98,10 @@ export function AboutSection({ index }: AboutSectionProps) {
                     {edu.period}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   )

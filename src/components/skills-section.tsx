@@ -1,4 +1,8 @@
+"use client"
+
+import { motion } from "framer-motion"
 import { skillCategories } from "@/lib/bio-data"
+import { sectionVariants, cardVariantUp } from "@/lib/animations"
 
 interface SkillsSectionProps {
   index: number
@@ -22,9 +26,15 @@ export function SkillsSection({ index }: SkillsSectionProps) {
 
         <h2 id="skills-heading" className="sr-only">Skills & Technologies</h2>
 
-        <div className="grid gap-px border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={sectionVariants}
+          className="grid gap-px border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
           {skillCategories.map((category) => (
-            <div
+            <motion.div
+              variants={cardVariantUp}
               key={category.label}
               className="group flex flex-col gap-5 bg-background p-4 md:p-6 lg:p-8 transition-colors hover:bg-card"
             >
@@ -46,9 +56,9 @@ export function SkillsSection({ index }: SkillsSectionProps) {
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )
