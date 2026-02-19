@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { skillCategories } from "@/lib/bio-data"
-import { sectionVariants, cardVariant } from "@/lib/animations"
+import { sectionVariants, cardVariantUp } from "@/lib/animations"
 
 interface SkillsSectionProps {
   index: number
@@ -34,7 +34,7 @@ export function SkillsSection({ index }: SkillsSectionProps) {
           className="grid gap-px border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
           {skillCategories.map((category) => (
             <motion.div
-              variants={cardVariant}
+              variants={cardVariantUp}
               key={category.label}
               className="group flex flex-col gap-5 bg-background p-4 md:p-6 lg:p-8 transition-colors hover:bg-card"
             >

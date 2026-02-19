@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Globe, Brain, BarChart3 } from "lucide-react"
-import { sectionVariants, cardVariant } from "@/lib/animations"
+import { sectionVariants, cardVariantUp } from "@/lib/animations"
 
 interface ServicesStripProps {
   index: number
@@ -54,7 +54,7 @@ export function ServicesStrip({ index }: ServicesStripProps) {
           className="grid gap-px border border-border bg-border md:grid-cols-3">
           {services.map((service) => (
             <motion.div
-              variants={cardVariant}
+              variants={cardVariantUp}
               key={service.title}
               className="group flex flex-col gap-6 bg-background p-4 lg:p-8 transition-colors hover:bg-card"
             >

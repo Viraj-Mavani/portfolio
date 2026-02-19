@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import { GraduationCap, MapPin, Calendar } from "lucide-react"
 import { aboutContent, education } from "@/lib/bio-data"
 import { useMode } from "@/hooks/use-mode"
-import { fadeUpVariant, sectionVariants, cardVariant } from "@/lib/animations"
+import { fadeUpVariant, sectionVariants, cardVariantUp } from "@/lib/animations"
 
 interface AboutSectionProps {
   index: number
@@ -37,7 +37,7 @@ export function AboutSection({ index }: AboutSectionProps) {
           variants={sectionVariants}
           className="grid gap-8 lg:grid-cols-2 items-stretch">
           {/* About text */}
-          <motion.div variants={cardVariant} className="flex flex-col gap-6 rounded-md border border-border bg-card p-4 md:p-8 h-full">
+          <motion.div variants={cardVariantUp} className="flex flex-col gap-6 rounded-md border border-border bg-card p-4 md:p-8 h-full">
             <div className="flex items-start justify-between">
               <span className="font-mono text-[10px] tracking-widest text-primary uppercase">
                 {mode === "generalist" ? "about_me" : `about_${mode.replace("-", "_")}`}
@@ -62,7 +62,7 @@ export function AboutSection({ index }: AboutSectionProps) {
           <motion.div variants={sectionVariants} className="flex flex-col gap-4">
             {education.map((edu) => (
               <motion.div
-                variants={cardVariant}
+                variants={cardVariantUp}
                 key={edu.degree}
                 className="group flex flex-col gap-4 rounded-md border border-border bg-card px-4 py-6 md:p-8 transition-colors hover:border-primary/30"
               >

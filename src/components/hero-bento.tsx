@@ -8,7 +8,7 @@ import { TerminalCard } from "./terminal-card"
 import { TechTicker } from "./tech-ticker"
 import { useMode } from "@/hooks/use-mode"
 import { HeroContent } from "@/lib/bio-data"
-import { fadeUpVariant, sectionVariants, cardVariant } from "@/lib/animations"
+import { fadeUpVariant, sectionVariants, cardVariantUp } from "@/lib/animations"
 
 interface HeroBentoProps {
   index: number
@@ -40,7 +40,7 @@ export function HeroBento({ index }: HeroBentoProps) {
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:grid-rows-[1fr_auto]"
       >
         {/* Card 1 - Intro */}
-        <motion.div variants={cardVariant} className="sm:col-span-2 md:col-span-2 flex flex-col justify-between rounded-md border border-border bg-card p-6 md:p-8 lg:p-10">
+        <motion.div variants={cardVariantUp} className="sm:col-span-2 md:col-span-2 flex flex-col justify-between rounded-md border border-border bg-card p-6 md:p-8 lg:p-10">
           <div>
             <span className="mb-4 inline-block font-mono text-[10px] tracking-widest text-primary uppercase">
               {content.title}
@@ -120,12 +120,12 @@ export function HeroBento({ index }: HeroBentoProps) {
         </motion.div>
 
         {/* Card 2 - Terminal (Tall, Right, spans 2 rows) */}
-        <motion.div variants={cardVariant} className="sm:col-span-2 md:col-span-1 min-h-[425px] lg:min-h-[440px] md:row-span-2">
+        <motion.div variants={cardVariantUp} className="sm:col-span-2 md:col-span-1 min-h-[425px] lg:min-h-[440px] md:row-span-2">
           <TerminalCard />
         </motion.div>
 
         {/* Card 3 - Status (Small, Bottom Left) */}
-        <motion.div variants={cardVariant} className="flex items-center gap-4 rounded-md border border-border bg-card px-6 py-5">
+        <motion.div variants={cardVariantUp} className="flex items-center gap-4 rounded-md border border-border bg-card px-6 py-5">
           <div className="relative flex items-center justify-center">
             <span className="absolute h-3 w-3 animate-ping rounded-full bg-emerald-400/40" aria-hidden="true" />
             <span className="relative h-2.5 w-2.5 rounded-full bg-emerald-400" aria-hidden="true" />
@@ -141,7 +141,7 @@ export function HeroBento({ index }: HeroBentoProps) {
         </motion.div>
 
         {/* Card 4 - Tech Stack Ticker (Small, Bottom Center) */}
-        <motion.div variants={cardVariant} className="min-h-[72px]">
+        <motion.div variants={cardVariantUp} className="min-h-[72px]">
           <TechTicker />
         </motion.div>
       </motion.div>

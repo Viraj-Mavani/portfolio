@@ -15,7 +15,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { fadeUpVariant, sectionVariants, cardVariant } from "@/lib/animations"
+import { fadeUpVariant, sectionVariants, cardVariantUp } from "@/lib/animations"
 
 const modeFilters = [
   { id: "all", label: "All" },
@@ -120,7 +120,7 @@ export function ProjectsPageContent() {
         >
           {filtered.map((project, index) => (
             <motion.article
-              variants={cardVariant}
+              variants={cardVariantUp}
               key={project.title}
               className="group rounded-md border border-border bg-card transition-colors hover:border-primary/30"
             >

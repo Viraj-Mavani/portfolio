@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import { Briefcase, Calendar, MapPin } from "lucide-react"
 import { experiences } from "@/lib/bio-data"
-import { sectionVariants, cardVariant } from "@/lib/animations"
+import { sectionVariants, cardVariantUp } from "@/lib/animations"
 
 interface ExperienceSectionProps {
   index: number
@@ -35,7 +35,7 @@ export function ExperienceSection({ index }: ExperienceSectionProps) {
           className="flex flex-col gap-4">
           {experiences.map((exp, index) => (
             <motion.div
-              variants={cardVariant}
+              variants={cardVariantUp}
               key={exp.role}
               className="group relative flex flex-col gap-6 rounded-md border border-border bg-card px-4 py-6 md:p-6 lg:p-8 transition-colors hover:border-primary/30"
             >

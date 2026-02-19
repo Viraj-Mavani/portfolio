@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import { Award, ExternalLink, ChevronDown, ChevronUp } from "lucide-react"
 import { certificates } from "@/lib/bio-data"
 import { useMode } from "@/hooks/use-mode"
-import { sectionVariants, cardVariant } from "@/lib/animations"
+import { sectionVariants, cardVariantUp } from "@/lib/animations"
 
 const INITIAL_COUNT = 4
 
@@ -52,7 +52,7 @@ export function CertificatesSection({ index }: CertificatesSectionProps) {
           className="grid gap-px border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
           {visible.map((cert, index) => (
             <motion.div
-              variants={cardVariant}
+              variants={cardVariantUp}
               key={cert.title}
               className={`group flex flex-col gap-2 lg:gap-3 bg-background p-4 md:p-6 transition-colors hover:bg-card ${!expanded && index === 3 ? "lg:hidden" : ""}`}
             >
