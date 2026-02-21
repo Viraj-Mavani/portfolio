@@ -95,7 +95,7 @@ export const projects: Project[] = [
   {
     title: "Context-Aware Portfolio Platform",
     brief:
-      "Architected a high-performance, polymorphic portfolio platform from scratch using Next.js 14 and TypeScript. The system features a custom state-driven \"Mode Switcher\" that recontextualizes the entire UI—from hero text to project filtering—based on a viewer's specific interest. I utilized Gemini Stitch for UI design inspiration, ensuring a modern, developer-centric aesthetic with 99.9% performance scores.",
+      "Architected a high-performance, polymorphic portfolio platform from scratch using Next.js 14 and TypeScript. The system features a custom state-driven \"Mode Switcher\" that recontextualizes the entire UI—from hero text to project filtering—based on a viewer's interest. I utilized Gemini Stitch for UI design inspiration, ensuring a modern, developer-centric aesthetic with 99.9% performance scores.",
     description: [
       "This project represents a shift away from static personal websites toward an interactive, context-aware experience. I built this platform from scratch using Next.js 14 and Tailwind CSS to solve a specific problem: effectively showcasing a multi-disciplinary background in Full-Stack development, AI research, and Data Engineering without overwhelming the viewer. The core innovation is the custom-engineered \"Mode Switcher\", a centralized state management system that dynamically swaps the content and filtering of the entire platform—including the Hero section, About bio, Experience, and Projects—to match the recruiter's specific domain of interest.",
       "For the user interface, I drew design inspiration from Gemini Stitch, focusing on a clean, \"Obsidian-style\" terminal aesthetic that emphasizes technical precision. The frontend utilizes shadcn/ui components, customized with complex Framer Motion animations for smooth, hardware-accelerated transitions between modes.",
@@ -104,6 +104,7 @@ export const projects: Project[] = [
     tags: ["Next.js 14", "TypeScript", "Tailwind CSS", "Framer Motion", "Context API", "Lucide React", "shadcn/ui"],
     mode: ["fullstack"],
     live: "https://virajmavani.dev",
+    github: "https://github.com/Viraj-Mavani/portfolio",
   },
   {
     title: "E-commerce Platform",
@@ -120,7 +121,7 @@ export const projects: Project[] = [
   {
     title: "Full-Stack Amazon Clone",
     brief:
-      "Developed a comprehensive cross-platform e-commerce application using Flutter, Node.js, and MongoDB. The system replicates core Amazon functionalities, including secure user authentication and integrated mobile payments via Google Pay. It also features a dedicated seller dashboard for tracking inventory and real-time sales statistics, demonstrating a complete full-stack mobile commerce solution.",
+      "Developed a comprehensive cross-platform e-commerce application using Flutter, Node.js & MongoDB. The system replicates core Amazon functionalities, including secure user authentication and integrated mobile payments via Google Pay. It also features a dedicated seller dashboard for tracking inventory and real-time sales statistics, demonstrating a complete full-stack mobile commerce solution.",
     description: [
       "Created as a final year capstone project for my Bachelor’s degree at Atmiya University, this Full-Stack Amazon Clone was designed to demonstrate proficiency in cross-platform mobile development and scalable backend architecture. The primary objective was to build a functional, end-to-end e-commerce ecosystem that supports two distinct user personas: consumers and sellers. This project allowed me to explore the complexities of state management, API integration, and database schema design in a real-world context.",
       "The technical architecture utilizes the Flutter framework for the frontend, providing a high-performance UI that works seamlessly across Android and iOS from a single codebase. The backend is powered by a RESTful API built with Node.js and Express, which handles business logic and communicates with a MongoDB database. I implemented JWT-based authentication to secure user accounts and developed a modular data structure to manage product listings, user profiles, and order histories efficiently.",
