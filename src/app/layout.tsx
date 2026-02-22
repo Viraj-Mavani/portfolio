@@ -1,6 +1,7 @@
 import React from "react"
 import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from "@/components/theme-provider"
 import { ModeProvider } from "@/hooks/use-mode"
 import { SITE_METADATA } from "@/lib/site-metadata"
@@ -43,6 +44,7 @@ export default function RootLayout({
             </ScrollArea>
           </ModeProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
