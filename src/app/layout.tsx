@@ -5,6 +5,8 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { ModeProvider } from "@/hooks/use-mode"
 import { SITE_METADATA } from "@/lib/site-metadata"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import './globals.css'
 
@@ -30,20 +32,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrains.variable}`} suppressHydrationWarning>
-      <body className="font-sans antialiased">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <ModeProvider>
-            <ScrollArea className="h-screen w-full">
-              {children}
-            </ScrollArea>
-          </ModeProvider>
-        </ThemeProvider>
-      </body>
-    </html>
-  )
+			<body className="font-sans antialiased">
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="dark"
+					enableSystem
+					disableTransitionOnChange
+				>
+					<ModeProvider>
+						<ScrollArea className="h-screen w-full">
+							{children}
+						</ScrollArea>
+					</ModeProvider>
+				</ThemeProvider>
+				<SpeedInsights />
+				<Analytics />
+			</body>
+		</html>
+  );
 }
