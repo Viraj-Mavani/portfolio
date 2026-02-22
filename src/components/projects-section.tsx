@@ -85,7 +85,9 @@ export function ProjectsSection({ index }: ProjectsSectionProps) {
               variants={index % 2 === 0 ? cardVariantRight : cardVariantLeft}
               key={project.title}
               onClick={() => handleProjectClick(project)}
-              className="group relative flex flex-col gap-5 rounded-md border border-border bg-card px-4 py-6 md:p-4 md:py-6 lg:p-8 transition-colors hover:border-primary/30"
+              whileHover={{ y: -6 }}
+              transition={{ duration: 0.2 }}
+              className="group relative flex flex-col gap-5 rounded-md border border-border bg-card px-4 py-6 md:p-4 md:py-6 lg:p-8 transition-all hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 cursor-pointer"
             >
               {/* Header */}
               <div className="flex items-start justify-between">
@@ -169,32 +171,46 @@ export function ProjectsSection({ index }: ProjectsSectionProps) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
                 onClick={handleCloseModal}
-                className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm"
+                className="fixed inset-0 z-50 bg-background/90 backdrop-blur-md"
               />
               <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: "-45%", x: "-50%" }}
+                initial={{ opacity: 0, scale: 0.9, y: "-45%", x: "-50%" }}
                 animate={{ opacity: 1, scale: 1, y: "-50%", x: "-50%" }}
-                exit={{ opacity: 0, scale: 0.95, y: "-45%", x: "-50%" }}
-                transition={{ duration: 0.2 }}
-                className="fixed left-1/2 top-1/2 z-50 w-[95%] h-[85%] md:w-[85%] md:h-[85%] lg:w-[75%] lg:h-[85%] max-w-5xl -translate-y-1/2 rounded-lg border border-border bg-card shadow-2xl overflow-hidden flex flex-col"
+                exit={{ opacity: 0, scale: 0.9, y: "-45%", x: "-50%" }}
+                transition={{ type: "spring", duration: 0.5, bounce: 0.1 }}
+                className="fixed left-1/2 top-1/2 z-50 w-[95%] h-[90%] md:w-[85%] md:h-[85%] lg:w-[75%] lg:h-[85%] max-w-5xl -translate-y-1/2 overflow-hidden flex flex-col shadow-2xl shadow-black/40"
               >
-                  {/* Header / Close */}
-                  <div className="flex items-center justify-between border-b border-border px-6 py-4 bg-card/50 backdrop-blur-md sticky top-0 z-10">
-                      <h2 className="font-mono text-sm md:text-lg font-medium uppercase tracking-wider text-foreground">
-                          {selectedProject.title}
-                      </h2>
-                      <button
-                          onClick={() => setSelectedProject(null)}
-                          className="rounded-sm p-1 text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
-                      >
-                          <X className="h-5 w-5" />
-                      </button>
-                  </div>
+                  {/* Glass morphism container */}
+                  <div className="relative w-full h-full bg-card/95 backdrop-blur-xl rounded-xl overflow-hidden">
+                      {/* Subtle gradient border effect */}
+                      <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/20 via-transparent to-primary/10 p-[1px]">
+                          <div className="w-full h-full rounded-xl bg-card" />
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="relative w-full h-full flex flex-col">
+                          {/* Header / Close */}
+                          <div className="flex items-center justify-between px-6 py-5 bg-gradient-to-b from-background/50 to-transparent backdrop-blur-sm">
+                              <h2 className="font-mono text-sm md:text-lg font-medium uppercase tracking-wider text-foreground">
+                                  {selectedProject.title}
+                              </h2>
+                              <motion.button
+                                  whileHover={{ scale: 1.1, rotate: 90 }}
+                                  whileTap={{ scale: 0.9 }}
+                                  transition={{ duration: 0.2 }}
+                                  onClick={() => setSelectedProject(null)}
+                                  className="relative group rounded-full p-2 text-muted-foreground transition-colors"
+                              >
+                                  <div className="absolute inset-0 rounded-full bg-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
+                                  <X className="h-5 w-5 relative z-10 group-hover:text-foreground transition-colors" />
+                              </motion.button>
+                          </div>
 
-                  {/* Scrollable Content */}
-                  <ScrollArea className="flex-1">
-                    <div className="p-6 md:p-8">
+                          {/* Scrollable Content */}
+                          <ScrollArea className="flex-1">
+                              <div className="p-6 md:p-8">
                       {/* Top Actions */}
                       <div className="mb-8 flex flex-wrap gap-4">
                           {selectedProject.github && (
@@ -271,10 +287,12 @@ export function ProjectsSection({ index }: ProjectsSectionProps) {
                                       </div>
                                   )}
                               </div>
-                          </div>
-                      )}
-                    </div>
-                  </ScrollArea>
+                          )}
+                      </div>
+                              </div>
+                          </ScrollArea>
+                      </div>
+                  </div>
               </motion.div>
             </>
           )}
