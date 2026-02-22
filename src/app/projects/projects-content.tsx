@@ -15,6 +15,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { fadeUpVariant, sectionVariants, cardVariantRight, cardVariantLeft } from "@/lib/animations"
 
 const modeFilters = [
@@ -263,7 +264,8 @@ export function ProjectsPageContent() {
                 </div>
 
                 {/* Scrollable Content */}
-                <div className="flex-1 overflow-y-auto p-6 md:p-8">
+                <ScrollArea className="flex-1">
+                  <div className="p-6 md:p-8">
                     {/* Top Actions */}
                     <div className="mb-8 flex flex-wrap gap-4">
                         {selectedProject.github && (
@@ -342,7 +344,8 @@ export function ProjectsPageContent() {
                             </div>
                         </div>
                     )}
-                </div>
+                  </div>
+                </ScrollArea>
             </motion.div>
           </>
         )}

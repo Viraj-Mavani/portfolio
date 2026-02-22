@@ -7,6 +7,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { useMode } from "@/hooks/use-mode"
 import { sectionVariants, fadeUpVariant, cardVariantRight, cardVariantLeft } from "@/lib/animations"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { useEffect, useState } from "react"
 
 interface ProjectsSectionProps {
@@ -44,12 +45,16 @@ export function ProjectsSection({ index }: ProjectsSectionProps) {
   // Lock body scroll when modal is open
   useEffect(() => {
     if (selectedProject) {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
+      document.body.style.paddingRight = `${scrollbarWidth}px`
       document.body.style.overflow = "hidden"
     } else {
       document.body.style.overflow = "unset"
+      document.body.style.paddingRight = "0px"
     }
     return () => {
       document.body.style.overflow = "unset"
+      document.body.style.paddingRight = "0px"
     }
   }, [selectedProject])
 
@@ -188,7 +193,8 @@ export function ProjectsSection({ index }: ProjectsSectionProps) {
                   </div>
 
                   {/* Scrollable Content */}
-                  <div className="flex-1 overflow-y-auto p-6 md:p-8">
+                  <ScrollArea className="flex-1">
+                    <div className="p-6 md:p-8">
                       {/* Top Actions */}
                       <div className="mb-8 flex flex-wrap gap-4">
                           {selectedProject.github && (
@@ -267,7 +273,8 @@ export function ProjectsSection({ index }: ProjectsSectionProps) {
                               </div>
                           </div>
                       )}
-                  </div>
+                    </div>
+                  </ScrollArea>
               </motion.div>
             </>
           )}

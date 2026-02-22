@@ -4,6 +4,7 @@ import { Inter, JetBrains_Mono } from 'next/font/google'
 import { ThemeProvider } from "@/components/theme-provider"
 import { ModeProvider } from "@/hooks/use-mode"
 import { SITE_METADATA } from "@/lib/site-metadata"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 import './globals.css'
 
@@ -37,7 +38,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <ModeProvider>
-            {children}
+            <ScrollArea className="h-screen w-full">
+              {children}
+            </ScrollArea>
           </ModeProvider>
         </ThemeProvider>
       </body>
