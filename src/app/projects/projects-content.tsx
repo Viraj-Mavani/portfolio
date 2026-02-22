@@ -2,9 +2,8 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import Image from "next/image"
-import { motion } from "framer-motion"
-import { ArrowLeft, Github, ExternalLink, Image as ImageIcon, Video, ChevronDown } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import { ArrowLeft, ChevronDown } from "lucide-react"
 
 import { projects } from "@/lib/project-data"
 import { TopNav } from "@/components/top-nav"
@@ -15,7 +14,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { fadeUpVariant, sectionVariants, cardVariantRight } from "@/lib/animations"
+import { fadeUpVariant, sectionVariants, cardVariantRight, cardVariantLeft } from "@/lib/animations"
+import { useProjectModal } from "@/hooks/use-project-modal"
+import { ProjectCard } from "@/components/project-card"
+import { ProjectDetailModal } from "@/components/project-detail-modal"
 
 const modeFilters = [
   { id: "all", label: "All" },
@@ -27,6 +29,7 @@ const modeFilters = [
 
 export function ProjectsPageContent() {
   const [activeFilter, setActiveFilter] = useState("all")
+  const { selectedProject, openProject, closeProject } = useProjectModal()
 
   const filtered =
     activeFilter === "all"
@@ -111,111 +114,22 @@ export function ProjectsPageContent() {
           </div>
         </motion.div>
 
-        {/* Project list */}
+        {/* Project list (Grid) */}
         <motion.div 
           key={activeFilter}
           initial="hidden"
           animate="visible"
           variants={sectionVariants}
-          className="flex flex-col gap-6"
-        >
+          className="grid gap-4 md:grid-cols-2">
           {filtered.map((project, index) => (
-            <motion.article
-              variants={cardVariantRight}
+            <ProjectCard
               key={project.title}
-              className="group rounded-md border border-border bg-card transition-colors hover:border-primary/30"
-            >
-              <div className="p-4 md:p-8 lg:p-12">
-                {/* Top row */}
-                <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                  <div className="flex flex-col gap-1">
-                    <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
-                      project_{String(index + 1).padStart(2, "0")}
-                    </span>
-                    <h2 className="text-md md:text-xl font-medium text-foreground">
-                      {project.title}
-                    </h2>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${project.title} GitHub`}
-                        className="flex h-9 w-9 items-center justify-center rounded-sm border border-border text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
-                      >
-                        <Github className="h-4 w-4" strokeWidth={1.5} />
-                      </a>
-                    )}
-                    {project.live && (
-                      <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${project.title} live demo`}
-                        className="flex h-9 w-9 items-center justify-center rounded-sm border border-border text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
-                      >
-                        <ExternalLink className="h-4 w-4" strokeWidth={1.5} />
-                      </a>
-                    )}
-                  </div>
-                </div>
-
-                {/* Description */}
-                <div className="mb-6 flex max-w-5xl flex-col gap-4">
-                  {(Array.isArray(project.description) ? project.description : [project.description]).map((paragraph, i) => (
-                    <p key={i} className="text-xs md:text-sm leading-relaxed text-muted-foreground text-justify">{paragraph}</p>
-                  ))}
-                </div>
-
-                {/* Media placeholders */}
-                {(project.images || project.video) && (
-                  <div className="mb-6 flex flex-wrap gap-3">
-                    {project.images?.map((img, i) => (
-                      <div
-                        key={`${project.title}-img-${i}`}
-                        className="flex h-40 w-64 items-center justify-center rounded-sm border border-border bg-secondary"
-                      >
-                        <Image
-                          src={img}
-                          alt={`${project.title} screenshot ${i + 1}`}
-                          width={256}
-                          height={160}
-                          className="h-full w-full object-cover"
-                        />
-                      </div>
-                    ))}
-                    {project.video && (
-                      <div className="flex h-40 w-64 items-center justify-center rounded-sm border border-border bg-secondary">
-                        <Video className="h-6 w-6 text-muted-foreground" strokeWidth={1} />
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/* Tags + Modes */}
-                <div className="flex flex-wrap items-center gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="inline-flex items-center rounded-sm border border-border px-2 py-0.5 font-mono text-[10px] text-muted-foreground transition-colors group-hover:border-primary/20 group-hover:text-foreground"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                  <span className="mx-1 h-3 w-px bg-border" aria-hidden="true" />
-                  {project.mode.map((m) => (
-                    <span
-                      key={m}
-                      className="rounded-sm bg-primary/10 px-2 py-0.5 font-mono text-[10px] text-primary"
-                    >
-                      {m}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.article>
+              project={project}
+              index={index}
+              onClick={openProject}
+              variants={index % 2 === 0 ? cardVariantRight : cardVariantLeft}
+              limitTags={true}
+            />
           ))}
         </motion.div>
 
@@ -235,6 +149,13 @@ export function ProjectsPageContent() {
       </main>
 
       <Footer />
+
+      {/* Project Detail Overlay */}
+      <AnimatePresence>
+        {selectedProject && (
+          <ProjectDetailModal project={selectedProject} onClose={closeProject} />
+        )}
+      </AnimatePresence>
     </div>
   )
 }
