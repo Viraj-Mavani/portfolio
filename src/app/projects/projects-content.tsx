@@ -157,8 +157,9 @@ export function ProjectsPageContent() {
               variants={index % 2 === 0 ? cardVariantRight : cardVariantLeft}
               key={project.title}
               onClick={() => handleProjectClick(project)}
-              // whileHover={{ y: -4 }}
-              className="group relative flex flex-col gap-5 rounded-md border border-border bg-card px-4 py-6 md:p-4 md:py-6 lg:p-8 transition-all hover:border-primary/30 hover:shadow-md cursor-pointer"
+              // whileHover={{ y: -6 }}
+              transition={{ duration: 0.2 }}
+              className="group relative flex flex-col gap-5 rounded-md border border-border bg-card px-4 py-6 md:p-4 md:py-6 lg:p-8 transition-all hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 cursor-pointer"
             >
               {/* Header */}
               <div className="flex items-start justify-between">
@@ -240,112 +241,128 @@ export function ProjectsPageContent() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
               onClick={handleCloseModal}
-              className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm"
+              className="fixed inset-0 z-50 bg-background/90 backdrop-blur-md"
             />
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: "-45%", x: "-50%" }}
+              initial={{ opacity: 0, scale: 0.9, y: "-45%", x: "-50%" }}
               animate={{ opacity: 1, scale: 1, y: "-50%", x: "-50%" }}
-              exit={{ opacity: 0, scale: 0.95, y: "-45%", x: "-50%" }}
-              transition={{ duration: 0.2 }}
-              className="fixed left-1/2 top-1/2 z-50 w-[95%] h-[85%] md:w-[85%] md:h-[85%] lg:w-[75%] lg:h-[85%] max-w-5xl -translate-y-1/2 rounded-lg border border-border bg-card shadow-2xl overflow-hidden flex flex-col"
+              exit={{ opacity: 0, scale: 0.9, y: "-45%", x: "-50%" }}
+              transition={{ type: "spring", duration: 0.5, bounce: 0.1 }}
+              className="fixed left-1/2 top-1/2 z-50 w-[95%] h-[90%] md:w-[85%] md:h-[85%] lg:w-[75%] lg:h-[85%] max-w-5xl -translate-y-1/2 overflow-hidden flex flex-col shadow-2xl shadow-black/40"
             >
-                {/* Header / Close */}
-                <div className="flex items-center justify-between border-b border-border px-6 py-4 bg-card/50 backdrop-blur-md sticky top-0 z-10">
-                    <h2 className="font-mono text-sm md:text-lg font-medium uppercase tracking-wider text-foreground">
-                        {selectedProject.title}
-                    </h2>
-                    <button
-                        onClick={() => setSelectedProject(null)}
-                        className="rounded-sm p-1 text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
-                    >
-                        <X className="h-5 w-5" />
-                    </button>
-                </div>
-
-                {/* Scrollable Content */}
-                <ScrollArea className="flex-1">
-                  <div className="p-6 md:p-8">
-                    {/* Top Actions */}
-                    <div className="mb-8 flex flex-wrap gap-4">
-                        {selectedProject.github && (
-                            <a
-                                href={selectedProject.github}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 rounded-sm border border-border px-4 py-2 font-mono text-xs text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
-                            >
-                                <Github className="h-4 w-4" />
-                                View Source
-                            </a>
-                        )}
-                        {selectedProject.live && (
-                            <a
-                                href={selectedProject.live}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 rounded-sm border border-border px-4 py-2 font-mono text-xs text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
-                            >
-                                <ExternalLink className="h-4 w-4" />
-                                Live Demo
-                            </a>
-                        )}
+                {/* Glass morphism container */}
+                <div className="relative w-full h-full bg-card/95 backdrop-blur-xl rounded-xl overflow-hidden">
+                    {/* Subtle gradient border effect */}
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/20 via-transparent to-primary/10 p-[1px]">
+                        <div className="w-full h-full rounded-xl bg-card" />
                     </div>
-
-                    {/* Description */}
-                    <div className="mb-8 flex flex-col gap-4">
-                        <h3 className="font-mono text-xs md:text-sm uppercase tracking-widest text-primary">Description</h3>
-                        {(Array.isArray(selectedProject.description) ? selectedProject.description : [selectedProject.description]).map((paragraph, i) => (
-                            <p key={i} className="text-xs md:text-sm leading-relaxed text-muted-foreground text-justify">
-                                {paragraph}
-                            </p>
-                        ))}
-                    </div>
-
-                    {/* Tech Stack */}
-                    <div className="mb-8">
-                        <h3 className="mb-4 font-mono text-xs md:text-sm uppercase tracking-widest text-primary">Technologies</h3>
-                        <div className="flex flex-wrap gap-2">
-                            {selectedProject.tags.map((tag) => (
-                                <span
-                                    key={tag}
-                                    className="inline-flex items-center rounded-sm border border-border px-2.5 py-1 font-mono text-[10px] text-muted-foreground"
-                                >
-                                    {tag}
-                                </span>
-                            ))}
+                    
+                    {/* Content */}
+                    <div className="relative w-full h-full flex flex-col">
+                        {/* Header / Close */}
+                        <div className="flex items-center justify-between px-6 py-5 bg-gradient-to-b from-background/50 to-transparent backdrop-blur-sm">
+                            <h2 className="font-mono text-sm md:text-lg font-medium uppercase tracking-wider text-foreground">
+                                {selectedProject.title}
+                            </h2>
+                            <motion.button
+                                whileHover={{ scale: 1.1, rotate: 90 }}
+                                whileTap={{ scale: 0.9 }}
+                                transition={{ duration: 0.2 }}
+                                onClick={() => setSelectedProject(null)}
+                                className="relative group rounded-full p-2 text-muted-foreground transition-colors"
+                            >
+                                <div className="absolute inset-0 rounded-full bg-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <X className="h-5 w-5 relative z-10 group-hover:text-foreground transition-colors" />
+                            </motion.button>
                         </div>
-                    </div>
 
-                    {/* Media */}
-                    {(selectedProject.images || selectedProject.video) && (
-                        <div>
-                            <h3 className="mb-4 font-mono text-xs md:text-sm uppercase tracking-widest text-primary">Gallery</h3>
-                            <div className="grid gap-4 sm:grid-cols-2">
-                                {selectedProject.images?.map((img, i) => (
-                                    <div
-                                        key={`${selectedProject.title}-img-${i}`}
-                                        className="relative aspect-video overflow-hidden rounded-sm border border-border bg-secondary"
-                                    >
-                                        <Image
-                                            src={img}
-                                            alt={`${selectedProject.title} screenshot ${i + 1}`}
-                                            fill
-                                            className="object-cover"
-                                        />
-                                    </div>
-                                ))}
-                                {selectedProject.video && (
-                                    <div className="relative aspect-video flex items-center justify-center rounded-sm border border-border bg-secondary">
-                                        <Video className="h-8 w-8 text-muted-foreground" strokeWidth={1} />
-                                        <span className="sr-only">Video demo available</span>
-                                    </div>
-                                )}
+                        {/* Scrollable Content */}
+                        <ScrollArea className="flex-1">
+                            <div className="p-6 md:p-8">
+                              {/* Top Actions */}
+                              <div className="mb-8 flex flex-wrap gap-4">
+                                  {selectedProject.github && (
+                                      <a
+                                          href={selectedProject.github}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="inline-flex items-center gap-2 rounded-sm border border-border px-4 py-2 font-mono text-xs text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
+                                      >
+                                          <Github className="h-4 w-4" />
+                                          View Source
+                                      </a>
+                                  )}
+                                  {selectedProject.live && (
+                                      <a
+                                          href={selectedProject.live}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="inline-flex items-center gap-2 rounded-sm border border-border px-4 py-2 font-mono text-xs text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
+                                      >
+                                          <ExternalLink className="h-4 w-4" />
+                                          Live Demo
+                                      </a>
+                                  )}
+                              </div>
+
+                              {/* Description */}
+                              <div className="mb-8 flex flex-col gap-4">
+                                  <h3 className="font-mono text-xs md:text-sm uppercase tracking-widest text-primary">Description</h3>
+                                  {(Array.isArray(selectedProject.description) ? selectedProject.description : [selectedProject.description]).map((paragraph, i) => (
+                                      <p key={i} className="text-xs md:text-sm leading-relaxed text-muted-foreground text-justify">
+                                          {paragraph}
+                                      </p>
+                                  ))}
+                              </div>
+
+                              {/* Tech Stack */}
+                              <div className="mb-8">
+                                  <h3 className="mb-4 font-mono text-xs md:text-sm uppercase tracking-widest text-primary">Technologies</h3>
+                                  <div className="flex flex-wrap gap-2">
+                                      {selectedProject.tags.map((tag) => (
+                                          <span
+                                              key={tag}
+                                              className="inline-flex items-center rounded-sm border border-border px-2.5 py-1 font-mono text-[10px] text-muted-foreground"
+                                          >
+                                              {tag}
+                                          </span>
+                                      ))}
+                                  </div>
+                              </div>
+
+                              {/* Media */}
+                              {(selectedProject.images || selectedProject.video) && (
+                                  <div>
+                                      <h3 className="mb-4 font-mono text-xs md:text-sm uppercase tracking-widest text-primary">Gallery</h3>
+                                      <div className="grid gap-4 sm:grid-cols-2">
+                                          {selectedProject.images?.map((img, i) => (
+                                              <div
+                                                  key={`${selectedProject.title}-img-${i}`}
+                                                  className="relative aspect-video overflow-hidden rounded-sm border border-border bg-secondary"
+                                              >
+                                                  <Image
+                                                      src={img}
+                                                      alt={`${selectedProject.title} screenshot ${i + 1}`}
+                                                      fill
+                                                      className="object-cover"
+                                                  />
+                                              </div>
+                                          ))}
+                                          {selectedProject.video && (
+                                              <div className="relative aspect-video flex items-center justify-center rounded-sm border border-border bg-secondary">
+                                                  <Video className="h-8 w-8 text-muted-foreground" strokeWidth={1} />
+                                                  <span className="sr-only">Video demo available</span>
+                                              </div>
+                                          )}
+                                      </div>
+                                  </div>
+                              )}
                             </div>
-                        </div>
-                    )}
-                  </div>
-                </ScrollArea>
+                        </ScrollArea>
+                    </div>
+                </div>
             </motion.div>
           </>
         )}
