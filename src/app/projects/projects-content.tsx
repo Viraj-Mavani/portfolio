@@ -34,6 +34,26 @@ export function ProjectsPageContent() {
       ? projects
       : projects.filter((p) => p.mode.includes(activeFilter))
 
+  // Handle back button to close modal
+  useEffect(() => {
+    const handlePopState = () => {
+      if (selectedProject) {
+        setSelectedProject(null)
+      }
+    }
+    window.addEventListener("popstate", handlePopState)
+    return () => window.removeEventListener("popstate", handlePopState)
+  }, [selectedProject])
+
+  const handleProjectClick = (project: Project) => {
+    window.history.pushState(null, "", window.location.href)
+    setSelectedProject(project)
+  }
+
+  const handleCloseModal = () => {
+    window.history.back()
+  }
+
   // Lock body scroll when modal is open
   useEffect(() => {
     if (selectedProject) {
@@ -130,13 +150,12 @@ export function ProjectsPageContent() {
           initial="hidden"
           animate="visible"
           variants={sectionVariants}
-          className="grid gap-4 md:grid-cols-2"
-        >
+          className="grid gap-4 md:grid-cols-2">
           {filtered.map((project, index) => (
             <motion.div
               variants={index % 2 === 0 ? cardVariantRight : cardVariantLeft}
               key={project.title}
-              onClick={() => setSelectedProject(project)}
+              onClick={() => handleProjectClick(project)}
               // whileHover={{ y: -4 }}
               className="group relative flex flex-col gap-5 rounded-md border border-border bg-card px-4 py-6 md:p-4 md:py-6 lg:p-8 transition-all hover:border-primary/30 hover:shadow-md cursor-pointer"
             >
@@ -161,7 +180,7 @@ export function ProjectsPageContent() {
                   )}
                   {project.live && (
                     <div
-                      aria-label={`${project.title} live`}
+                      aria-label={`${project.title} live demo`}
                       className="flex h-8 w-8 items-center justify-center rounded-sm border border-border text-muted-foreground transition-colors group-hover:border-primary group-hover:text-foreground"
                     >
                       <ExternalLink className="h-4 w-4" strokeWidth={1.5} />
@@ -220,7 +239,7 @@ export function ProjectsPageContent() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setSelectedProject(null)}
+              onClick={handleCloseModal}
               className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm"
             />
             <motion.div
@@ -266,7 +285,7 @@ export function ProjectsPageContent() {
                                 className="inline-flex items-center gap-2 rounded-sm border border-border px-4 py-2 font-mono text-xs text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
                             >
                                 <ExternalLink className="h-4 w-4" />
-                                Live
+                                Live Demo
                             </a>
                         )}
                     </div>
