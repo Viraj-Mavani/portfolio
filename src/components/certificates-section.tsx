@@ -1,11 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { motion } from "framer-motion"
 import { Award, ExternalLink, ChevronDown, ChevronUp } from "lucide-react"
 import { certificates } from "@/lib/bio-data"
 import { useMode } from "@/hooks/use-mode"
 import { sectionVariants, cardVariantUp, fadeUpVariant } from "@/lib/animations"
+import { useIsMobile, useAutoHighlight } from "@/hooks/use-mobile-view-effect"
 
 const INITIAL_COUNT = 4
 
@@ -14,8 +15,11 @@ interface CertificatesSectionProps {
 }
 
 export function CertificatesSection({ index }: CertificatesSectionProps) {
+  const isMobile = useIsMobile()
   const { mode } = useMode()
   const [expanded, setExpanded] = useState(false)
+  const buttonRef = useRef<HTMLButtonElement>(null)
+  const isButtonActive = useAutoHighlight(buttonRef, isMobile)
 
   // Filter logic
   const filteredCertificates = certificates.filter((cert) => 
@@ -52,53 +56,7 @@ export function CertificatesSection({ index }: CertificatesSectionProps) {
           variants={sectionVariants}
           className="grid gap-px border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
           {visible.map((cert, index) => (
-            <motion.div
-              variants={cardVariantUp}
-              key={cert.title}
-              className={`group flex flex-col gap-2 lg:gap-3 bg-background p-4 md:p-6 transition-colors hover:bg-card ${!expanded && index === 3 ? "lg:hidden" : ""}`}
-            >
-              <div className="flex items-start justify-between">
-                <div className="flex h-8 w-8 items-center justify-center rounded-sm border border-border bg-secondary text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                  <Award className="h-3.5 w-3.5" strokeWidth={1.5} />
-                </div>
-                {cert.credentialUrl && (
-                  <a
-                    href={cert.credentialUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`View ${cert.title} credential`}
-                    className="flex h-6 w-6 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    <ExternalLink className="h-3 w-3" strokeWidth={1.5} />
-                  </a>
-                )}
-              </div>
-
-              <div className="flex flex-col gap-0.5">
-                <h3 className="text-sm font-medium leading-tight text-foreground">
-                  {cert.title}
-                </h3>
-                <span className="font-mono text-xs text-primary">
-                  {cert.issuer}
-                </span>
-              </div>
-
-              <div className="mt-auto flex items-center justify-between">
-                <span className="font-mono text-[10px] text-muted-foreground">
-                  {cert.date}
-                </span>
-                <div className="flex gap-1">
-                  {cert.modes.map((mode) => (
-                    <span
-                      key={mode}
-                      className="rounded-sm border border-border px-1.5 py-0.5 font-mono text-[9px] text-muted-foreground"
-                    >
-                      {mode}
-                    </span>
-                  ))}
-                </div>
-              </div>
-             </motion.div>
+            <CertificateCard key={cert.title} cert={cert} index={index} expanded={expanded} isMobile={isMobile} />
           ))}
           {Array.from({ length: emptySlots }).map((_, i) => {
             const showOnMd = visible.length % 2 !== 0 && i === 0
@@ -122,21 +80,79 @@ export function CertificatesSection({ index }: CertificatesSectionProps) {
             variants={fadeUpVariant}
             className={`mt-6 flex justify-center ${!expanded && filteredCertificates.length === 4 ? "md:hidden lg:flex" : ""}`}>
             <button
+              ref={buttonRef}
               onClick={() => setExpanded((prev) => !prev)}
-              className="group inline-flex items-center gap-2 rounded-sm border border-border px-5 py-2.5 font-mono text-xs text-muted-foreground transition-all hover:border-primary hover:text-foreground"
+              className={`group inline-flex items-center gap-2 rounded-sm border px-5 py-2.5 font-mono text-xs transition-all duration-300 lg:hover:border-primary lg:hover:text-foreground ${isButtonActive ? "border-primary text-foreground" : "border-border text-muted-foreground"}`}
               aria-expanded={expanded}
               aria-controls="certificates-grid"
             >
               {expanded ? "Show Less" : `Show All (${filteredCertificates.length})`}
               {expanded ? (
-                <ChevronUp className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5" />
+                <ChevronUp className={`h-3.5 w-3.5 transition-transform duration-300 lg:group-hover:-translate-y-0.5 ${isButtonActive ? "-translate-y-0.5" : ""}`} />
               ) : (
-                <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:translate-y-0.5" />
+                <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-300 lg:group-hover:translate-y-0.5 ${isButtonActive ? "translate-y-0.5" : ""}`} />
               )}
             </button>
           </motion.div>
         )}
       </div>
     </section>
+  )
+}
+
+function CertificateCard({ cert, index, expanded, isMobile }: { cert: typeof certificates[number], index: number, expanded: boolean, isMobile: boolean }) {
+  const ref = useRef(null)
+  const isActive = useAutoHighlight(ref, isMobile)
+
+  return (
+    <motion.div
+      ref={ref}
+      variants={cardVariantUp}
+      className={`group flex flex-col gap-2 lg:gap-3 p-4 md:p-6 transition-colors duration-300 lg:hover:bg-card ${!expanded && index === 3 ? "lg:hidden" : ""} ${isActive ? "bg-card" : "bg-background"}`}
+    >
+      <div className="flex items-start justify-between">
+        <div
+          className={`flex h-8 w-8 items-center justify-center rounded-sm border transition-colors duration-300 lg:group-hover:bg-primary lg:group-hover:text-primary-foreground ${isActive ? "bg-primary text-primary-foreground border-primary" : "bg-secondary text-primary border-border"}`}
+        >
+          <Award className="h-3.5 w-3.5" strokeWidth={1.5} />
+        </div>
+        {cert.credentialUrl && (
+          <a
+            href={cert.credentialUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`View ${cert.title} credential`}
+            className="flex h-6 w-6 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <ExternalLink className="h-3 w-3" strokeWidth={1.5} />
+          </a>
+        )}
+      </div>
+
+      <div className="flex flex-col gap-0.5">
+        <h3 className="text-sm font-medium leading-tight text-foreground">
+          {cert.title}
+        </h3>
+        <span className="font-mono text-xs text-primary">
+          {cert.issuer}
+        </span>
+      </div>
+
+      <div className="mt-auto flex items-center justify-between">
+        <span className="font-mono text-[10px] text-muted-foreground">
+          {cert.date}
+        </span>
+        <div className="flex gap-1">
+          {cert.modes.map((mode) => (
+            <span
+              key={mode}
+              className="rounded-sm border border-border px-1.5 py-0.5 font-mono text-[9px] text-muted-foreground"
+            >
+              {mode}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.div>
   )
 }

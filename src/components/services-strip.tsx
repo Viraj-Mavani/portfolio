@@ -1,8 +1,10 @@
 "use client"
 
+import { useRef } from "react"
 import { motion } from "framer-motion"
 import { Globe, Brain, BarChart3 } from "lucide-react"
 import { sectionVariants, cardVariantUp } from "@/lib/animations"
+import { useIsMobile, useAutoHighlight } from "@/hooks/use-mobile-view-effect"
 
 interface ServicesStripProps {
   index: number
@@ -30,6 +32,7 @@ const services = [
 ]
 
 export function ServicesStrip({ index }: ServicesStripProps) {
+  const isMobile = useIsMobile()
 
   return (
     <section id="services" className="border-t border-border" aria-labelledby="services-heading">
@@ -53,45 +56,54 @@ export function ServicesStrip({ index }: ServicesStripProps) {
           variants={sectionVariants}
           className="grid gap-px border border-border bg-border md:grid-cols-3">
           {services.map((service) => (
-            <motion.div
-              variants={cardVariantUp}
-              key={service.title}
-              className="group flex flex-col gap-6 bg-background p-4 lg:p-8 transition-colors hover:bg-card"
-            >
-              <div className="flex items-start justify-between">
-                <service.icon
-                  className="h-5 w-5 text-primary"
-                  strokeWidth={1.5}
-                  aria-hidden="true"
-                />
-                <span className="font-mono text-[10px] text-muted-foreground">
-                  {"//"}
-                </span>
-              </div>
-
-              <div className="flex flex-col gap-3">
-                <h3 className="text-md lg:text-lg font-medium tracking-tight text-foreground">
-                  {service.title}
-                </h3>
-                <p className="text-xs lg:text-sm leading-relaxed text-muted-foreground">
-                  {service.description}
-                </p>
-              </div>
-
-              <div className="mt-auto flex flex-wrap gap-2 pt-4">
-                {service.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-sm border border-border px-2 py-0.5 font-mono text-[10px] text-muted-foreground transition-colors group-hover:border-primary/30 group-hover:text-foreground"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
+            <ServiceCard key={service.title} service={service} isMobile={isMobile} />
           ))}
         </motion.div>
       </div>
     </section>
+  )
+}
+
+function ServiceCard({ service, isMobile }: { service: typeof services[number], isMobile: boolean }) {
+  const ref = useRef(null)
+  const isActive = useAutoHighlight(ref, isMobile)
+
+  return (
+    <motion.div
+      ref={ref}
+      variants={cardVariantUp}
+      className={`group flex flex-col gap-6 p-4 lg:p-8 transition-colors duration-300 lg:hover:bg-card ${isActive ? "bg-card" : "bg-background"}`}
+    >
+      <div className="flex items-start justify-between">
+        <service.icon
+          className="h-5 w-5 text-primary"
+          strokeWidth={1.5}
+          aria-hidden="true"
+        />
+        <span className="font-mono text-[10px] text-muted-foreground">
+          {"//"}
+        </span>
+      </div>
+
+      <div className="flex flex-col gap-3">
+        <h3 className="text-md lg:text-lg font-medium tracking-tight text-foreground">
+          {service.title}
+        </h3>
+        <p className="text-xs lg:text-sm leading-relaxed text-muted-foreground">
+          {service.description}
+        </p>
+      </div>
+
+      <div className="mt-auto flex flex-wrap gap-2 pt-4">
+        {service.tags.map((tag) => (
+          <span
+            key={tag}
+            className={`rounded-sm border px-2 py-0.5 font-mono text-[10px] transition-colors duration-300 lg:group-hover:border-primary/30 lg:group-hover:text-foreground ${isActive ? "border-primary/30 text-foreground" : "border-border text-muted-foreground"}`}
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    </motion.div>
   )
 }
