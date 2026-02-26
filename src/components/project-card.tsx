@@ -5,6 +5,7 @@ import { motion, Variants } from "framer-motion"
 import { Github, ExternalLink } from "lucide-react"
 import { Project } from "@/lib/project-data"
 import { useIsMobile, useAutoHighlight } from "@/hooks/use-mobile-view-effect"
+import { TRANSITION_SPRING } from "@/lib/transition-config"
 
 interface ProjectCardProps {
   project: Project
@@ -25,6 +26,8 @@ export const ProjectCard = memo(function ProjectCard({ project, index, onClick, 
 
   return (
     <motion.div
+      layoutId={`card-container-${project.title}`}
+      transition={TRANSITION_SPRING}
       ref={ref}
       variants={variants}
       onClick={() => onClick(project)}
@@ -37,6 +40,7 @@ export const ProjectCard = memo(function ProjectCard({ project, index, onClick, 
             project_{String(index + 1).padStart(2, "0")} / brief description
           </span>
           <h3
+            layoutId={`card-title-${project.title}`}
             className={`text-md md:text-lg font-medium transition-colors duration-300 lg:group-hover:text-primary ${isActive ? "text-primary" : "text-foreground"}`}
           >
             {project.title}
@@ -81,6 +85,7 @@ export const ProjectCard = memo(function ProjectCard({ project, index, onClick, 
       <div className="mt-auto flex flex-wrap gap-2 pt-2">
         {tagsToShow.map((tag) => (
           <span
+            layoutId={`card-tag-${project.title}-${tag}`}
             key={tag}
             className={`inline-flex items-center rounded-sm border px-2 py-0.5 font-mono text-[10px] transition-colors duration-300 lg:group-hover:border-primary/20 lg:group-hover:text-foreground ${isActive ? "border-primary/20 text-foreground" : "border-border text-muted-foreground"}`}
           >

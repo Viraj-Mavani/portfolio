@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { Github, ExternalLink, Video, X } from "lucide-react"
 import { Project } from "@/lib/project-data"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { TRANSITION_SPRING } from "@/lib/transition-config"
 
 interface ProjectDetailModalProps {
   project: Project
@@ -23,26 +24,29 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
         className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm"
       />
       <motion.div
-        initial={{ opacity: 0, scale: 0.9, y: "-45%", x: "-50%" }}
-        animate={{ opacity: 1, scale: 1, y: "-50%", x: "-50%" }}
-        exit={{ opacity: 0, scale: 0.9, y: "-45%", x: "-50%" }}
-        transition={{ type: "spring", duration: 0.5, bounce: 0.1 }}
-        className="fixed left-1/2 top-1/2 z-50 w-[95%] h-[90%] md:w-[85%] md:h-[85%] lg:w-[75%] lg:h-[85%] max-w-5xl -translate-y-1/2 overflow-hidden flex flex-col shadow-2xl shadow-black/40"
+        layoutId={`card-container-${project.title}`}
+        transition={TRANSITION_SPRING}
+        className="fixed left-1/2 top-1/2 z-50 w-[95%] h-[90%] md:w-[85%] md:h-[85%] lg:w-[75%] lg:h-[85%] max-w-5xl -translate-y-1/2 -translate-x-1/2 overflow-hidden rounded-xl flex flex-col shadow-2xl shadow-black/40 bg-card"
       >
         {/* Glass morphism container */}
-        <div className="relative w-full h-full rounded-xl overflow-hidden">
+        <div className="relative w-full h-full">
           {/* Subtle gradient border effect */}
-          <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/20 via-transparent to-primary/10 p-[1px]">
-            <div className="w-full h-full rounded-xl bg-card/95" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 p-[1px]">
+            <div className="w-full h-full bg-card/95" />
           </div>
 
           {/* Content */}
-          <div className="relative w-full h-full flex flex-col">
+          <motion.div 
+            className="relative w-full h-full flex flex-col"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { delay: 0.1 } }}
+            exit={{ opacity: 0, transition: { duration: 0.1 } }} // Fast exit to prevent content squashing
+          >
             {/* Header / Close */}
             <div className="flex items-center justify-between px-6 py-5 bg-gradient-to-b from-background/50 to-transparent backdrop-blur-sm">
-              <h2 className="font-mono text-sm md:text-lg font-medium uppercase tracking-wider text-foreground">
+              <motion.h2 layoutId={`card-title-${project.title}`} className="font-mono text-sm md:text-lg font-medium uppercase tracking-wider text-foreground">
                 {project.title}
-              </h2>
+              </motion.h2>
               <motion.button
                 whileHover={{ scale: 1.1, rotate: 90 }}
                 whileTap={{ scale: 0.9 }}
@@ -100,6 +104,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
                       <span
+                        layoutId={`card-tag-${project.title}-${tag}`}
                         key={tag}
                         className="inline-flex items-center rounded-sm border px-2.5 py-1 font-mono text-[10px] text-foreground border-primary/20"
                       >
@@ -138,7 +143,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
                 )}
               </div>
             </ScrollArea>
-          </div>
+          </motion.div>
         </div>
       </motion.div>
     </>
