@@ -10,6 +10,8 @@ import { useMode } from "@/hooks/use-mode"
 import { HeroContent } from "@/lib/bio-data"
 import { sectionVariants, cardVariantUp, cardVariantLeft, cardVariantRight, cardVariantDown } from "@/lib/animations"
 import { useAutoHighlight, useIsMobile } from "@/hooks/use-mobile-view-effect"
+import { DiaText } from "./animations/text/dia-text";
+import { TextBlurIn } from "./animations/text/blur-in";
 
 interface HeroBentoProps {
   index: number
@@ -24,12 +26,13 @@ export function HeroBento({ index }: HeroBentoProps) {
   const isNameActive = useAutoHighlight(nameRef, isMobile)
   const [isAutoExpanded, setIsAutoExpanded] = useState(false)
   const [hasInteracted, setHasInteracted] = useState(false)
+  const [isInitialAnimationComplete, setIsInitialAnimationComplete] = useState(false)
 
   useEffect(() => {
     if (isMobile) return
     if (hasInteracted) return
 
-    const expandTimer = setTimeout(() => setIsAutoExpanded(true), 1000)
+    const expandTimer = setTimeout(() => setIsAutoExpanded(true), 1200)
     const collapseTimer = setTimeout(() => setIsAutoExpanded(false), 3000)
 
     return () => {
@@ -65,23 +68,24 @@ export function HeroBento({ index }: HeroBentoProps) {
         <motion.div variants={cardVariantDown} className="sm:col-span-2 md:col-span-2 flex flex-col justify-between rounded-md border border-border bg-card p-6 md:p-8 lg:p-10">
           <div>
             <span className="mb-4 inline-block font-mono text-[10px] tracking-widest text-primary uppercase">
-              {content.title}
+              <DiaText words={["Full-Stack", "AI"]} duration={3500} /> {content.title}
             </span>
             <h1
               id="hero-heading"
               className="text-balance text-3xl font-medium leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl"
             >
-              Hello, I am
+              <TextBlurIn as={motion.span} className="inline-block">Hello, I am</TextBlurIn>
               <br />
               <motion.span
                 ref={nameRef}
                 className="text-primary inline-flex cursor-pointer select-none"
                 onHoverStart={() => {
+                  if (isMobile) return
                   setIsHovered(true)
                   setHasInteracted(true)
                   setIsAutoExpanded(false)
                 }}
-                onHoverEnd={() => setIsHovered(false)}
+                onHoverEnd={() => !isMobile && setIsHovered(false)}
                 onTap={() => {
                   setIsHovered(!isHovered)
                   setHasInteracted(true)
@@ -89,9 +93,14 @@ export function HeroBento({ index }: HeroBentoProps) {
                 }}
                 layout
               >
-                <motion.span layout>V</motion.span>
+                <motion.span 
+                  layout
+                  initial={{ opacity: 0, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, filter: "blur(0px)" }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >V</motion.span>
                 <AnimatePresence>
-                  {shouldExpand && (
+                  {shouldExpand && isInitialAnimationComplete && (
                     <motion.span
                       initial={{ opacity: 0, width: 0 }}
                       animate={{ opacity: 1, width: "auto" }}
@@ -105,7 +114,7 @@ export function HeroBento({ index }: HeroBentoProps) {
                 </AnimatePresence>
                 
                 <AnimatePresence>
-                  {shouldExpand && (
+                  {shouldExpand && isInitialAnimationComplete && (
                     <motion.span
                       initial={{ opacity: 0, width: 0 }}
                       animate={{ opacity: 1, width: "auto" }}
@@ -118,9 +127,14 @@ export function HeroBento({ index }: HeroBentoProps) {
                   )}
                 </AnimatePresence>
 
-                <motion.span layout>M</motion.span>
+                <motion.span 
+                  layout
+                  initial={{ opacity: 0, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, filter: "blur(0px)" }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                >M</motion.span>
                 <AnimatePresence>
-                  {shouldExpand && (
+                  {shouldExpand && isInitialAnimationComplete && (
                     <motion.span
                       initial={{ opacity: 0, width: 0 }}
                       animate={{ opacity: 1, width: "auto" }}
@@ -132,12 +146,18 @@ export function HeroBento({ index }: HeroBentoProps) {
                     </motion.span>
                   )}
                 </AnimatePresence>
-                <motion.span layout>.</motion.span>
+                <motion.span 
+                  layout
+                  initial={{ opacity: 0, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, filter: "blur(0px)" }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  onAnimationComplete={() => setIsInitialAnimationComplete(true)}
+                >.</motion.span>
               </motion.span>
             </h1>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground lg:text-lg">
+            <TextBlurIn className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground lg:text-lg">
               {content.description}
-            </p>
+            </TextBlurIn>
           </div>
 
           <motion.div 
