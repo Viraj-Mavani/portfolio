@@ -4,15 +4,16 @@ import { useRef, useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import { TerminalCard } from "./terminal-card"
-import { TechTicker } from "./tech-ticker"
+import { TerminalCard } from "../blocks/terminal-card"
+import { TechTicker } from "../blocks/tech-ticker"
+import { GlowCard } from "../blocks/glow-card"
 import { useMode } from "@/hooks/use-mode"
 import { HeroContent } from "@/lib/bio-data"
 import { sectionVariants, cardVariantUp, cardVariantLeft, cardVariantRight, cardVariantDown } from "@/lib/animations"
 import { useAutoHighlight, useIsMobile } from "@/hooks/use-mobile-view-effect"
-import { DiaText } from "./animations/text/dia-text";
-import { TextBlurIn } from "./animations/text/blur-in";
-import { MagneticButton } from "./magnetic-button";
+import { DiaText } from "../animations/text/dia-text";
+import { TextBlurIn } from "../animations/text/blur-in";
+import { MagneticButton } from "../blocks/magnetic-button";
 
 interface HeroBentoProps {
   index: number
@@ -53,20 +54,20 @@ export function HeroBento({ index }: HeroBentoProps) {
           index
         </span>
         <div className="h-px flex-1 bg-border" aria-hidden="true" />
-          <span className="font-mono text-[10px] tracking-widest text-muted-foreground">
-            {String(index).padStart(2, "0")}
-          </span>
+        <span className="font-mono text-[10px] tracking-widest text-muted-foreground">
+          {String(index).padStart(2, "0")}
+        </span>
       </div>
 
       {/* Bento Grid */}
-      <motion.div 
+      <motion.div
         initial="hidden"
         animate="visible"
         variants={sectionVariants}
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:grid-rows-[1fr_auto]"
       >
         {/* Card 1 - Intro */}
-        <motion.div variants={cardVariantDown} className="sm:col-span-2 md:col-span-2 flex flex-col justify-between rounded-md border border-border bg-card p-6 md:p-8 lg:p-10">
+        <GlowCard as={motion.div} variants={cardVariantDown} className="sm:col-span-2 md:col-span-2 flex flex-col justify-between rounded-md border border-border bg-card p-6 md:p-8 lg:p-10">
           <div>
             <span className="mb-4 inline-block font-mono text-[10px] tracking-widest text-primary uppercase">
               <DiaText words={["Full-Stack", "AI"]} duration={3500} /> {content.title}
@@ -94,7 +95,7 @@ export function HeroBento({ index }: HeroBentoProps) {
                 }}
                 layout
               >
-                <motion.span 
+                <motion.span
                   layout
                   initial={{ opacity: 0, filter: "blur(10px)" }}
                   animate={{ opacity: 1, filter: "blur(0px)" }}
@@ -113,7 +114,7 @@ export function HeroBento({ index }: HeroBentoProps) {
                     </motion.span>
                   )}
                 </AnimatePresence>
-                
+
                 <AnimatePresence>
                   {shouldExpand && isInitialAnimationComplete && (
                     <motion.span
@@ -128,7 +129,7 @@ export function HeroBento({ index }: HeroBentoProps) {
                   )}
                 </AnimatePresence>
 
-                <motion.span 
+                <motion.span
                   layout
                   initial={{ opacity: 0, filter: "blur(10px)" }}
                   animate={{ opacity: 1, filter: "blur(0px)" }}
@@ -147,7 +148,7 @@ export function HeroBento({ index }: HeroBentoProps) {
                     </motion.span>
                   )}
                 </AnimatePresence>
-                <motion.span 
+                <motion.span
                   layout
                   initial={{ opacity: 0, filter: "blur(10px)" }}
                   animate={{ opacity: 1, filter: "blur(0px)" }}
@@ -161,7 +162,7 @@ export function HeroBento({ index }: HeroBentoProps) {
             </TextBlurIn>
           </div>
 
-          <motion.div 
+          <motion.div
             className="mt-8">
             <MagneticButton>
               <Link
@@ -173,7 +174,7 @@ export function HeroBento({ index }: HeroBentoProps) {
               </Link>
             </MagneticButton>
           </motion.div>
-        </motion.div>
+        </GlowCard>
 
         {/* Card 2 - Terminal (Tall, Right, spans 2 rows) */}
         <motion.div variants={cardVariantLeft} className="hidden md:block md:col-span-1 min-h-[425px] md:min-h-[440px] md:row-span-2" >
@@ -181,7 +182,7 @@ export function HeroBento({ index }: HeroBentoProps) {
         </motion.div>
 
         {/* Card 3 - Status (Small, Bottom Left) */}
-        <motion.div variants={cardVariantRight} className="flex items-center gap-4 rounded-md border border-border bg-card px-6 py-5">
+        <GlowCard as={motion.div} variants={cardVariantRight} className="flex items-center gap-4 rounded-md border border-border bg-card px-6 py-5">
           <div className="relative flex items-center justify-center">
             <span className="absolute h-3 w-3 animate-ping rounded-full bg-emerald-400/40" aria-hidden="true" />
             <span className="relative h-2.5 w-2.5 rounded-full bg-emerald-400" aria-hidden="true" />
@@ -194,7 +195,7 @@ export function HeroBento({ index }: HeroBentoProps) {
               Available for Freelance
             </span>
           </div>
-        </motion.div>
+        </GlowCard>
 
         {/* Card 4 - Tech Stack Ticker (Small, Bottom Center) */}
         <motion.div variants={cardVariantUp} className="min-h-[72px]">
