@@ -38,7 +38,7 @@ export function Footer() {
 
   return (
     <footer id="contact" className="border-t border-border" role="contentinfo">
-      <div className="mx-auto max-w-7xl px-4 py-12">
+      <div className="mx-auto max-w-7xl px-4 pt-[5.5rem] pb-32">
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
 
           <motion.div
@@ -83,7 +83,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   initial={{ opacity: 0, scale: 0.8, y: 20 }}
                   whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                  viewport={{ once: false, margin: "-10%" }}
+                  viewport={{ once: false, amount: 0.2 }} // trigger when 20% visible
                   transition={{
                     duration: 0.4,
                     delay: i * 0.1,

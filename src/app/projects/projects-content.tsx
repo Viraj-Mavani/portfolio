@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { ArrowLeft, ChevronDown } from "lucide-react"
 
 import { projects } from "@/lib/project-data"
-import { TopNav } from "@/components/layout/top-nav"
+import { Navigation } from "@/components/layout/navigation"
 import { Footer } from "@/components/layout/footer"
 import {
   DropdownMenu,
@@ -18,6 +18,7 @@ import { fadeUpVariant, sectionVariants, cardVariantRight, cardVariantLeft } fro
 import { useProjectModal } from "@/hooks/use-project-modal"
 import { ProjectCard } from "@/components/blocks/project-card"
 import { ProjectDetailModal } from "@/components/blocks/project-detail-modal"
+import { SectionHeader } from "@/components/layout/section-header"
 
 const modeFilters = [
   { id: "all", label: "All" },
@@ -38,33 +39,24 @@ export function ProjectsPageContent() {
 
   return (
     <div className="min-h-screen">
-      <TopNav />
+      <Navigation />
 
       <main className="mx-auto max-w-7xl px-4 pt-24 pb-16 lg:pt-28">
         {/* Back link */}
         <Link
           href="/"
-          className="mb-8 inline-flex items-center gap-2 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
+          className="mb-12 inline-flex items-center gap-2 font-mono text-[10px] tracking-widest text-muted-foreground uppercase transition-colors hover:text-primary"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
-          Back to Home
+          Back to Terminal
         </Link>
 
         {/* Page header */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeUpVariant}
-          className="mb-10 flex items-center gap-4"
-        >
-          <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
-            all projects
-          </span>
-          <div className="h-px flex-1 bg-border" aria-hidden="true" />
-          <span className="font-mono text-[10px] tracking-widest text-muted-foreground">
-            {String(filtered.length).padStart(2, "0")} results
-          </span>
-        </motion.div>
+        <SectionHeader 
+          index={projects.length} 
+          title="Archive // All Projects" 
+          subtitle="A comprehensive index of technical implementations, research experiments, and engineering solutions."
+        />
 
         {/* Mode filter bar */}
         <motion.div
