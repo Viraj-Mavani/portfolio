@@ -8,6 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import { AmbientCursor } from "@/components/layout/ambient-cursor"
 import { PremiumBackground } from '@/components/layout/premium-background'
 import { AccessibilityProvider } from "@/contexts/accessibility-context"
+import { NavigationHubProvider } from "@/contexts/navigation-hub-context"
 import { AccessibilityMenu } from "@/components/blocks/accessibility-menu"
 import { ClientShell } from "@/components/layout/client-shell"
 import localFont from 'next/font/local'
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
 		description: SITE_METADATA.description,
 		images: [
 			{
-				url: "/og-image.jpg", // need to be added
+				url: "/og-image.png", // need to be changed
 				width: 1200,
 				height: 630,
 				alt: SITE_METADATA.title,
@@ -52,7 +53,7 @@ export const metadata: Metadata = {
 		card: "summary_large_image",
 		title: SITE_METADATA.title,
 		description: SITE_METADATA.description,
-		images: ["/og-image.jpg"],
+		images: ["/og-image.png"], // need to be changed
 		creator: "@Viraj__Mavani",
 	},
 	icons: {
@@ -99,11 +100,11 @@ const jsonLd = {
 				"@id": `${SITE_METADATA.siteUrl}/#logo`
 			},
 			"sameAs": [
-				"https://github.com/Viraj-Mavani",
-				"https://www.linkedin.com/in/viraj-mavani/",
-				"https://twitter.com/Viraj__Mavani",
-				"https://discord.com/users/atom1zer",
-				"https://www.instagram.com/veer.mavani"
+				SITE_METADATA.social.github,
+				SITE_METADATA.social.linkedin,
+				SITE_METADATA.social.twitter,
+				SITE_METADATA.social.discord,
+				SITE_METADATA.social.instagram
 			],
 			"jobTitle": "Full Stack AI Engineer"
 		}
@@ -131,12 +132,14 @@ export default function RootLayout({
 					disableTransitionOnChange
 				>
 					<AccessibilityProvider>
-						<AmbientCursor />
-						<PremiumBackground />
-            <ClientShell>
-							{children}
-            </ClientShell>
-						<AccessibilityMenu />
+						<NavigationHubProvider>
+							<AmbientCursor />
+							<PremiumBackground />
+							<ClientShell>
+								{children}
+							</ClientShell>
+							<AccessibilityMenu />
+						</NavigationHubProvider>
 					</AccessibilityProvider>
 				</ThemeProvider>
 				<SpeedInsights />
