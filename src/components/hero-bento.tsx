@@ -11,6 +11,7 @@ import { useMode } from "@/hooks/use-mode"
 // import { useIsTablet } from "@/hooks/use-tablet"
 import { HeroContent } from "@/lib/bio-data"
 import { sectionVariants, cardVariantUp, cardVariantLeft, cardVariantRight, cardVariantDown } from "@/lib/animations"
+import LetterGlitch from "@/components/letter-glitch"
 
 interface HeroBentoProps {
   index: number
@@ -77,9 +78,20 @@ export function HeroBento({ index }: HeroBentoProps) {
   // }
 
   // if (!mounted) return <div className="min-h-screen" />; 
-  
+
   return (
-    <section id="home" className="mx-auto max-w-7xl px-4 pt-32 pb-16 md:pt-36 lg:pt-40 lg:pb-24" aria-labelledby="hero-heading">
+    <section id="home" className="relative overflow-hidden">
+      <div className="absolute inset-0 -z-10 h-full w-full opacity-30">
+        <LetterGlitch
+          glitchSpeed={50}
+          centerVignette={true}
+          outerVignette={false}
+          smooth={true}
+          glitchColors={["#ff0000", "#00ff00", "#0000ff"]}
+          characters="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        />
+      </div>
+      <div className="mx-auto max-w-7xl px-4 pt-32 pb-16 md:pt-36 lg:pt-40 lg:pb-24" aria-labelledby="hero-heading">
       {/* Section label */}
       <div className="mb-8 flex items-center gap-4">
         <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
@@ -205,6 +217,7 @@ export function HeroBento({ index }: HeroBentoProps) {
           <TechTicker />
         </motion.div>
       </motion.div>
+      </div>
     </section>
   )
 }
