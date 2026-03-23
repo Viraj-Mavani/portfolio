@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { skillCategories } from "@/lib/bio-data"
 import { cinematicReveal, staggerContainer, headerReveal } from "@/lib/animations"
 import { useIsMobile, useAutoHighlight } from "@/hooks/use-mobile-view-effect"
+import { useMode } from "@/hooks/use-mode"
 import * as SiIcons from "react-icons/si";
 import { LuHash, LuWorkflow, LuDatabaseZap, LuNetwork } from "react-icons/lu";
 import { FaJava } from "react-icons/fa";
@@ -83,9 +84,18 @@ const getSkillIcon = (skillName: string) => {
   return LuHash;
 };
 
+const MODE_TO_SKILLS: Record<string, string[]> = {
+  fullstack: ["TypeScript", "JavaScript", "C#", "Next.js", ".NET Core", "Node.js", "React", "Tailwind CSS", "PostgreSQL", "SQL", "MongoDB", "CI/CD", "Docker"],
+  "ai-ml": ["Python", "PyTorch", "TensorFlow", "Scikit-learn", "Pandas", "NumPy", "LangChain", "Hugging Face"],
+  data: ["Python", "SQL", "PostgreSQL", "Apache Spark", "Airflow", "Kafka", "dbt", "ETL Pipelines", "Data Modeling", "MongoDB", "AWS"],
+  generalist: []
+};
 
 export function SkillsSection({ index }: SkillsSectionProps) {
   const isMobile = useIsMobile()
+  const { mode } = useMode()
+  
+  const relevantSkills = MODE_TO_SKILLS[mode] || [];
 
   return (
     <section id="skills" className="border-t border-border" aria-labelledby="skills-heading">
@@ -105,7 +115,7 @@ export function SkillsSection({ index }: SkillsSectionProps) {
           variants={staggerContainer}
           className="grid gap-px border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
           {skillCategories.map((category) => (
-            <SkillCard key={category.label} category={category} isMobile={isMobile} />
+            <SkillCard key={category.label} category={category} isMobile={isMobile} relevantSkills={relevantSkills} />
           ))}
         </motion.div>
       </div>
@@ -113,7 +123,7 @@ export function SkillsSection({ index }: SkillsSectionProps) {
   )
 }
 
-function SkillCard({ category, isMobile }: { category: typeof skillCategories[number], isMobile: boolean }) {
+function SkillCard({ category, isMobile, relevantSkills }: { category: typeof skillCategories[number], isMobile: boolean, relevantSkills: string[] }) {
   const ref = useRef(null)
   const isAutoActive = useAutoHighlight(ref, isMobile)
   const [isHovered, setIsHovered] = useState(false)
@@ -143,32 +153,41 @@ function SkillCard({ category, isMobile }: { category: typeof skillCategories[nu
         </div>
 
         <div className="flex flex-wrap gap-2">
-          {category.skills.map((skill) => (
-            <SkillPill key={skill} skill={skill} isActive={isActive} />
-          ))}
+          {category.skills.map((skill) => {
+            const isModeRelevant = relevantSkills.length > 0 ? relevantSkills.includes(skill) : false;
+            return <SkillPill key={skill} skill={skill} isActive={isActive} isModeRelevant={isModeRelevant} />
+          })}
         </div>
       </div>
     </motion.div>
   )
 }
 
-const SkillPill = memo(({ skill, isActive }: { skill: string, isActive: boolean }) => {
+const SkillPill = memo(({ skill, isActive, isModeRelevant }: { skill: string, isActive: boolean, isModeRelevant: boolean }) => {
   const Icon = useMemo(() => getSkillIcon(skill), [skill]);
+
+  const baseStyle = isActive 
+    ? "border-primary/40 text-foreground shadow-sm -translate-y-0.5" 
+    : "border-border text-muted-foreground translate-y-0";
+    
+  // Subtly highlight the skill if it is relevant to the current mode
+  const bgStyle = isModeRelevant && isActive 
+    ? "bg-primary/10 border-primary/60 shadow-[0_0_8px_rgba(50,200,150,0.15)]" 
+    : isActive 
+      ? "bg-primary/5" 
+      : "bg-transparent";
 
   return (
     <span
       className={`inline-flex items-center rounded-sm border px-2 py-1 font-mono text-[11px] lg:text-[12.5px] 
-        whitespace-nowrap transition-all duration-300 ease-out ${isActive
-          ? "border-primary/40 text-foreground bg-primary/5 -translate-y-0.5 shadow-sm"
-          : "border-border text-muted-foreground translate-y-0"
-        }`}
+        whitespace-nowrap transition-all duration-300 ease-out ${baseStyle} ${bgStyle}`}
     >
       <span
         className={`inline-flex items-center justify-center overflow-hidden transition-all duration-500 ease-out shrink-0 ${isActive ? "w-3 lg:w-3.5 mr-1.5 opacity-100" : "w-0 mr-0 opacity-0"
           }`}
       >
         <Icon
-          className="shrink-0 text-primary h-3 w-3 lg:h-3.5 lg:w-3.5"
+          className={`shrink-0 h-3 w-3 lg:h-3.5 lg:w-3.5 ${isModeRelevant && isActive ? "text-primary" : "text-primary/70"}`}
           aria-hidden="true"
         />
       </span>

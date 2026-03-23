@@ -15,7 +15,7 @@ import {
   School,
   Lightbulb
 } from "lucide-react"
-import { education } from "@/lib/bio-data"
+import { education, detailedAboutContent } from "@/lib/bio-data"
 import { BentoGallery } from "@/components/sections/bento-gallery"
 import { fadeUpVariant, sectionVariants, cardVariantRight, cinematicReveal, staggerContainer, headerReveal } from "@/lib/animations"
 import { useIsMobile, useAutoHighlight, useAtTopHighlight } from "@/hooks/use-mobile-view-effect"
@@ -24,15 +24,7 @@ import { SectionHeader } from "@/components/layout/section-header"
 import { GlowCard } from "@/components/blocks/glow-card"
 import { PremiumBackButton } from "@/components/ui/premium-back-button"
 import { useNavigationHub } from "@/contexts/navigation-hub-context"
-
-const intro = {
-  title: "I'm a Full Stack AI Engineer who believes that the best code is written by those who never stop being students.",
-  paragraphs: [
-    "My journey didn't start with complex neural networks; it started back in India with a simple curiosity about how I could make a computer do the work for me. From those first automation scripts to completing my Master’s in AI at Western University, I’ve always been driven by the transition from 'how does this work?' to 'how can I make this better?'. Moving to Canada to specialize in AI allowed me to take my professional full-stack foundations and ground them in the deep, theoretical research that defines the next generation of software.",
-    "I don't believe in being a 'master' of everything, because in this field, the moment you stop learning, you fall behind. My real expertise isn't just in a specific stack like .NET or React—it’s in the ability to pick up any tool, documentation, or research paper and turn it into a working solution. Whether I’m familiar with a technology or seeing it for the first time, I have the discipline to learn it, implement it, and ship it. To me, a technical challenge isn't a wall; it's just a new topic to master before the next deployment.",
-    "Beyond the terminal, I’m deeply focused on the responsibility we have as engineers. My research into the 'Ethical Dilemmas in AI' taught me that intelligence without alignment is a liability. I’m not interested in building tech for the sake of buzzwords; I want to build systems that are genuinely useful, secure, and aligned with human values. Whether I'm processing millions of records with 99.9% uptime or fine-tuning a model, my goal is to ensure that the final product is as ethically sound as it is technically precise."
-  ]
-}
+import { useMode } from "@/hooks/use-mode"
 
 const journey = [
   {
@@ -73,6 +65,7 @@ const journey = [
 ]
 
 export function AboutContent() {
+  const { mode } = useMode()
   const { isOpen: isNavHubOpen } = useNavigationHub()
   const [isTypingComplete, setIsTypingComplete] = useState(false)
   const [loadingDots, setLoadingDots] = useState("")
@@ -177,10 +170,10 @@ export function AboutContent() {
                     who I am
                   </span>
                   <h1 className="mb-6 text-balance font-medium leading-tight tracking-tight text-foreground text-md md:text-2xl lg:text-3xl">
-                    {intro.title}
+                    {detailedAboutContent[mode]?.title || detailedAboutContent.generalist.title}
                   </h1>
                   <div className="flex max-w-full flex-col gap-4 text-justify">
-                    {intro.paragraphs.map((paragraph, index) => (
+                    {(detailedAboutContent[mode]?.paragraphs || detailedAboutContent.generalist.paragraphs).map((paragraph, index) => (
                       <p key={index} className="text-xs md:text-base leading-relaxed text-muted-foreground">
                         {paragraph}
                       </p>

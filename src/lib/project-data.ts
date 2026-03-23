@@ -9,6 +9,7 @@ export interface Project {
 	banner?: string;
 	video?: string;
 	mode: string[];
+	featuredIn?: string[];
 }
 
 export const projects: Project[] = [
@@ -34,6 +35,7 @@ export const projects: Project[] = [
 		],
 		live: "https://www.skythread.aero/solution/overview",
 		mode: ["fullstack"],
+		featuredIn: ["generalist", "fullstack"],
 	},
 	{
 		title: "Web Scraping Automation for Business Registries",
@@ -56,6 +58,7 @@ export const projects: Project[] = [
 		github: "https://github.com/Viraj-Mavani/web-scraping-automation",
 		live: "https://www.upwork.com/freelancers/~0100fa5d569b04d18d?p=1927504018187304960",
 		mode: ["data", "webscraping"],
+		featuredIn: ["generalist", "data"],
 	},
 	{
 		title: "Distributed Web Scraper using MPI",
@@ -77,6 +80,7 @@ export const projects: Project[] = [
 		],
 		github: "https://github.com/Viraj-Mavani/DistributedWebScraper",
 		mode: ["ai-ml", "data", "webscraping"],
+		featuredIn: ["generalist", "data", "ai-ml"],
 	},
 	{
 		title: "Tomato Leaf Disease Detection",
@@ -99,6 +103,7 @@ export const projects: Project[] = [
 		],
 		github: "https://github.com/Viraj-Mavani/smart_agriculture_system",
 		mode: ["ai-ml"],
+		featuredIn: ["generalist", "ai-ml"],
 	},
 	{
 		title: "Neo-Atom: A Local Agentic AI Assistant",
@@ -123,6 +128,7 @@ export const projects: Project[] = [
 		],
 		github: "https://github.com/Viraj-Mavani/neo-atom",
 		mode: ["ai-ml"],
+		featuredIn: ["generalist", "ai-ml"],
 	},
 	{
 		title: "ML-Powered Taxi Fare Prediction",
@@ -143,7 +149,8 @@ export const projects: Project[] = [
 			"Matplotlib",
 		],
 		github: "https://github.com/Viraj-Mavani/ML-Powered-Taxi-Fare-Prediction-using-Docker",
-		mode: ["ai-ml"],
+		mode: ["ai-ml", "data"],
+		featuredIn: ["data"],
 	},
 	{
 		title: "Ethical Dilemmas in AI",
@@ -167,6 +174,7 @@ export const projects: Project[] = [
 		],
 		github: "https://github.com/Viraj-Mavani/EthicalDilemmaAI",
 		mode: ["ai-ml"],
+		featuredIn: ["ai-ml"],
 	},
 	{
 		title: "Context-Aware Portfolio Platform",
@@ -185,9 +193,10 @@ export const projects: Project[] = [
 			"Lucide React",
 			"shadcn/ui",
 		],
-		mode: ["fullstack"],
 		live: "https://virajmavani.dev",
 		github: "https://github.com/Viraj-Mavani/portfolio",
+		mode: ["fullstack"],
+		featuredIn: ["fullstack"],
 	},
 	{
 		title: "E-commerce Platform",
@@ -230,5 +239,6 @@ export const projects: Project[] = [
 		],
 		github: "https://github.com/Viraj-Mavani/amazon_clone",
 		mode: ["fullstack"],
+		featuredIn: ["fullstack"],
 	},
 ];

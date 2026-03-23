@@ -223,15 +223,15 @@ export function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
                   <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
                     02. Perspective
                   </span>
-                  <span className="rounded-full bg-primary/10 px-2 py-0.5 font-mono text-[8px] tracking-widest text-primary uppercase animate-pulse">
-                    Coming Soon
-                  </span>
                 </div>
-                <div className="flex flex-col gap-2 opacity-50 grayscale pointer-events-none">
+                <div className="flex flex-col gap-2">
                   {modes.map((mode) => (
                     <button
                       key={mode.id}
-                      onClick={() => setActiveMode(mode.id as any)}
+                      onClick={() => {
+                        setActiveMode(mode.id as any)
+                        onClose()
+                      }}
                       className={`flex items-center justify-between rounded-sm border border-border px-4 py-3 font-mono text-xs transition-all ${activeMode === mode.id
                           ? "bg-primary text-primary-foreground border-primary"
                           : "bg-secondary/40 text-muted-foreground hover:border-primary/50"

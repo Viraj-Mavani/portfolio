@@ -8,6 +8,7 @@ import { RefreshCcw, SearchX } from "lucide-react"
 import { projects } from "@/lib/project-data"
 import { Navigation } from "@/components/layout/navigation"
 import { Footer } from "@/components/layout/footer"
+import { useMode } from "@/hooks/use-mode"
 import { fadeUpVariant, sectionVariants, cinematicGrid, cardVariantRight, cardVariantLeft } from "@/lib/animations"
 import { useProjectModal } from "@/hooks/use-project-modal"
 import { ProjectCard } from "@/components/blocks/project-card"
@@ -28,8 +29,9 @@ const modeFilters = [
 ]
 
 export function ProjectsPageContent() {
+  const { mode } = useMode()
   const { isOpen: isNavHubOpen } = useNavigationHub()
-  const [activeFilter, setActiveFilter] = useState("all")
+  const [activeFilter, setActiveFilter] = useState(() => mode === "generalist" ? "all" : mode)
   const { selectedProject, sourceRect, openProject, closeProject } = useProjectModal()
   const isMobile = useIsMobile()
   const scrollThreshold = 25
@@ -149,7 +151,7 @@ export function ProjectsPageContent() {
             </div>
 
             <button
-              onClick={() => setActiveFilter("all")} //TODO: set a default filter as per "Perspective mode" and use it here
+              onClick={() => setActiveFilter(mode === "generalist" ? "all" : mode)}
               className="mt-10 group relative flex items-center gap-3 overflow-hidden rounded-sm border border-primary/30 bg-primary/5 px-8 py-3 font-mono text-[10px] tracking-widest text-primary uppercase transition-all hover:bg-primary/10 hover:border-primary"
             >
               <RefreshCcw className="h-3.5 w-3.5 transition-transform duration-700 group-hover:rotate-180" />

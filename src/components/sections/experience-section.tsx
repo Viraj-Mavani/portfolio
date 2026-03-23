@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { Briefcase, Calendar, MapPin } from "lucide-react"
 import { experiences } from "@/lib/bio-data"
 import { cinematicReveal, staggerContainer } from "@/lib/animations"
+import { useMode } from "@/hooks/use-mode"
 import { useIsMobile, useAutoHighlight } from "@/hooks/use-mobile-view-effect"
 import { SectionHeader } from "../layout/section-header"
 
@@ -14,6 +15,7 @@ interface ExperienceSectionProps {
 
 export function ExperienceSection({ index }: ExperienceSectionProps) {
   const isMobile = useIsMobile()
+  const { mode } = useMode()
 
   return (
     <section id="experience" className="border-t border-border" aria-labelledby="experience-heading">
@@ -33,7 +35,7 @@ export function ExperienceSection({ index }: ExperienceSectionProps) {
           variants={staggerContainer}
           className="flex flex-col gap-4">
           {experiences.map((exp, index) => (
-            <ExperienceCard key={exp.role} exp={exp} index={index} isMobile={isMobile} />
+            <ExperienceCard key={exp.role} exp={exp} index={index} isMobile={isMobile} mode={mode} />
           ))}
         </motion.div>
       </div>
@@ -41,7 +43,7 @@ export function ExperienceSection({ index }: ExperienceSectionProps) {
   )
 }
 
-function ExperienceCard({ exp, index, isMobile }: { exp: typeof experiences[number], index: number, isMobile: boolean }) {
+function ExperienceCard({ exp, index, isMobile, mode }: { exp: typeof experiences[number], index: number, isMobile: boolean, mode: string }) {
   const ref = useRef(null)
   const isActive = useAutoHighlight(ref, isMobile)
 
@@ -78,7 +80,7 @@ function ExperienceCard({ exp, index, isMobile }: { exp: typeof experiences[numb
 
       {/* Description */}
       <p className="text-xs md:text-sm leading-relaxed text-muted-foreground text-justify">
-        {exp.description}
+        {exp.modeDescriptions?.[mode] || exp.description}
       </p>
 
       {/* Tags */}

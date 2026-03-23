@@ -25,7 +25,7 @@ export function ProjectsSection({ index }: ProjectsSectionProps) {
   const isViewAllActive = useAutoHighlight(viewAllRef, isMobile)
 
   const filteredProjects = projects.filter((project) =>
-    mode === "generalist" || project.mode.includes(mode)
+    project.featuredIn?.includes(mode)
   )
 
   return (
@@ -45,7 +45,7 @@ export function ProjectsSection({ index }: ProjectsSectionProps) {
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
           className="grid gap-4 md:grid-cols-2">
-          {filteredProjects.slice(0, 4).map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <ProjectCard
               key={project.title}
               project={project}
@@ -56,7 +56,7 @@ export function ProjectsSection({ index }: ProjectsSectionProps) {
           ))}
         </motion.div>
 
-        {filteredProjects.length > 4 && (
+        {filteredProjects.length > 0 && (
           <motion.div
             initial="hidden"
             whileInView="visible"

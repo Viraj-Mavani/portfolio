@@ -30,6 +30,7 @@ export interface Experience {
   location: string
   period: string
   description: string
+  modeDescriptions?: Partial<Record<string, string>>
   tags: string[]
 }
 
@@ -158,6 +159,11 @@ export const experiences: Experience[] = [
     period: "Sep 2023 - Jul 2024",
     description:
       "Engineered scalable full-stack solutions using .NET Core and AngularJS, optimizing front-end/back-end integration to boost client system performance by 20%. Led 15+ enterprise web scraping projects for international clients, processing millions of records with 99%+ data integrity. Implemented serverless AWS Lambda pipelines to streamline data storage, while mentoring junior developers to elevate team coding standards.",
+    modeDescriptions: {
+      "fullstack": "Engineered scalable full-stack solutions using .NET Core and AngularJS, optimizing integration to boost system performance by 20%. Implemented secure JWT pipelines and real-time synchronization, while mentoring junior developers to elevate team coding standards.",
+      "data": "Spearheaded 15+ enterprise web scraping projects for international clients, bypassing anti-scraping defenses to process millions of records with 99%+ integrity. Engineered serverless AWS Lambda data pipelines to streamline cloud storage and large-scale extraction tasks.",
+      "ai-ml": "Led large-scale data extraction projects, ensuring precise data modeling and unstructured data processing essential for downstream machine learning applications. Managed cloud-native data pipelines via AWS Lambda for international enterprise clients.",
+    },
     tags: ["C#", ".NET Core", "AngularJS", "JWT Token", "Python", "AWS Lambda", "PostgreSQL", "SQL", "Azure DevOps/ServiceBus", "Docker", "Selenium", "Scrapy", "CI/CD", "Web Scraping", "xUnit"],
   },
   {
@@ -231,3 +237,38 @@ export const certificates: Certificate[] = [
     modes: ["fullstack"],
   },
 ]
+
+export const detailedAboutContent: Record<string, { title: string, paragraphs: string[] }> = {
+  generalist: {
+    title: "I'm a Full Stack AI Engineer who believes that the best code is written by those who never stop being students.",
+    paragraphs: [
+      "My journey didn't start with complex neural networks; it started back in India with a simple curiosity about how I could make a computer do the work for me. From those first automation scripts to completing my Master’s in AI at Western University, I’ve always been driven by the transition from 'how does this work?' to 'how can I make this better?'. Moving to Canada to specialize in AI allowed me to take my professional full-stack foundations and ground them in the deep, theoretical research that defines the next generation of software.",
+      "I don't believe in being a 'master' of everything, because in this field, the moment you stop learning, you fall behind. My real expertise isn't just in a specific stack like .NET or React—it’s in the ability to pick up any tool, documentation, or research paper and turn it into a working solution. Whether I’m familiar with a technology or seeing it for the first time, I have the discipline to learn it, implement it, and ship it. To me, a technical challenge isn't a wall; it's just a new topic to master before the next deployment.",
+      "Beyond the terminal, I’m deeply focused on the responsibility we have as engineers. My research into the 'Ethical Dilemmas in AI' taught me that intelligence without alignment is a liability. I’m not interested in building tech for the sake of buzzwords; I want to build systems that are genuinely useful, secure, and aligned with human values. Whether I'm processing millions of records with 99.9% uptime or fine-tuning a model, my goal is to ensure that the final product is as ethically sound as it is technically precise."
+    ]
+  },
+  fullstack: {
+    title: "I'm a Full Stack Engineer who treats the entire system—from database architecture to the final pixel—as a unified product.",
+    paragraphs: [
+      "My engineering mindset matured while building enterprise-grade applications in the .NET ecosystem. Moving from India to Canada to pursue my Master's at Western University, I brought a strong foundation in scalable architecture, API design, and CI/CD pipelines. For me, full-stack isn't just knowing two frameworks; it's understanding the complete lifecycle of a request and optimizing every layer it touches.",
+      "I thrive in environments that require robust systems capable of handling high transaction volumes, like my work on a complex aerospace tracking system. I embrace a 'Student for Life' philosophy. If a new technology, whether it's Next.js 14, advanced Redis caching, or Azure ServiceBus, offers a better solution, I have the discipline to master it and implement it safely into production.",
+      "Ultimately, my goal is to deliver software that doesn't just work, but performs flawlessly under pressure. I prioritize clean code, comprehensive unit testing, and rigorous debugging. I want to build architectures that other engineers enjoy working on and interfaces that users naturally understand."
+    ]
+  },
+  "ai-ml": {
+    title: "I'm a Machine Learning Engineer focused on moving advanced AI concepts out of the lab and into production systems.",
+    paragraphs: [
+      "My journey into Artificial Intelligence began when I realized standard software could only go so far in solving complex, unstructured problems. Relocating to Canada for my Master's at Western University allowed me to dive deep into neural networks, computer vision, and the ethical alignment of Large Language Models. I don't just fine-tune models; I build the pipelines and infrastructure necessary to serve them in resource-constrained environments.",
+      "Because my background is rooted in full-stack development, I understand how to integrate intelligence into existing architectures. Whether I am developing a custom CNN for disease detection or crafting an agentic, local LLM assistant like Neo-Atom, my focus is always on practical implementation. A great model isn't useful if it can't be seamlessly integrated and scaled.",
+      "I am also deeply invested in the safety and ethical alignment of AI systems. My Directed Studies research quantified the ethical stances of top-tier LLMs, reinforcing my belief that deploying AI without rigorous validation is irresponsible. I build systems designed to be powerful, verifiable, and genuinely useful for real-world applications."
+    ]
+  },
+  data: {
+    title: "I'm a Data Engineer who specializes in transforming the unstructured chaos of the web into high-integrity data assets.",
+    paragraphs: [
+      "Data is only as valuable as it is reliable. My expertise was forged through spearheading over 15 large-scale data extraction projects for international enterprise clients. Relocating to Canada for my Master's at Western University further sharpened my skills in distributed systems and parallel computing, transitioning my scripts into high-throughput ecosystems.",
+      "I specialize in the gritty work of reverse-engineering complex APIs, bypassing sophisticated anti-scraping defenses, and orchestrating massive extraction tasks using distributed architectures like MPI and AWS Lambda. If the data is on the internet, I know how to extract it efficiently, ethically, and securely, ensuring 99.9% uptime and integrity.",
+      "Beyond extraction, my focus revolves around the entire ETL lifecycle. I take unstructured, multi-lingual web data and implement rigorous, automated post-processing layers to validate, deduplicate, and model the information, transforming raw text into the foundation for advanced analytics and machine learning."
+    ]
+  }
+}
